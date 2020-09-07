@@ -16,7 +16,19 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 2eb7f9da47162404cb6198665f903694
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 2324235a112e1dd46898a31cb202ca66
+    m_Address: Assets/04.Fonts/NotoSansKR-Black.otf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: a36e22b1c6c06a44b9b633a7643b9fd3
+    m_Address: Assets/04.Fonts/NotoSansKorea-Black SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 29591270612b426449ed2471d0b86eef, type: 2}
   m_SchemaSet:

@@ -343,6 +343,8 @@ MonoBehaviour:
   _curState: 0
   _createPlayerNameUI: {fileID: 218694375}
   _stateText: {fileID: 661219202}
+  _netMgrPrefab: {fileID: 8715175860588034315, guid: bee5f973e9f191742a14f52f40fd653c,
+    type: 3}
 --- !u!1 &581159460
 GameObject:
   m_ObjectHideFlags: 0

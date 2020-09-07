@@ -7,12 +7,14 @@ using Photon.Realtime;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    private const int _maxPlayerCount = 4;
+
     /// <summary>
     /// 랜덤매칭에 들어간다.
     /// </summary>
     public void JoinRandomRoom()
     {
-
+        PhotonNetwork.JoinRandomRoom();
     }
 
     #region Monobehaviour Function
@@ -42,5 +44,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         #endif
     }
 
+    public override void OnJoinedRoom()
+    {
+        PhotonNetwork.LoadLevel(2);
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = _maxPlayerCount });
+    }
     #endregion
 }
