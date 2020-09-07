@@ -26,6 +26,8 @@ public class GameManager
 
     // 네트워크를 관리할 변수
     public NetworkManager NetManager;
+
+    public GameObject _playerCharacter = null;
 }
 
 public class LogManager
