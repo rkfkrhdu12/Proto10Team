@@ -21,7 +21,7 @@ public class UnitController : MonoBehaviour
     {
         if (!_photonView.IsMine) { enabled = false; return; }
 
-        GameManager.Instance._playerCharacter = gameObject;
+        GameManager.Instance.PlayerCharacter = gameObject;
     }
 
     private void FixedUpdate()

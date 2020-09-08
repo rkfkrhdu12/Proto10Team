@@ -17,6 +17,33 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private const int _maxPlayerCount = 4;
 
+    #region Variable
+
+    WaitForSeconds _playerSpawnTime = new WaitForSeconds(.5f);
+
+    #endregion
+
+    #region Private Function
+
+    private IEnumerator WaitPlayerSpawn()
+    {
+        bool isEnd = false;
+
+        while (!isEnd)
+        {
+            yield return _playerSpawnTime;
+
+            if (GameManager.Instance.CurState == GameManager.eSceneState.InGame)
+            {
+                PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+
+                isEnd = true;
+            }
+        }
+    }
+
+    #endregion
+
     #region Monobehaviour Function
     private void Start()
     {
@@ -47,6 +74,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel(2);
+
+        if (GameManager.Instance.PlayerCharacter == null)
+            StartCoroutine(WaitPlayerSpawn());
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
