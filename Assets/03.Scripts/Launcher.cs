@@ -94,8 +94,6 @@ namespace NetWork
 
         private void Awake()
         {
-            Screen.SetResolution(960, 540, false);
-
             UpdateState(eNetWorkState.Disconnect);
 
             // 게임 버젼을 PhotonNetwork 에 등록
