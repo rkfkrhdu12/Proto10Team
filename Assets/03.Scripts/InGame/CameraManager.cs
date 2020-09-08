@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+using GameCamera;
+
+namespace GameCamera
+{
+    class CameraData
+    {
+        public int _mouseSensitivity;
+    }
+}
 public class CameraManager : MonoBehaviour
 {
     private Transform _playerCharTransform;
+    private Transform _pivotTransform;
+
+    private CameraData _data = new CameraData();
 
     private Vector3 _curVelocity = Vector3.zero;
-
     public bool _isActive = true;
 
-    private int _mouseSensitivity = 80;
 
-    [SerializeField]
-    private ScrollController _scrCtrl;
+    public void SetMouseSensitivity(ref int Value)
+    {
+        _data._mouseSensitivity = Value;
+    }
+
+    private int _mouseSensitivity { get { return _data._mouseSensitivity; } }
 
     void Start()
     {
@@ -24,9 +38,13 @@ public class CameraManager : MonoBehaviour
                 if (GameManager.Instance.PlayerCharacter != null)
                     _playerCharTransform = GameManager.Instance.PlayerCharacter.transform;
         }
+
+        _pivotTransform = transform;
     }
 
-    void Update()
+    public float smoothTime = .1f;
+
+    void LateUpdate()
     {
         if(_playerCharTransform == null)
         {
@@ -40,11 +58,13 @@ public class CameraManager : MonoBehaviour
         if(!_isActive) { return; }
 
         // Position Update
-        transform.position = Vector3.SmoothDamp(transform.position, _playerCharTransform.position, ref _curVelocity, .35f);
+
+
+        _pivotTransform.position = Vector3.SmoothDamp(_pivotTransform.position, _playerCharTransform.position, ref _curVelocity, smoothTime);
 
         // Rotation Update
         float horizontal = Input.GetAxis("Mouse X");
 
-        transform.eulerAngles += new Vector3(0, horizontal * _scrCtrl.Value * Time.deltaTime, 0);
+        _pivotTransform.localEulerAngles += new Vector3(0, horizontal * _mouseSensitivity * Time.deltaTime, 0);
     }
 }

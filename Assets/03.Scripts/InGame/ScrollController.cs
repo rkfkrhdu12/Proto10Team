@@ -20,13 +20,7 @@ public class ScrollController : MonoBehaviour
     [SerializeField]
     private int MaxValue;
 
-    // 현재 스크롤의 값
-    [SerializeField]
-    private float _curValue;
-
-    // Script 용 Public 변수
-    [HideInInspector]
-    public float Value { get { return _curValue; } }
+    public int Value = 200;
 
     // 스크롤의 최소값이 1이상일 경우 -1 이상의 값을 가져 게이지바의 fillAmount를 조정할 때 쓰이는 변수
     private float _gap = 0.0f;
@@ -50,13 +44,13 @@ public class ScrollController : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Mouse X");
 
-        _curValue = Mathf.Clamp(_curValue + horizontal, MinValue, MaxValue);
+        Value = (int)Mathf.Clamp(Value + horizontal, MinValue, MaxValue);
 
-        Gage.fillAmount = (_curValue + _gap) / (MaxValue + _gap);
+        Gage.fillAmount = (Value + _gap) / (MaxValue + _gap);
 
         if (Handle != null)
         {
-            _handlePos.x = -(_defaultPosX - ((_defaultPosX * 2) / Gage.fillAmount));
+            _handlePos.x = -(_defaultPosX - ((_defaultPosX * 2) * Gage.fillAmount));
 
             Handle.localPosition = _handlePos;
         }

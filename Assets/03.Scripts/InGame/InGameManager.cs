@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class InGameManager : MonoBehaviour
+public class InGameManager : SceneManager
 {
     private PhotonView _photonView;
 
@@ -15,6 +15,10 @@ public class InGameManager : MonoBehaviour
     [SerializeField]
     private CameraManager _cameraManager;
 
+    [SerializeField]
+    private ScrollController _mouseSensitivityOptionScroll;
+
+
     private void Awake()
     {
         GameManager.Instance.CurState = GameManager.eSceneState.InGame;
@@ -22,11 +26,13 @@ public class InGameManager : MonoBehaviour
         _photonView = GetComponent<PhotonView>();
 
         if (!_photonView.IsMine) { enabled = false; }
+
+        _cameraManager.SetMouseSensitivity(ref _mouseSensitivityOptionScroll.Value);
     }
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
             _optionObject.SetActive(!_optionObject.activeSelf);
 
