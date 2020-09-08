@@ -8,5 +8,4 @@ public class LobbyManager : MonoBehaviour
     {
         GameManager.Instance.NetManager.JoinRandomRoom();
     }
-
 }
