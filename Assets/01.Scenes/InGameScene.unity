@@ -249,8 +249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615b72adfda3f0f47b704cd447ee3384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
-  smoothTime: 10
+  _isInit: 0
+  _isOption: 1
+  smoothTime: 0.25
 --- !u!4 &214514968
 Transform:
   m_ObjectHideFlags: 0
@@ -1127,7 +1128,7 @@ MonoBehaviour:
   Gage: {fileID: 780456263}
   MinValue: 20
   MaxValue: 200
-  Value: 200
+  DefaultValue: -1
 --- !u!114 &1886133404
 MonoBehaviour:
   m_ObjectHideFlags: 0

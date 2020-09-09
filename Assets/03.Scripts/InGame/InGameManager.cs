@@ -18,7 +18,6 @@ public class InGameManager : SceneManager
     [SerializeField]
     private ScrollController _mouseSensitivityOptionScroll;
 
-
     private void Awake()
     {
         GameManager.Instance.CurState = GameManager.eSceneState.InGame;
@@ -27,7 +26,9 @@ public class InGameManager : SceneManager
 
         if (!_photonView.IsMine) { enabled = false; }
 
-        _cameraManager.SetMouseSensitivity(ref _mouseSensitivityOptionScroll.Value);
+        _mouseSensitivityOptionScroll.Init();
+
+        _cameraManager.SetMouseSensitivity(in _mouseSensitivityOptionScroll.Data);
     }
 
     private void Update()
@@ -36,7 +37,7 @@ public class InGameManager : SceneManager
         {
             _optionObject.SetActive(!_optionObject.activeSelf);
 
-            _cameraManager._isActive = !_optionObject.activeSelf;
+            _cameraManager._isOption = !_optionObject.activeSelf;
         }
     }
 }

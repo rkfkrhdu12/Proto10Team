@@ -2,6 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public class RefData
+{
+    public int _Value = 0;
+}
+
 [Serializable]
 public class ScrollController : MonoBehaviour
 {
@@ -19,8 +24,10 @@ public class ScrollController : MonoBehaviour
     // 해당 스크롤의 최대값
     [SerializeField]
     private int MaxValue;
+    [SerializeField]
+    private int DefaultValue = -1;
 
-    public int Value = 200;
+    public RefData Data;
 
     // 스크롤의 최소값이 1이상일 경우 -1 이상의 값을 가져 게이지바의 fillAmount를 조정할 때 쓰이는 변수
     private float _gap = 0.0f;
@@ -40,13 +47,21 @@ public class ScrollController : MonoBehaviour
         }
     }
 
+    public void Init()
+    {
+        if (DefaultValue == -1) DefaultValue = MaxValue;
+
+        Data = new RefData();
+        Data._Value = DefaultValue;
+    }
+
     public void UpdateHandle()
     {
         float horizontal = Input.GetAxis("Mouse X");
 
-        Value = (int)Mathf.Clamp(Value + horizontal, MinValue, MaxValue);
+        Data._Value = (int)Mathf.Clamp(Data._Value + horizontal, MinValue, MaxValue);
 
-        Gage.fillAmount = (Value + _gap) / (MaxValue + _gap);
+        Gage.fillAmount = (Data._Value + _gap) / (MaxValue + _gap);
 
         if (Handle != null)
         {
