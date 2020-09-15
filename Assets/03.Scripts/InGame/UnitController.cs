@@ -33,7 +33,7 @@ public class UnitController : MonoBehaviour
     Coroutine _jumpRoutine;
 
     // 현재 점프가 가능한 상태인지 확인
-    bool _isJump = false;
+    public bool _isJump = true;
 
     // 점프를 시키기위해 오브젝트의 강체를 가져옴
     Rigidbody _rigid;
@@ -131,18 +131,15 @@ public class UnitController : MonoBehaviour
             // 점프를 하였으면
             if (!_isJump)
             {
-                // 해당 오브젝트의 바닥에서 아래쪽으로 레이를 쏨
-                Ray ray = new Ray(_objectBottomPos, Vector3.down);
-
-                // 바닥이 될수 있는 레이어마스크에 걸린다면
-                if (Physics.Raycast(ray, out _hitGround, 2.5f, _HitLayerMask))
+                if(_rigid.velocity.y < .05f && _rigid.velocity.y > -.05f)
                 {
-                    // 점프상태 아님
-                    LogManager.Log("HitGround" + _hitGround.transform.gameObject.name);
+                    yield return _waitTime;
 
-                    _isJump = true;
+                    if (_rigid.velocity.y < .05f && _rigid.velocity.y > -.05f)
+                        _isJump = true;
                 }
             }
+
             yield return _waitTime;
         }
 
@@ -156,7 +153,7 @@ public class UnitController : MonoBehaviour
         {
             _isJump = false;
 
-            _rigid.AddForce(Vector3.up * _jumpPower);
+            _rigid.AddForce(Vector3.up * _jumpPower * 100);
         }
     }
 }

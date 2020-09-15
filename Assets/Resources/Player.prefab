@@ -92,7 +92,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7353031839672647207}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cb62cdbfcf46eb94fb75b1d5ec224184, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -151,9 +151,10 @@ MonoBehaviour:
   _photonView: {fileID: 5855374713646140786}
   _targetPos: {x: 0, y: 0, z: 0}
   smoothTime: 8.5
+  _isJump: 1
   _HitLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 257
 --- !u!114 &6037959793252923441
 MonoBehaviour:
   m_ObjectHideFlags: 0
