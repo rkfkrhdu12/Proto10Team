@@ -75,7 +75,7 @@ public class TartManager : MonoBehaviour
             Debug.Log("now어쩌고에 데이터 할당 완료. 임시 토핑에 세팅 시작!");
 
 
-            tempTopping.SetToppingInfo(nowSize, nowNum, nowType, nowScore, nowPosX, nowPosY, nowPosZ);
+            tempTopping.SetToppingInfo(nowCode, nowSize, nowNum, nowType, nowScore, nowPosX, nowPosY, nowPosZ);
 
             Debug.Log("임시 토핑 세팅 완료. 임시 타르트에 임시 토핑 추가.");
 

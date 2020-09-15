@@ -8,13 +8,13 @@ public class Tart : MonoBehaviour
     public int tartCode;
 
     GameObject testObj;
-    [Tooltip("해당 타르트의 정답 토핑들의 리스트 입니다.")]
+    [Tooltip("해당 타르트의 토핑들의 리스트 입니다....")]
     public List<Topping> toppingList = new List<Topping>();
 
 
-    [Tooltip("인게임 플레이 시에 사용되는 \n게임 오브젝트! 타르트에 들어있는\n게임 오브젝트! 토핑들의 리스트 입니다.")]
-    public List<GameObject> toppingObjList = new List<GameObject>();
-
+    //[Tooltip("인게임 플레이 시에 사용되는 \n게임 오브젝트! 타르트에 들어있는\n게임 오브젝트! 토핑들의 리스트 입니다.")]
+    //public List<GameObject> toppingObjList = new List<GameObject>();
+    //위에꺼 딱히 필요 없을 것 같아서 일단 주석처리 해놓습니다.
 
     [Header("그래도 타르트라고 인정이 되는 범위를 정합니다.")]    
     [Tooltip("왼쪽 아래.")]

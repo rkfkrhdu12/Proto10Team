@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29cfe5b77861cd4439723d0d2eabcea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tartManager: {fileID: 0}
+  tartManager: {fileID: 2090454885}
   myTart: {fileID: 0}
   myScore: 0
 --- !u!4 &1335133596
@@ -562,7 +562,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tartCode: 0
   toppingList: []
-  toppingObjList: []
   limitPos1: {fileID: 728805205}
   limitPos2: {fileID: 48885768}
 --- !u!136 &1618463923

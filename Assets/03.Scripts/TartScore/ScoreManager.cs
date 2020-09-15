@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
 
     public Tart myTart; // 우리 팀이 만든 타르트입니다.
 
-    public int myScore; //우리 팀의 점수(완성도)입니다.
+    public float myScore; //우리 팀의 점수(완성도)입니다.
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void TestTartInput()
@@ -32,10 +32,10 @@ public class ScoreManager : MonoBehaviour
     public bool IsToppingOutOfRange(Tart nowTart, Topping nowTopping)
     {
 
-        if (nowTopping.gameObject.transform.position.x>nowTart.limitPos1.gameObject.transform.position.x&&
-            nowTopping.gameObject.transform.position.z>nowTart.limitPos1.gameObject.transform.position.z&&
-            nowTopping.gameObject.transform.position.x<nowTart.limitPos2.gameObject.transform.position.x&&
-            nowTopping.gameObject.transform.position.x<nowTart.limitPos2.gameObject.transform.position.z)
+        if (nowTopping.gameObject.transform.position.x > nowTart.limitPos1.gameObject.transform.position.x &&
+            nowTopping.gameObject.transform.position.z > nowTart.limitPos1.gameObject.transform.position.z &&
+            nowTopping.gameObject.transform.position.x < nowTart.limitPos2.gameObject.transform.position.x &&
+            nowTopping.gameObject.transform.position.x < nowTart.limitPos2.gameObject.transform.position.z)
         {//y축의 정보는 사용하지 않음...
             return false;
         }
@@ -43,12 +43,98 @@ public class ScoreManager : MonoBehaviour
         {
             return true;
         }
-        
+
     }
 
-    public void MarkScore()
+    public void CheckScore()
     {
+        int checkVal = 0; //정답 타르트 기준으로, 토핑 별로 검사를 하기 위해 사용되는 변수...
+        Tart answerTart = tartManager.answerTart;
+        Topping nowAnswerTopping; // 현재 검사할 정답 토핑
+        Topping nowMyTopping; //현재 검사할 우리팀 토핑
+        while (true)
+        {
 
+            //정답 타르트의 토핑들 중 하나를 가져온다.
+            //nowAnswerTopping = tartManager.answerTart.toppingList[checkVal];
+
+            //다음. 정답 타르트 토핑(이하 정토)과 우리팀 타르트 토핑(이하 우토)을 비교해야한다.
+            //비교 전, 그래도 타르트라고 인정해주는 범위를 벗어난 우토는 리스트에서 제거해야한다...
+            for (int i = 0; i < myTart.toppingList.Count; i++)
+            {
+                if (IsToppingOutOfRange(myTart, myTart.toppingList[i])) //만약 범위 바깥에 있으면...
+                {
+                    myTart.toppingList.RemoveAt(i); //제거.
+                }
+
+            }
+
+            //제거를 완료했으면 이제 채점을 해야한다...
+            //정토에다가 우토를 하나하나 다 대조하는 방법밖에 떠오르지 않기 때문에, 그것을 한다...
+            for (int answerVal = 0; answerVal < answerTart.toppingList.Count; answerVal++)
+            {
+                int[] nowCheckArr = new int[20]; // +1의 해결책으로 나온 배열. 이 배열은 answerVal이 바뀔 때마다 초기화 된다.
+                int nowCheckVal = 0; // nowCheckArr의...인덱스...뭐 그런거.
+
+                for (int myVal = 0; myVal < myTart.toppingList.Count; myVal++)
+                {
+                    if (
+                        //우선 토핑 사이즈가 같아야하고,
+                        answerTart.toppingList[answerVal].toppingSize == myTart.toppingList[myVal].toppingSize &&
+                        //토핑 넘도 같아야 한다...
+                        answerTart.toppingList[answerVal].toppingNum == myTart.toppingList[myVal].toppingNum &&
+                        //마지막으로 토핑 타입까지 같으면 일단 같은 토핑이라고 판별 완료
+                        answerTart.toppingList[answerVal].toppingType == myTart.toppingList[myVal].toppingType&&
+                        //진짜 진짜 마지막으로 얘를 검사한 적도 없어야함
+                        myTart.toppingList[myVal].isCheck ==false
+                        )
+                    {
+                        //같은 토핑이 한 3개정도 있다고 쳐보자. 이 녀석 말고도 다른 녀석들을 찾으러 가야한다.
+                        //다른 녀석들을 찾으러 가기 전에, 이 녀석을 간략하게라도 저장해놓을 무언가가 필요하다...
+                        // +1 그래서 배열 하나로 myVal에 해당하는걸 저장해놓기로 했다. 
+
+                        nowCheckArr[nowCheckVal] = myVal; // myVal을 저장해놓는다.
+                        nowCheckVal += 1;//얘도 1 더해주고...
+
+                    }
+
+                }
+                //같은 토핑을 찾았다면 checkArr에 뭐가 들어있을 것이다.
+                //안 들어있으면 말고...
+                //이제 이 들어있는 무언가를 정타에 대입을 해봐야한다.
+                //기획서에 따르면, 거리를 비교해서 가장 가까운걸 대입시켜야한다.
+
+                //그럼 일단 좌표상으로 정타의 정토를 만들어놓자.
+                Vector2 nowAnswerToppingPos = 
+                    new Vector2(answerTart.toppingList[answerVal].answerPosX,
+                    answerTart.toppingList[answerVal].answerPosZ);
+
+                //또, 거리가 가장 가까운걸 골라내기 위한 변수
+                float nearDis = 252525;
+                float nowDis = 0;
+
+                int lastCheckVal = 0; // 결과로 나온 우타의 우토 인덱스...'최종적인 검사 대상'을 정하기 위해.
+
+                for (int i = 0; i <= nowCheckVal; i++)
+                { //이 nowCheckVal은 arr의 인덱스와 같으(?)므로 +1을 해줘야 마지막까지 제대로 된다...
+
+                    //우타의 우토를 만들어 놓고
+                    Vector2 nowMyToppingPos =
+                        new Vector2(myTart.toppingList[nowCheckArr[nowCheckVal]].gameObject.transform.position.x,
+                        myTart.toppingList[nowCheckArr[nowCheckVal]].gameObject.transform.position.z);
+
+                    nowDis = Vector2.Distance(nowAnswerToppingPos, nowMyToppingPos);
+                    
+                    //Distance 계산하기
+                    if (nearDis>nowDis) // 현재 '가장 가까운 거리'보다 더 가깝다면?
+                    {
+                        nearDis = nowDis; //갱신해주고
+                        lastCheckVal = nowCheckArr[nowCheckVal];//얘도 이렇게 해준다.
+                    }
+                }
+                //이렇게 lastCheckVal이 정해졌으면, 진짜 마지막으로 거리에 따른 점수를 부여한다.
+            }
+        }
     }
-    
+
 }
