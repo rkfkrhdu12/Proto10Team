@@ -9,25 +9,25 @@ public class TestTargetController : MonoBehaviour
     Vector3 _targetPos;
 
     [SerializeField, Range(3, 20)]
-    private float _moveSpeed = 7;
+    private float _moveSpeed = 10;
 
     Vector3 _curVelocity = Vector3.zero;
 
+    private Transform _transform;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        _transform = transform;
     }
 
+    public float smoothTime = 5;
     // Update is called once per frame
     void FixedUpdate()
     {
-
         _targetPos.x += Input.GetAxis("Horizontal") * Time.fixedDeltaTime * _moveSpeed;
         _targetPos.y = transform.position.y;
         _targetPos.z += Input.GetAxis("Vertical") * Time.fixedDeltaTime * _moveSpeed;
 
-        transform.position = Vector3.SmoothDamp(transform.position, _targetPos, ref _curVelocity, 0.1f);
+        transform.position = Vector3.Lerp(_transform.position, _targetPos, Time.deltaTime * smoothTime);
     }
 }

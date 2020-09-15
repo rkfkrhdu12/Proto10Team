@@ -5,6 +5,12 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+public enum eTeam
+{
+    Red,
+    Blue,
+}
+
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     /// <summary>
@@ -20,6 +26,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Variable
 
     WaitForSeconds _playerSpawnTime = new WaitForSeconds(.5f);
+
+    public PlayerController[] RedTeam = new PlayerController[2];
+    public PlayerController[] BlueTeam = new PlayerController[2];
+
+    public PlayerController[] GetTeam(eTeam team)
+    {
+        switch (team)
+        {
+            case eTeam.Red: return RedTeam;
+            case eTeam.Blue: return BlueTeam;
+        }
+
+        return null;
+    }
 
     #endregion
 
