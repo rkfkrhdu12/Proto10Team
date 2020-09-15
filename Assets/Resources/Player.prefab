@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7353031839672647204}
   - component: {fileID: 5855374713646140786}
   - component: {fileID: 7789593532145264898}
+  - component: {fileID: 6037959793252923441}
   - component: {fileID: 1461252461771136836}
   m_Layer: 0
   m_Name: Player
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 7353031839672647207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ae3b059fcf916354c897db28dafadf75, type: 2}
+  - {fileID: 2100000, guid: 20d56a8cd80f9ed4fa16642695587ddf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,8 +149,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _photonView: {fileID: 5855374713646140786}
-  _moveSpeed: 7
-  smoothTime: 5
+  _targetPos: {x: 0, y: 0, z: 0}
+  smoothTime: 8.5
+  _HitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &6037959793252923441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353031839672647207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b1f779c6caef54ca079df80e2a3d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1461252461771136836
 MonoBehaviour:
   m_ObjectHideFlags: 0

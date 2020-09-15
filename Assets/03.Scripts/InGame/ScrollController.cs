@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class RefData
 {
-    public int _Value = 0;
+    public float _Value = 0;
 }
 
 [Serializable]

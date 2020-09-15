@@ -12,8 +12,10 @@ public class CameraManager : MonoBehaviour
     private RefData _mouseSensitivity;
 
     private Vector3 _curVelocity = Vector3.zero;
+
     public bool _isInit = false;
     public bool _isOption = true;
+    public bool _isRotation = false;
 
     private WaitForSeconds _waitTime = new WaitForSeconds(.25f);
 
@@ -53,6 +55,19 @@ public class CameraManager : MonoBehaviour
 
     public float smoothTime = .1f;
 
+    private void Update()
+    {
+        if(Input.GetMouseButton(1))
+        {
+            _isRotation = true;
+        }
+        else if(Input.GetMouseButtonUp(1))
+        {
+            _isRotation = false;
+        }
+        
+    }
+
     void LateUpdate()
     {
         if (!_isOption || !_isInit) { return; }
@@ -60,9 +75,12 @@ public class CameraManager : MonoBehaviour
         // Position Update
         _pivotTransform.position = Vector3.SmoothDamp(_pivotTransform.position, _playerCharTransform.position, ref _curVelocity, smoothTime);
 
-        // Rotation Update
-        float horizontal = Input.GetAxis("Mouse X");
+        if (_isRotation)
+        {
+            // Rotation Update
+            float horizontal = Input.GetAxis("Mouse X");
 
-        _pivotTransform.localEulerAngles += new Vector3(0, horizontal * _mouseSensitivity._Value * Time.deltaTime, 0);
+            _pivotTransform.localEulerAngles += new Vector3(0, horizontal * _mouseSensitivity._Value * Time.deltaTime, 0);
+        }
     }
 }
