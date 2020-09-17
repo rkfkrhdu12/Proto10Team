@@ -46,14 +46,14 @@ public class ScoreManager : MonoBehaviour
 
     }
 
+
+
     public void CheckScore()
     {
-        int checkVal = 0; //정답 타르트 기준으로, 토핑 별로 검사를 하기 위해 사용되는 변수...
+
         Tart answerTart = tartManager.answerTart;
-        Topping nowAnswerTopping; // 현재 검사할 정답 토핑
-        Topping nowMyTopping; //현재 검사할 우리팀 토핑
-        while (true)
-        {
+        //while (true)
+        //{
 
             //정답 타르트의 토핑들 중 하나를 가져온다.
             //nowAnswerTopping = tartManager.answerTart.toppingList[checkVal];
@@ -73,8 +73,8 @@ public class ScoreManager : MonoBehaviour
             //정토에다가 우토를 하나하나 다 대조하는 방법밖에 떠오르지 않기 때문에, 그것을 한다...
             for (int answerVal = 0; answerVal < answerTart.toppingList.Count; answerVal++)
             {
-                int[] nowCheckArr = new int[20]; // +1의 해결책으로 나온 배열. 이 배열은 answerVal이 바뀔 때마다 초기화 된다.
-                int nowCheckVal = 0; // nowCheckArr의...인덱스...뭐 그런거.
+                int[] nowCheckArr = new int[23]; // +1의 해결책으로 나온 배열. 이 배열은 answerVal이 바뀔 때마다 초기화 된다.
+                int nowCheckVal = 0; // nowCheckArr의 인덱스를 위해서 만든 변수.
 
                 for (int myVal = 0; myVal < myTart.toppingList.Count; myVal++)
                 {
@@ -84,12 +84,12 @@ public class ScoreManager : MonoBehaviour
                         //토핑 넘도 같아야 한다...
                         answerTart.toppingList[answerVal].toppingNum == myTart.toppingList[myVal].toppingNum &&
                         //마지막으로 토핑 타입까지 같으면 일단 같은 토핑이라고 판별 완료
-                        answerTart.toppingList[answerVal].toppingType == myTart.toppingList[myVal].toppingType&&
+                        answerTart.toppingList[answerVal].toppingType == myTart.toppingList[myVal].toppingType &&
                         //진짜 진짜 마지막으로 얘를 검사한 적도 없어야함
-                        myTart.toppingList[myVal].isCheck ==false
+                        myTart.toppingList[myVal].isCheck == false
                         )
                     {
-                        //같은 토핑이 한 3개정도 있다고 쳐보자. 이 녀석 말고도 다른 녀석들을 찾으러 가야한다.
+                        //같은 토핑이 한 3개정도 있다고 쳐보자. 방금 찾은 한 녀석 말고도 다른 녀석들을 찾으러 가야한다.
                         //다른 녀석들을 찾으러 가기 전에, 이 녀석을 간략하게라도 저장해놓을 무언가가 필요하다...
                         // +1 그래서 배열 하나로 myVal에 해당하는걸 저장해놓기로 했다. 
 
@@ -98,43 +98,93 @@ public class ScoreManager : MonoBehaviour
 
                     }
 
-                }
-                //같은 토핑을 찾았다면 checkArr에 뭐가 들어있을 것이다.
-                //안 들어있으면 말고...
+                }// 이 for문으로 인해 nowCheckArr에는 내 타르트의 토핑 리스트 '인덱스'가 3개정도 들어가게 되었다.
                 //이제 이 들어있는 무언가를 정타에 대입을 해봐야한다.
                 //기획서에 따르면, 거리를 비교해서 가장 가까운걸 대입시켜야한다.
 
-                //그럼 일단 좌표상으로 정타의 정토를 만들어놓자.
-                Vector2 nowAnswerToppingPos = 
+                //그리하여, 현재 비교해야할 정답 타르트 토핑 하나의 위치를 저장해놓는다. 
+                Vector2 nowAnswerToppingPos =
                     new Vector2(answerTart.toppingList[answerVal].answerPosX,
                     answerTart.toppingList[answerVal].answerPosZ);
 
-                //또, 거리가 가장 가까운걸 골라내기 위한 변수
+                //또, 거리가 가장 가까운걸 골라내기 위한 변수를 만든다.
                 float nearDis = 252525;
                 float nowDis = 0;
 
                 int lastCheckVal = 0; // 결과로 나온 우타의 우토 인덱스...'최종적인 검사 대상'을 정하기 위해.
 
-                for (int i = 0; i <= nowCheckVal; i++)
-                { //이 nowCheckVal은 arr의 인덱스와 같으(?)므로 +1을 해줘야 마지막까지 제대로 된다...
-
-                    //우타의 우토를 만들어 놓고
+                for (int i = 0; i < nowCheckVal; i++)
+                {
+                    //우타의 우토 위치를 만들어놓고
                     Vector2 nowMyToppingPos =
                         new Vector2(myTart.toppingList[nowCheckArr[nowCheckVal]].gameObject.transform.position.x,
                         myTart.toppingList[nowCheckArr[nowCheckVal]].gameObject.transform.position.z);
 
                     nowDis = Vector2.Distance(nowAnswerToppingPos, nowMyToppingPos);
-                    
+
                     //Distance 계산하기
-                    if (nearDis>nowDis) // 현재 '가장 가까운 거리'보다 더 가깝다면?
+                    if (nearDis > nowDis) // 현재 '가장 가까운 거리'보다 더 가깝다면?
                     {
                         nearDis = nowDis; //갱신해주고
                         lastCheckVal = nowCheckArr[nowCheckVal];//얘도 이렇게 해준다.
                     }
+
                 }
                 //이렇게 lastCheckVal이 정해졌으면, 진짜 마지막으로 거리에 따른 점수를 부여한다.
+
+                //문제1 발생...
+                //물론 크기상으로 1/2/3이라는 기준은 있지만, 그건 모델링할때 이야기고, 유니티에서 불러와봤자 다 똑같이 스케일은 1일 것이다.
+                //일단은 3이하만 점수 주고 0.5이하는 그냥 점수 다 주는걸로...
+                Vector2 nowLastMyToppingPos =
+                 new Vector2(myTart.toppingList[lastCheckVal].gameObject.transform.position.x,
+                  myTart.toppingList[lastCheckVal].gameObject.transform.position.z);
+
+                float lastDis = Vector2.Distance(nowAnswerToppingPos, nowLastMyToppingPos);
+
+                if (lastDis<3)//3보다 안에 있냐?
+                {
+                    if (lastDis < 0.5)//0.5보다 안에 있냐?
+                    {
+
+                        myScore += answerTart.toppingList[answerVal].toppingScore; //제대로 지급!
+                    }
+                    else
+                    {
+
+                        myScore += answerTart.toppingList[answerVal].toppingScore / lastDis; //나눠서 지급
+
+                    }
+                }
+                else
+                {//스코어 변동 없음.
+                    myScore += 0;
+
+                }
+                myTart.toppingList[lastCheckVal].isCheck = true; //채점을 했다는 표시로 true를 해준다.
+
+            }
+        //마지막으로, isCheck가 안된 녀석들(장애물같은 애들)을 구해서 완성도를 차감시키자.
+        for (int i = 0; i < myTart.toppingList.Count; i++)
+        {
+            if (myTart.toppingList[i].isCheck==false)//검사가 안된 녀석이 있다면?
+            {
+                if (myTart.toppingList[i].toppingSize ==0)//소형일 경우
+                {
+                    myScore -= 1;
+                }
+                else if (myTart.toppingList[i].toppingSize ==1)//중형일 경우
+                {
+                    myScore -= 2;
+                }
+                else if (myTart.toppingList[i].toppingSize ==2)//대형일 경우
+                {
+                    myScore -= 4;
+                }
             }
         }
+
+        //}
+
     }
 
 }
