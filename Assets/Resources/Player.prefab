@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 7789593532145264898}
   - component: {fileID: 6037959793252923441}
   - component: {fileID: 1461252461771136836}
+  - component: {fileID: -2174546900005533296}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +93,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7353031839672647207}
-  m_Material: {fileID: 13400000, guid: cb62cdbfcf46eb94fb75b1d5ec224184, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -133,6 +134,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1461252461771136836}
+  - {fileID: -2174546900005533296}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -151,7 +153,7 @@ MonoBehaviour:
   _photonView: {fileID: 5855374713646140786}
   _targetPos: {x: 0, y: 0, z: 0}
   smoothTime: 8.5
-  _isJump: 1
+  _isGround: 1
   _HitLayerMask:
     serializedVersion: 2
     m_Bits: 257
@@ -167,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b1f779c6caef54ca079df80e2a3d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pView: {fileID: 0}
 --- !u!114 &1461252461771136836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,3 +203,19 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &-2174546900005533296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353031839672647207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
