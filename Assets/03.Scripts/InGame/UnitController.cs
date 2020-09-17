@@ -33,7 +33,7 @@ public class UnitController : MonoBehaviour
     Coroutine _jumpRoutine;
 
     // 현재 점프가 가능한 상태인지 확인
-    bool _isJump = false;
+    public bool _isGround = true;
 
     // 점프를 시키기위해 오브젝트의 강체를 가져옴
     Rigidbody _rigid;
@@ -97,11 +97,27 @@ public class UnitController : MonoBehaviour
     private readonly string _axisKeyHorizontal = "Horizontal";
     private readonly string _axisKeyVertical = "Vertical";
 
+    float _inputWaitTime = 0.0f;
+
     private void UpdateMove()
     {
         // 현재 WASD의 Input값을 가져온 후 delta값과 이동속도를 곱함.
         float moveX = Input.GetAxis(_axisKeyHorizontal) * Time.fixedDeltaTime * _moveSpeed;
         float moveZ = Input.GetAxis(_axisKeyVertical) * Time.fixedDeltaTime * _moveSpeed;
+
+        if(moveX == 0 && moveZ == 0)
+        {
+            _inputWaitTime += Time.fixedDeltaTime;
+            if (_inputWaitTime > .1f)
+            {
+                _inputWaitTime = 0;
+                _targetPos = _transform.position;
+            }
+        }
+        else
+        {
+            _inputWaitTime = 0;
+        }
 
         // 타겟의 Position에 더하거나 초기화를 해준 후
         _targetPos.x += moveX;
@@ -129,20 +145,17 @@ public class UnitController : MonoBehaviour
         while (gameObject.activeSelf)
         {
             // 점프를 하였으면
-            if (!_isJump)
+            if (!_isGround)
             {
-                // 해당 오브젝트의 바닥에서 아래쪽으로 레이를 쏨
-                Ray ray = new Ray(_objectBottomPos, Vector3.down);
-
-                // 바닥이 될수 있는 레이어마스크에 걸린다면
-                if (Physics.Raycast(ray, out _hitGround, 2.5f, _HitLayerMask))
+                if(_rigid.velocity.y < .05f && _rigid.velocity.y > -.05f)
                 {
-                    // 점프상태 아님
-                    LogManager.Log("HitGround" + _hitGround.transform.gameObject.name);
+                    yield return _waitTime;
 
-                    _isJump = true;
+                    if (_rigid.velocity.y < .05f && _rigid.velocity.y > -.05f)
+                        _isGround = true;
                 }
             }
+
             yield return _waitTime;
         }
 
@@ -152,11 +165,11 @@ public class UnitController : MonoBehaviour
     private void UpdateJump()
     {
         // 현재 점프중이 아닐때 space바를 입력시 점프
-        if (Input.GetKeyDown(KeyCode.Space) && _isJump)
+        if (Input.GetKeyDown(KeyCode.Space) && _isGround)
         {
-            _isJump = false;
+            _isGround = false;
 
-            _rigid.AddForce(Vector3.up * _jumpPower);
+            _rigid.AddForce(Vector3.up * _jumpPower * 100);
         }
     }
 }

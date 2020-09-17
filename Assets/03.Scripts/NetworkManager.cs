@@ -22,24 +22,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     private const int _maxPlayerCount = 4;
+    public int MaxPlayerCount { get { return _maxPlayerCount; }}
 
     #region Variable
 
     WaitForSeconds _playerSpawnTime = new WaitForSeconds(.5f);
 
-    public PlayerController[] RedTeam = new PlayerController[2];
-    public PlayerController[] BlueTeam = new PlayerController[2];
-
-    public PlayerController[] GetTeam(eTeam team)
-    {
-        switch (team)
-        {
-            case eTeam.Red: return RedTeam;
-            case eTeam.Blue: return BlueTeam;
-        }
-
-        return null;
-    }
 
     #endregion
 

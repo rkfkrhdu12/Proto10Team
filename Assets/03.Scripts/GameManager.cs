@@ -26,15 +26,22 @@ public class GameManager
 
     // 네트워크를 관리할 변수
     private NetworkManager _netManager = null;
-    public NetworkManager NetManager
+    public NetworkManager NetManager 
     {
         get { return _netManager; }
         set { if (_netManager == null) _netManager = value; }
     }
 
+    private InGameManager _ingameManager = null;
+    public InGameManager InGameManager 
+    {
+        get { return _ingameManager; }
+        set { if (_ingameManager == null) _ingameManager = value; }
+    }
+
     // InGame의 캐릭터 오브젝트
     private GameObject _playerChar = null;
-    public GameObject PlayerCharacter
+    public GameObject PlayerCharacter 
     {
         get { return _playerChar; }
         set { if (_playerChar == null) _playerChar = value; }

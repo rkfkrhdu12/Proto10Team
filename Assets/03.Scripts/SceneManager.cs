@@ -4,5 +4,4 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
-    public float MouseSensivity = 100;
 }

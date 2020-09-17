@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using TMPro.EditorUtilities;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 

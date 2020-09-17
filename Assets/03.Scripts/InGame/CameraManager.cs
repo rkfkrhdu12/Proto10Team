@@ -19,6 +19,9 @@ public class CameraManager : MonoBehaviour
 
     private WaitForSeconds _waitTime = new WaitForSeconds(.25f);
 
+    public float smoothTime = .1f;
+    public Camera Camera = null;
+
     public void SetMouseSensitivity(in RefData Data)
     {
         _mouseSensitivity = Data;
@@ -53,11 +56,10 @@ public class CameraManager : MonoBehaviour
         _pivotTransform = transform;
     }
 
-    public float smoothTime = .1f;
 
     private void Update()
     {
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1)) 
         {
             _isRotation = true;
         }

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+using Photon.Realtime;
+
 public struct PlayerData
 {
     public eTeam _curTeam;
@@ -31,14 +34,22 @@ public class PlayerController : MonoBehaviour
     RefData _jumpPower  = new RefData(); public ref RefData GetJumpPower()  => ref _jumpPower;
     RefData _power      = new RefData(); public ref RefData GetPower()      => ref _power;
 
-    public eTeam Team => _datas._curTeam;
+    public eTeam Team { get => _datas._curTeam; set => _datas._curTeam = value; }
     public float MoveSpeed { get => _datas._moveSpeed;  set => _datas._moveSpeed = _moveSpeed._Value = value; }
     public float Power { get => _datas._power;  set => _datas._power = _power._Value = value; }
     public float JumpPower { get => _datas._jumpPower;  set => _datas._jumpPower = _jumpPower._Value = value; }
     public float[] ItemEffect { get => _datas._itemEffect; set => _datas._itemEffect = value; }
 
+    public PhotonView _pView;
+
     void Awake()
     {
+        _pView = GetComponent<PhotonView>();
+
+        if(!_pView.IsMine) { return; }
+
+        GameManager.Instance.InGameManager.AddPlayer(_pView.ViewID);
+
         MoveSpeed = 7.0f;
         JumpPower = 6.0f;
         ItemEffect = new float[6];
@@ -46,6 +57,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+        if(!_pView.IsMine) { return; }
     }
 }

@@ -14,7 +14,7 @@ public class SuperPower : ItemBase
     {
         eTeam getCharTeam = getPlayer.Team;
 
-        _applyObjects = GameManager.Instance.NetManager.GetTeam(getCharTeam);
+        _applyObjects = GameManager.Instance.InGameManager.GetPlayers(getCharTeam);
 
         for (int i = 0; i < _applyObjects.Length; ++i)
         {
@@ -27,7 +27,6 @@ public class SuperPower : ItemBase
 
         yield return _actionTime;
 
-
         for (int i = 0; i < _applyObjects.Length; ++i)
         {
             PlayerController pCtrl = _applyObjects[i];
@@ -36,8 +35,8 @@ public class SuperPower : ItemBase
 
             if (pCtrl.ItemEffect[(int)eitemNum.SuperPower] <= 0)
             {
-                _applyObjects[i].MoveSpeed *= 2;
-                _applyObjects[i].Power *= 2;
+                pCtrl.MoveSpeed *= 2;
+                pCtrl.Power *= 2;
             }
         }
     }
