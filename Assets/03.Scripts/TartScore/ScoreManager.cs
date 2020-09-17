@@ -7,13 +7,16 @@ public class ScoreManager : MonoBehaviour
     [Tooltip("타르트매니저 하나 만들어서 넣어주셔야 함")]
     public TartManager tartManager; // 타르트매니저. 정답 타르트!!의 정보가 들어있습니다.
 
+    [Tooltip("우리 팀이 만든 완성본 타르트")]
     public Tart myTart; // 우리 팀이 만든 타르트입니다.
 
+    [Tooltip("우리 팀의 점수")]
     public float myScore; //우리 팀의 점수(완성도)입니다.
 
     void Start()
     {
         TestTartInput();
+        CheckScore();
     }
 
     void Update()
