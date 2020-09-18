@@ -8,14 +8,31 @@ using Photon.Pun.UtilityScripts;
 
 public class Team
 {
-    public PlayerController[] _Players  = new PlayerController[_maxPlayerCount];
-    public CharacterUI[] _CharacterUI    = new CharacterUI[_maxPlayerCount];
+    public PlayerController[] _Players = null;
+    public CharacterUI[] _CharacterUI = null;
 
     private int _curPlayerCount = 0;
-    private static readonly int _maxPlayerCount = GameManager.Instance.NetManager.MaxPlayerCount / GameManager.Instance.InGameManager.TeamCount;
+    private static int _maxPlayerCount = -1;
+    public void SetMaxPlayerCount(int maxPlayerCount)
+    {
+        if (_maxPlayerCount == -1) { _maxPlayerCount = maxPlayerCount; }
+
+        if(_Players == null)
+        {
+            _Players = new PlayerController[_maxPlayerCount];
+        }
+
+        if (_CharacterUI == null)
+        {
+            _CharacterUI = new CharacterUI[_maxPlayerCount];
+        }
+    }
+
 
     public bool Init(PlayerController player, CharacterUI[] charUIs)
     {
+        if(_Players == null) { SetMaxPlayerCount(2); }
+
         if (_curPlayerCount < _maxPlayerCount)
         {
             _Players[_curPlayerCount] = player;
@@ -45,22 +62,13 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
     public Canvas Canvas;
 
-    public Team RedTeam = new Team();
-    public Team BlueTeam = new Team();
+    public Team RedTeam;
+    public Team BlueTeam;
 
     [SerializeField]
     private CharacterUI[] _RedCharacterUIs;
     [SerializeField]
     private CharacterUI[] _BlueCharacterUIs;
-
-    //public PlayerController[] RedTeam = new PlayerController[2];
-    //[SerializeField]
-    //private GameObject[] RedCharacterUI = new GameObject[2];
-    //int _curRedTeamCount = 0;
-    //public PlayerController[] BlueTeam = new PlayerController[2];
-    //[SerializeField]
-    //private GameObject[] BlueCharacterUI = new GameObject[2];
-    //int _curBlueTeamCount = 0;
 
     private const int _teamCount = 2;
     public int TeamCount => _teamCount;
@@ -80,7 +88,10 @@ public class InGameManager : MonoBehaviourPunCallbacks
     {
         _photonView = GetComponent<PhotonView>();
 
-        // if (!_photonView.IsMine) { enabled = false; }
+        RedTeam = new Team();
+        RedTeam.SetMaxPlayerCount(GameManager.Instance.NetManager.MaxPlayerCount / TeamCount);
+        BlueTeam = new Team();
+        BlueTeam.SetMaxPlayerCount(GameManager.Instance.NetManager.MaxPlayerCount / TeamCount);
 
         GameManager.Instance.InGameManager = this;
 
