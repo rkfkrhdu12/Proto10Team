@@ -5,63 +5,102 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using Photon.Pun;
+
 public class CharacterUI : MonoBehaviour
 {
     [SerializeField]
     public TMP_Text _nameBox;
 
-    static Dictionary<eTeam, Color> _teamColorBox = new Dictionary<eTeam, Color>();
-
     private GameObject _traceObject;
 
     RectTransform _canvasRectTrs = null;
-    Camera _Camera = null;
+    Camera _camera = null;
 
-    private void Awake()
+    PhotonView _pView = null;
+
+    InGameManager _inGameMgr = null;
+
+    private void Start()
     {
-        if (_teamColorBox.Count == 0)
+        _inGameMgr = GameManager.Instance.InGameManager;
+
+        if (_canvasRectTrs == null)
         {
-            _teamColorBox.Add(eTeam.Red, new Color(255,0, 0));
-            _teamColorBox.Add(eTeam.Blue, new Color(0, 0, 255));
+            _canvasRectTrs = _inGameMgr.Canvas.GetComponent<RectTransform>();
+        }
+
+        if (_camera == null)
+        {
+            _camera = _inGameMgr.CameraManager.Camera;
+        }
+
+        if(_pView == null)
+        {
+            _pView = _inGameMgr.PView;
         }
     }
 
     public void Init(PlayerController pCtrl)
     {
         _nameBox.text = pCtrl._pView.Owner.NickName;
-        _nameBox.color = _teamColorBox[pCtrl.Team];
 
         _traceObject = pCtrl.gameObject;
 
-        if (_canvasRectTrs == null) 
+        if (_canvasRectTrs == null)
         {
-            _canvasRectTrs = GameManager.Instance.InGameManager.Canvas.GetComponent<RectTransform>();
+            _canvasRectTrs = _inGameMgr.Canvas.GetComponent<RectTransform>();
         }
 
-        if (_Camera == null)
+        if (_camera == null)
         {
-            _Camera = GameManager.Instance.InGameManager.CameraManager.Camera;
+            _camera = _inGameMgr.CameraManager.Camera;
         }
+
+        if (_pView == null)
+        {
+            _pView = _inGameMgr.PView;
+        }
+    }
+
+    //[PunRPC]
+    void Disable()
+    {
+        if (string.IsNullOrWhiteSpace(_nameBox.text)) { return; }
+
+        _traceObject = null;
+        _nameBox.text = "";
     }
 
     public void LateUpdate()
     {
-        if (_canvasRectTrs == null && _Camera == null) { return; }
+        if (_canvasRectTrs == null && _camera == null) { return; }
+
+        if (_traceObject == null)
+        {
+            Disable();
+            return;
+        } // { _inGameMgr.PView.RPC("Disable", RpcTarget.AllBuffered); return; }
+        else if(_traceObject != null)
+        {
+            if (!_traceObject.activeSelf)
+            {
+                Disable();
+                return;
+            }
+        }
 
         var screenPos = Camera.main.WorldToScreenPoint(_traceObject.transform.position);
 
-        if (screenPos.z < 0.0f)
-        {
-            screenPos *= -1.0f;
-        }
+        if (screenPos.z < 0.0f) { screenPos *= -1.0f; }
 
         Vector2 localPos;
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvasRectTrs, screenPos, _Camera, out localPos);
+            
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvasRectTrs, screenPos, _camera, out localPos);
 
         if (localPos == null) { return; }
 
-        localPos.y += 85.0f;
+        localPos.y += 100.0f;
 
         transform.localPosition = localPos;
     }

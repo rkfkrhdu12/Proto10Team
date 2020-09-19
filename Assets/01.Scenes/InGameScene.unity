@@ -382,7 +382,7 @@ MonoBehaviour:
   _isOption: 1
   _isRotation: 0
   smoothTime: 0.25
-  Camera: {fileID: 0}
+  Camera: {fileID: 440019002}
 --- !u!4 &214514968
 Transform:
   m_ObjectHideFlags: 0
@@ -572,6 +572,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 652922277}
     m_Modifications:
+    - target: {fileID: 6683976697943070273, guid: 59220b934d1890443b45588da1c194c6,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683976697943070273, guid: 59220b934d1890443b45588da1c194c6,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6683976697943070274, guid: 59220b934d1890443b45588da1c194c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1329,6 +1339,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 459283861}
     m_Modifications:
+    - target: {fileID: 6683976697943070273, guid: 59220b934d1890443b45588da1c194c6,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6683976697943070274, guid: 59220b934d1890443b45588da1c194c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1764,6 +1779,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1589612981}
     m_Modifications:
+    - target: {fileID: 6683976697943070273, guid: 59220b934d1890443b45588da1c194c6,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6683976697943070274, guid: 59220b934d1890443b45588da1c194c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2076,6 +2096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c15ef2017229949909a5b0209f8010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PView: {fileID: 0}
   _optionObject: {fileID: 677041918}
   CameraManager: {fileID: 214514967}
   _mouseSensitivityOptionScroll: {fileID: 1886133403}
@@ -2313,6 +2334,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1058434712}
     m_Modifications:
+    - target: {fileID: 6683976697943070273, guid: 59220b934d1890443b45588da1c194c6,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683976697943070273, guid: 59220b934d1890443b45588da1c194c6,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6683976697943070274, guid: 59220b934d1890443b45588da1c194c6,
         type: 3}
       propertyPath: m_LocalPosition.x

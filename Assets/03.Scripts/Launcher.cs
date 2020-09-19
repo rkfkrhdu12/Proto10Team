@@ -49,11 +49,9 @@ namespace NetWork
 
                     playerName = PlayerPrefs.GetString(_playerNamePrefkey);
                 }
-                else
-                { // 유저의 이름을 제대로 가져왔을때 || 이미 저장된 이름이 있을때
-                    GameManager.Instance.PlayerName = playerName;
-                }
 
+                // 유저의 이름을 제대로 가져왔을때 || 이미 저장된 이름이 있을때
+                GameManager.Instance.PlayerName = playerName;
 
                 // Photon Cloud 에 연결 시작
                 PhotonNetwork.ConnectUsingSettings();

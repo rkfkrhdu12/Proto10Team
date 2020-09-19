@@ -51,6 +51,7 @@ public class Team
 public class InGameManager : MonoBehaviourPunCallbacks
 {
     private PhotonView _photonView;
+    public PhotonView PView;
 
     [SerializeField]
     private GameObject _optionObject;
