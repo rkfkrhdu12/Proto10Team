@@ -13,11 +13,11 @@ public class Team
 
     private int _curPlayerCount = 0;
     private static int _maxPlayerCount = -1;
-    public void SetMaxPlayerCount(int maxPlayerCount)
+    public void Init(int maxPlayerCount, CharacterUI[] charUIs = null)
     {
-        if (_maxPlayerCount == -1) { _maxPlayerCount = maxPlayerCount; }
+        if (_maxPlayerCount <= -1) { _maxPlayerCount = maxPlayerCount; }
 
-        if(_Players == null)
+        if (_Players == null)
         {
             _Players = new PlayerController[_maxPlayerCount];
         }
@@ -25,18 +25,18 @@ public class Team
         if (_CharacterUI == null)
         {
             _CharacterUI = new CharacterUI[_maxPlayerCount];
+            _CharacterUI = charUIs;
         }
     }
 
-
-    public bool Init(PlayerController player, CharacterUI[] charUIs)
+    public bool AddPlayer(PlayerController player)
     {
-        if(_Players == null) { SetMaxPlayerCount(2); }
+        if (_Players == null) { Init(2); }
 
         if (_curPlayerCount < _maxPlayerCount)
         {
             _Players[_curPlayerCount] = player;
-            _CharacterUI[_curPlayerCount] = charUIs[_curPlayerCount];
+            _CharacterUI[_curPlayerCount].gameObject.SetActive(true);
 
             _CharacterUI[_curPlayerCount].Init(_Players[_curPlayerCount]);
 
@@ -90,9 +90,9 @@ public class InGameManager : MonoBehaviourPunCallbacks
         _photonView = GetComponent<PhotonView>();
 
         RedTeam = new Team();
-        RedTeam.SetMaxPlayerCount(GameManager.Instance.NetManager.MaxPlayerCount / TeamCount);
+        RedTeam.Init(GameManager.Instance.NetManager.MaxPlayerCount / TeamCount, _RedCharacterUIs);
         BlueTeam = new Team();
-        BlueTeam.SetMaxPlayerCount(GameManager.Instance.NetManager.MaxPlayerCount / TeamCount);
+        BlueTeam.Init(GameManager.Instance.NetManager.MaxPlayerCount / TeamCount, _BlueCharacterUIs);
 
         GameManager.Instance.InGameManager = this;
 
@@ -127,7 +127,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         PlayerController pCtrl = pView.GetComponent<PlayerController>();
         if (pCtrl == null) { return; }
 
-        if (!RedTeam.Init(pCtrl, _RedCharacterUIs))
-            BlueTeam.Init(pCtrl, _BlueCharacterUIs);
+        if (!RedTeam.AddPlayer(pCtrl))
+            BlueTeam.AddPlayer(pCtrl);
     }
 }

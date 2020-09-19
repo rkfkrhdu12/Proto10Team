@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     public float MoveSpeed { get => _datas._moveSpeed;  set => _datas._moveSpeed = _moveSpeed._Value = value; }
     public float Power { get => _datas._power;  set => _datas._power = _power._Value = value; }
     public float JumpPower { get => _datas._jumpPower;  set => _datas._jumpPower = _jumpPower._Value = value; }
-    public float[] ItemEffect { get => _datas._itemEffect; set => _datas._itemEffect = value; }
+    public float[] ItemEffectStateCount { get => _datas._itemEffect; set => _datas._itemEffect = value; }
 
     public PhotonView _pView;
 
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
         MoveSpeed = 7.0f;
         JumpPower = 6.0f;
-        ItemEffect = new float[6];
+        ItemEffectStateCount = new float[6];
     }
 
     void Update()

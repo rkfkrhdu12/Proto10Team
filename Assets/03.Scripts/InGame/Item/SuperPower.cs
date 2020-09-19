@@ -22,7 +22,7 @@ public class SuperPower : ItemBase
 
             pCtrl.MoveSpeed *= 2;
             pCtrl.Power *= 2;
-            pCtrl.ItemEffect[(int)eitemNum.SuperPower] += 1;
+            pCtrl.ItemEffectStateCount[(int)eitemNum.SuperPower] += 1;
         }
 
         yield return _actionTime;
@@ -31,9 +31,9 @@ public class SuperPower : ItemBase
         {
             PlayerController pCtrl = _applyObjects[i];
 
-            pCtrl.ItemEffect[(int)eitemNum.SuperPower] -= 1;
+            pCtrl.ItemEffectStateCount[(int)eitemNum.SuperPower] -= 1;
 
-            if (pCtrl.ItemEffect[(int)eitemNum.SuperPower] <= 0)
+            if (pCtrl.ItemEffectStateCount[(int)eitemNum.SuperPower] <= 0)
             {
                 pCtrl.MoveSpeed *= 2;
                 pCtrl.Power *= 2;
