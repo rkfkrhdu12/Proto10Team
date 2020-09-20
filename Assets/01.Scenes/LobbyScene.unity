@@ -1102,6 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 20
+  smoothTime: 5
 --- !u!65 &1146233513
 BoxCollider:
   m_ObjectHideFlags: 0
