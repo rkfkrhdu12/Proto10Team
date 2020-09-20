@@ -13,10 +13,15 @@ public class ScoreManager : MonoBehaviour
     [Tooltip("우리 팀의 점수")]
     public float myScore; //우리 팀의 점수(완성도)입니다.
 
+    [Header("토핑의 채점 범위")]
+    [Range(0,10)]
+    public float lastCheckDis;
+    
+
     void Start()
     {
         TestTartInput();
-        CheckScore();
+        //CheckScore();
     }
 
     void Update()
@@ -144,7 +149,7 @@ public class ScoreManager : MonoBehaviour
 
                 float lastDis = Vector2.Distance(nowAnswerToppingPos, nowLastMyToppingPos);
 
-                if (lastDis<3)//3보다 안에 있냐?
+                if (lastDis<lastCheckDis)//보다 안에 있냐?
                 {
                     if (lastDis < 0.5)//0.5보다 안에 있냐?
                     {
@@ -171,15 +176,15 @@ public class ScoreManager : MonoBehaviour
         {
             if (myTart.toppingList[i].isCheck==false)//검사가 안된 녀석이 있다면?
             {
-                if (myTart.toppingList[i].toppingSize ==0)//소형일 경우
+                if (myTart.toppingList[i].toppingSize ==1)//소형일 경우
                 {
                     myScore -= 1;
                 }
-                else if (myTart.toppingList[i].toppingSize ==1)//중형일 경우
+                else if (myTart.toppingList[i].toppingSize ==2)//중형일 경우
                 {
                     myScore -= 2;
                 }
-                else if (myTart.toppingList[i].toppingSize ==2)//대형일 경우
+                else if (myTart.toppingList[i].toppingSize ==3)//대형일 경우
                 {
                     myScore -= 4;
                 }
