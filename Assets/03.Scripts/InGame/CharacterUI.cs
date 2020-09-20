@@ -12,6 +12,7 @@ public class CharacterUI : MonoBehaviour
     [SerializeField]
     public TMP_Text _nameBox;
 
+    [SerializeField]
     private GameObject _traceObject;
 
     RectTransform _canvasRectTrs = null;
@@ -21,8 +22,11 @@ public class CharacterUI : MonoBehaviour
 
     InGameManager _inGameMgr = null;
 
+    private readonly static Vector3 offset = new Vector3(0, 50, 0);
+
     private void Start()
     {
+        // 혹시 null 일 경우 새로 초기화
         if (_inGameMgr == null)         _inGameMgr = GameManager.Instance.InGameManager;
         if (_canvasRectTrs == null)     _canvasRectTrs = _inGameMgr.Canvas.GetComponent<RectTransform>();
         if (_camera == null)            _camera = _inGameMgr.CameraManager.Camera;
@@ -31,10 +35,13 @@ public class CharacterUI : MonoBehaviour
 
     public void Init(PlayerController pCtrl)
     {
+        // TextBox속의 닉네임 설정
         _nameBox.text = pCtrl._pView.Owner.NickName;
 
+        // 따라다닐 오브젝트 설정
         _traceObject = pCtrl.gameObject;
 
+        // 혹시 null 일 경우 새로 초기화
         if (_inGameMgr == null)         _inGameMgr = GameManager.Instance.InGameManager;
         if (_canvasRectTrs == null)     _canvasRectTrs = _inGameMgr.Canvas.GetComponent<RectTransform>();
         if (_camera == null)            _camera = _inGameMgr.CameraManager.Camera;
@@ -44,6 +51,7 @@ public class CharacterUI : MonoBehaviour
     //[PunRPC]
     void Disable()
     {
+        // 유저가 나가거나 UI가 사라져야할 경우
         if (string.IsNullOrWhiteSpace(_nameBox.text)) { return; }
 
         _traceObject = null;
@@ -70,16 +78,6 @@ public class CharacterUI : MonoBehaviour
 
         var screenPos = _camera.WorldToScreenPoint(_traceObject.transform.position);
 
-        if (screenPos.z < 0.0f) { screenPos *= -1.0f; }
-
-        Vector2 localPos;
-            
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvasRectTrs, screenPos, _camera, out localPos);
-
-        if (localPos == null) { return; }
-
-        localPos.y += 100.0f;
-
-        transform.localPosition = localPos;
+        transform.localPosition = screenPos + offset;
     }
 }
