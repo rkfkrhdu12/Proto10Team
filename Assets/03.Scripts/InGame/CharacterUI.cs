@@ -59,7 +59,7 @@ public class CharacterUI : MonoBehaviour
             Disable();
             return;
         } // { _inGameMgr.PView.RPC("Disable", RpcTarget.AllBuffered); return; }
-        else if(_traceObject != null)
+        else if (_traceObject != null)
         {
             if (!_traceObject.activeSelf)
             {

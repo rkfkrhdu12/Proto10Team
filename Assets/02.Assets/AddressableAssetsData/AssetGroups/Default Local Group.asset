@@ -23,6 +23,18 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 3b47fb59e08d0e64096d5ebcda37a171
+    m_Address: Assets/04.Fonts/NotoSansKorea-Black SDF_Team1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 63fa4e075cbc81b4ea7bd741dd33251d
+    m_Address: Assets/04.Fonts/NotoSansKorea-Black SDF_Team2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: a36e22b1c6c06a44b9b633a7643b9fd3
     m_Address: Assets/04.Fonts/NotoSansKorea-Black SDF.asset
     m_ReadOnly: 0
