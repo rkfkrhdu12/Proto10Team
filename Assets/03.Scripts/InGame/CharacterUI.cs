@@ -23,22 +23,10 @@ public class CharacterUI : MonoBehaviour
 
     private void Start()
     {
-        _inGameMgr = GameManager.Instance.InGameManager;
-
-        if (_canvasRectTrs == null)
-        {
-            _canvasRectTrs = _inGameMgr.Canvas.GetComponent<RectTransform>();
-        }
-
-        if (_camera == null)
-        {
-            _camera = _inGameMgr.CameraManager.Camera;
-        }
-
-        if(_pView == null)
-        {
-            _pView = _inGameMgr.PView;
-        }
+        if (_inGameMgr == null)         _inGameMgr = GameManager.Instance.InGameManager;
+        if (_canvasRectTrs == null)     _canvasRectTrs = _inGameMgr.Canvas.GetComponent<RectTransform>();
+        if (_camera == null)            _camera = _inGameMgr.CameraManager.Camera;
+        if (_pView == null)             _pView = _inGameMgr.PView;
     }
 
     public void Init(PlayerController pCtrl)
@@ -47,20 +35,10 @@ public class CharacterUI : MonoBehaviour
 
         _traceObject = pCtrl.gameObject;
 
-        if (_canvasRectTrs == null)
-        {
-            _canvasRectTrs = _inGameMgr.Canvas.GetComponent<RectTransform>();
-        }
-
-        if (_camera == null)
-        {
-            _camera = _inGameMgr.CameraManager.Camera;
-        }
-
-        if (_pView == null)
-        {
-            _pView = _inGameMgr.PView;
-        }
+        if (_inGameMgr == null)         _inGameMgr = GameManager.Instance.InGameManager;
+        if (_canvasRectTrs == null)     _canvasRectTrs = _inGameMgr.Canvas.GetComponent<RectTransform>();
+        if (_camera == null)            _camera = _inGameMgr.CameraManager.Camera;
+        if (_pView == null)             _pView = _inGameMgr.PView;
     }
 
     //[PunRPC]
@@ -90,7 +68,7 @@ public class CharacterUI : MonoBehaviour
             }
         }
 
-        var screenPos = Camera.main.WorldToScreenPoint(_traceObject.transform.position);
+        var screenPos = _camera.WorldToScreenPoint(_traceObject.transform.position);
 
         if (screenPos.z < 0.0f) { screenPos *= -1.0f; }
 

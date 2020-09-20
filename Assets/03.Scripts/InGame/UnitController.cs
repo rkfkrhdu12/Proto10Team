@@ -83,14 +83,14 @@ public class UnitController : MonoBehaviour
             _jumpRoutine = StartCoroutine(ActionJump());
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (!_photonView.IsMine) { return; }
 
         UpdateMove();
         UpdateJump();
 
-        transform.position = Vector3.Lerp(_transform.position, _targetPos, Time.fixedDeltaTime * smoothTime);
+        transform.position = Vector3.Lerp(_transform.position, _targetPos, Time.deltaTime * smoothTime);
     }
 
     // string 을 그냥 넣는것보다 이게 더 좋을것 같다는 생각과 그렇다는 글을 어디서 본 기억이 있음 틀렸으면 지적 환영
@@ -102,8 +102,8 @@ public class UnitController : MonoBehaviour
     private void UpdateMove()
     {
         // 현재 WASD의 Input값을 가져온 후 delta값과 이동속도를 곱함.
-        float moveX = Input.GetAxis(_axisKeyHorizontal) * Time.fixedDeltaTime * _moveSpeed;
-        float moveZ = Input.GetAxis(_axisKeyVertical) * Time.fixedDeltaTime * _moveSpeed;
+        float moveX = Input.GetAxis(_axisKeyHorizontal) * Time.deltaTime * _moveSpeed;
+        float moveZ = Input.GetAxis(_axisKeyVertical) * Time.deltaTime * _moveSpeed;
 
         if(moveX == 0 && moveZ == 0)
         {
