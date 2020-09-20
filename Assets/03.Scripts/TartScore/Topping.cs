@@ -31,7 +31,8 @@ public class Topping : MonoBehaviour
     }
 
     public void SetToppingInfo(int code, int size, int num, int type, float score, float x, float y, float z)//토핑의 여러가지 정보들을 Set
-    {
+    {        
+
         toppingCode = code;
         toppingSize = size;
         
