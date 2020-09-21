@@ -18,10 +18,16 @@ public class TartSettingManager : MonoBehaviour
     public GameObject errorTopping;
 
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         scoreManager.TestTartInput();
         AnswerTartSetting();
+
+    }
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -54,6 +60,11 @@ public class TartSettingManager : MonoBehaviour
                 answerTart.toppingList[i].answerPosZ),
                 nowToppingObj.transform.rotation);
          
+
+            //아래 주석이 통하지 않는 이유:
+            //타르트 매니저 자체에 Tart컴포넌트가 생성되어있기 때문에.
+            //Tart의 게임오브젝트를 불러오면...당연히 타르트 매니저가 불러와진다...
+            
             //Topping tempTopping = tempToppingObj.GetComponent<Topping>();
             //if (tempTopping)
             //{

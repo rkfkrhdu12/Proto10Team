@@ -25,9 +25,17 @@ public class Topping : MonoBehaviour
     public float answerPosY;
     public float answerPosZ;
 
+    [Tooltip("현재 토핑의 위치입니다. Update에서 계속 업데이트됨.")]
+    public Vector2 nowToppingPos;
+
     private void Awake()
     {
         isCheck = false;
+    }
+
+    private void Update()
+    {
+        nowToppingPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
     }
 
     public void SetToppingInfo(int code, int size, int num, int type, float score, float x, float y, float z)//토핑의 여러가지 정보들을 Set
