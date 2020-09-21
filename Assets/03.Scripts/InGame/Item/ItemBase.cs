@@ -21,7 +21,6 @@ public class ItemBase : MonoBehaviour
         Slow,
         Float,
     }
-    protected PlayerController[] _applyObjects;
 
     public virtual IEnumerator Action(PlayerController getPlayer) { yield return null; }
     protected WaitForSeconds _actionTime = null;

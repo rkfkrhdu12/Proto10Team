@@ -52,6 +52,11 @@ public class PlayerController : MonoBehaviour
 
     public bool isInit = false;
 
+    public void Init(eTeam team)
+    {
+        _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
+    }
+
     void Awake()
     {
         _pView = GetComponent<PhotonView>();
@@ -67,8 +72,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
-
         _curTeamObject.Active();
 
         isInit = true;

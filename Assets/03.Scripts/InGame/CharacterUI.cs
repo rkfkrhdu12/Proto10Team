@@ -62,7 +62,8 @@ public class CharacterUI : MonoBehaviour
     }
 
     public void LateUpdate()
-    {
+    { // 현재 Screen 값에 따라 UI 위치 수정 해야함.
+
         if (_canvasRectTrs == null && _camera == null) { return; }
 
         if (_traceObject == null)
