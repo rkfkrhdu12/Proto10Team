@@ -68,14 +68,14 @@ public class TartManager : MonoBehaviour
             //nowPosY = (float)csvData[nowVal]["TOPPING_POS_Y"];
             //nowPosZ = (float)csvData[nowVal]["TOPPING_POS_Z"];
 
-            Debug.Log("nowCode = " + nowCode + " | nowVal = " + nowVal);
+            //Debug.Log("nowCode = " + nowCode + " | nowVal = " + nowVal);
 
-            Debug.Log("now어쩌고에 데이터 할당 완료. 임시 토핑에 세팅 시작!");
+            //Debug.Log("now어쩌고에 데이터 할당 완료. 임시 토핑에 세팅 시작!");
             Topping tempTopping = gameObject.AddComponent<Topping>(); //임시로 쓰일 현재 토핑
 
             tempTopping.SetToppingInfo(nowCode, nowSize, nowNum, nowType, nowScore, nowPosX, nowPosY, nowPosZ);
 
-            Debug.Log("임시 토핑 세팅 완료. 임시 타르트에 임시 토핑 추가.");
+           // Debug.Log("임시 토핑 세팅 완료. 임시 타르트에 임시 토핑 추가.");
 
             tempTart.AddTopping(tempTopping);
             tempTart.tartCode = tartCode;
@@ -84,7 +84,7 @@ public class TartManager : MonoBehaviour
         }
 
 
-        Debug.Log("임시 타르트를 모두 세팅 완료.");
+        //Debug.Log("임시 타르트를 모두 세팅 완료.");
 
         answerTart = tempTart;
 

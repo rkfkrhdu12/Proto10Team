@@ -46,9 +46,9 @@ public class TartSettingManager : MonoBehaviour
 
         for (int i = 0; i < answerTart.toppingList.Count; i++)//오브젝트 배치를 위해 for문을 돌린다.
         {
-            Debug.Log("현재 i : " + i);
-            Debug.Log("현재 토핑사이즈 : " + answerTart.toppingList[i].toppingSize);
-            Debug.Log("현재 토핑넘 : " + answerTart.toppingList[i].toppingNum);
+           // Debug.Log("현재 i : " + i);
+          //  Debug.Log("현재 토핑사이즈 : " + answerTart.toppingList[i].toppingSize);
+          //  Debug.Log("현재 토핑넘 : " + answerTart.toppingList[i].toppingNum);
             GameObject nowToppingObj = ReturnTopping(answerTart.toppingList[i].toppingSize,
              answerTart.toppingList[i].toppingNum,
              answerTart.toppingList[i].toppingType);
