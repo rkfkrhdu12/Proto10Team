@@ -35,11 +35,13 @@ public class CharacterUI : MonoBehaviour
 
     public void Init(PlayerController pCtrl)
     {
+        if (pCtrl == null) { gameObject.SetActive(false); return; }
+
         // TextBox속의 닉네임 설정
         _nameBox.text = pCtrl._pView.Owner.NickName;
 
         // 따라다닐 오브젝트 설정
-        _traceObject = pCtrl.gameObject;
+        _traceObject = pCtrl.HeadObj;
 
         // 혹시 null 일 경우 새로 초기화
         if (_inGameMgr == null)         _inGameMgr = GameManager.Instance.InGameManager;
@@ -48,7 +50,7 @@ public class CharacterUI : MonoBehaviour
         if (_pView == null)             _pView = _inGameMgr.PView;
     }
 
-    //[PunRPC]
+    [PunRPC]
     void Disable()
     {
         // 유저가 나가거나 UI가 사라져야할 경우
@@ -56,6 +58,7 @@ public class CharacterUI : MonoBehaviour
 
         _traceObject = null;
         _nameBox.text = "";
+
     }
 
     public void LateUpdate()

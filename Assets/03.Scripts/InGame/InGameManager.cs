@@ -85,6 +85,32 @@ public class InGameManager : MonoBehaviourPunCallbacks
         return null;
     }
 
+    [PunRPC]
+    public void LeftRoom(GameObject leftPlayer)
+    {
+        PlayerController pCtrl = leftPlayer.GetComponent<PlayerController>();
+        if (pCtrl == null) { return; }
+
+        for (int i = 0; i < RedTeam._Players.Length; ++i)
+        {
+            if (RedTeam._Players[i] == pCtrl)
+            {
+
+
+                return;
+            }
+        }
+
+        for (int i = 0; i < BlueTeam._Players.Length; ++i)
+        {
+            if (BlueTeam._Players[i] == pCtrl)
+            {
+
+                return;
+            }
+        }
+    }
+
     private void Awake()
     {
         _photonView = GetComponent<PhotonView>();
