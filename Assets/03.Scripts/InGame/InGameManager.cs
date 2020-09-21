@@ -8,18 +8,21 @@ using Photon.Pun.UtilityScripts;
 
 public class Team
 {
-    public PlayerController[] _Players = null;
+    private eTeam _team = eTeam.None;
+    public eTeam CurTeam { get { return _team; } }
+
+    public List<PlayerController> _Players = new List<PlayerController>();
     public CharacterUI[] _CharacterUI = null;
 
-    private int _curPlayerCount = 0;
+    public int CurPlayerCount { get { return _Players.Count - 1; } }
     private static int _maxPlayerCount = -1;
-    public void Init(int maxPlayerCount, CharacterUI[] charUIs = null)
+    public void Init(int maxPlayerCount, CharacterUI[] charUIs = null, eTeam curTeam = eTeam.None)
     {
         if (_maxPlayerCount <= -1) { _maxPlayerCount = maxPlayerCount; }
 
-        if (_Players == null)
+        if (_team == eTeam.None)
         {
-            _Players = new PlayerController[_maxPlayerCount];
+            _team = curTeam;
         }
 
         if (_CharacterUI == null)
@@ -31,20 +34,29 @@ public class Team
 
     public bool AddPlayer(PlayerController player)
     {
-        if (_Players == null) { Init(2); }
+        if (player == null) { return false; }
+        if (_Players == null) { _Players = new List<PlayerController>(); }
 
-        if (_curPlayerCount < _maxPlayerCount)
+        if (CurPlayerCount < _maxPlayerCount - 1)
         {
-            _Players[_curPlayerCount] = player;
-            _CharacterUI[_curPlayerCount].gameObject.SetActive(true);
+            _Players.Add(player);
 
-            _CharacterUI[_curPlayerCount].Init(_Players[_curPlayerCount]);
+            _Players[CurPlayerCount].Init(CurTeam);
 
-            ++_curPlayerCount;
+            _CharacterUI[CurPlayerCount].gameObject.SetActive(true);
+
+            _CharacterUI[CurPlayerCount].Init(_Players[CurPlayerCount]);
             return true;
         }
         else
             return false;
+    }
+
+    public void RemovePlayer(PlayerController player)
+    {
+        if (player == null) { return; }
+
+        // for()
     }
 }
 
@@ -74,7 +86,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
     private const int _teamCount = 2;
     public int TeamCount => _teamCount;
 
-    public PlayerController[] GetPlayers(eTeam team)
+    public List<PlayerController> GetPlayers(eTeam team)
     {
         switch (team)
         {
@@ -91,7 +103,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         PlayerController pCtrl = leftPlayer.GetComponent<PlayerController>();
         if (pCtrl == null) { return; }
 
-        for (int i = 0; i < RedTeam._Players.Length; ++i)
+        for (int i = 0; i < RedTeam._Players.Count; ++i)
         {
             if (RedTeam._Players[i] == pCtrl)
             {
@@ -101,7 +113,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
             }
         }
 
-        for (int i = 0; i < BlueTeam._Players.Length; ++i)
+        for (int i = 0; i < BlueTeam._Players.Count; ++i)
         {
             if (BlueTeam._Players[i] == pCtrl)
             {

@@ -9,6 +9,7 @@ public enum eTeam
 {
     Red,
     Blue,
+    None,
 }
 
 public class NetworkManager : MonoBehaviourPunCallbacks

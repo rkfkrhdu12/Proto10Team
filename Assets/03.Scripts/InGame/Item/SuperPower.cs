@@ -14,11 +14,11 @@ public class SuperPower : ItemBase
     {
         eTeam getCharTeam = getPlayer.Team;
 
-        _applyObjects = GameManager.Instance.InGameManager.GetPlayers(getCharTeam);
+        var applyObjects = GameManager.Instance.InGameManager.GetPlayers(getCharTeam);
 
-        for (int i = 0; i < _applyObjects.Length; ++i)
+        for (int i = 0; i < applyObjects.Count; ++i)
         {
-            PlayerController pCtrl = _applyObjects[i];
+            PlayerController pCtrl = applyObjects[i];
 
             pCtrl.MoveSpeed *= 2;
             pCtrl.Power *= 2;
@@ -27,9 +27,9 @@ public class SuperPower : ItemBase
 
         yield return _actionTime;
 
-        for (int i = 0; i < _applyObjects.Length; ++i)
+        for (int i = 0; i < applyObjects.Count; ++i)
         {
-            PlayerController pCtrl = _applyObjects[i];
+            PlayerController pCtrl = applyObjects[i];
 
             pCtrl.ItemEffectStateCount[(int)eitemNum.SuperPower] -= 1;
 
