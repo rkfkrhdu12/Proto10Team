@@ -66,6 +66,7 @@ public class TartSettingManager : MonoBehaviour
             //tempTopping.answerPosX = answerTart.toppingList[i].answerPosX;
             //tempTopping.answerPosY= answerTart.toppingList[i].answerPosY;
             //tempTopping.answerPosZ = answerTart.toppingList[i].answerPosZ;
+
             tempToppingObj.transform.SetParent(scoreManager.tartManager.answerTart.gameObject.transform);
 
         }
