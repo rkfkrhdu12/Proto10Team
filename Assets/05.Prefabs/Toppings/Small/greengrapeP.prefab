@@ -93,11 +93,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toppingCode: 1
-  toppingSize: 0
-  toppingNum: 0
+  toppingSize: 1
+  toppingNum: 2
   toppingType: 0
   toppingScore: 0
   isCheck: 0
   answerPosX: 0
   answerPosY: 0
   answerPosZ: 0
+  nowToppingPos: {x: 0, y: 0}
