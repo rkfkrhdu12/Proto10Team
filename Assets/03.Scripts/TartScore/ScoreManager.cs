@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        TestTartInput();
+       // TestTartInput();
         //CheckScore();
     }
 
@@ -29,6 +29,9 @@ public class ScoreManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 25번 타르트 csv를 읽어오고...그렇습니다.
+    /// </summary>
     public void TestTartInput()
     {
         tartManager.DataLoadAndSetAnswerTart(25);
