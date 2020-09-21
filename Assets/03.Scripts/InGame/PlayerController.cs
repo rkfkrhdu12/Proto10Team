@@ -39,8 +39,18 @@ public class PlayerController : MonoBehaviour
     public float Power { get => _datas._power;  set => _datas._power = _power._Value = value; }
     public float JumpPower { get => _datas._jumpPower;  set => _datas._jumpPower = _jumpPower._Value = value; }
     public float[] ItemEffectStateCount { get => _datas._itemEffect; set => _datas._itemEffect = value; }
+    public GameObject HeadObj { get { return _curTeamObject.Head; } }
 
     public PhotonView _pView;
+
+    [SerializeField]
+    private PlayerObjectData _redObject = null;
+    [SerializeField]
+    private PlayerObjectData _blueObject = null;
+
+    private PlayerObjectData _curTeamObject = null;
+
+    public bool isInit = false;
 
     void Awake()
     {
@@ -55,8 +65,17 @@ public class PlayerController : MonoBehaviour
         ItemEffectStateCount = new float[6];
     }
 
+    private void Start()
+    {
+        _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
+
+        _curTeamObject.Active();
+
+        isInit = true;
+    }
+
     void Update()
     {
-        if(!_pView.IsMine) { return; }
+        if (!_pView.IsMine) { return; }
     }
 }

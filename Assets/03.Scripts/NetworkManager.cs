@@ -91,5 +91,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = _maxPlayerCount });
     }
+
+    public override void OnLeftRoom()
+    {
+    }
     #endregion
 }
