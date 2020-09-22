@@ -54,16 +54,24 @@ public class PlayerController : MonoBehaviour
 
     public void Init(eTeam team)
     {
+        _datas._curTeam = team;
+
         _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
+        _curTeamObject.Active();
+    }
+
+    [PunRPC]
+    void Register()
+    {
+        GameManager.Instance.InGameManager.AddPlayer(this);
     }
 
     void Awake()
     {
         _pView = GetComponent<PhotonView>();
+        if (!_pView.IsMine) { return; }
 
-        if(!_pView.IsMine) { return; }
-
-        GameManager.Instance.InGameManager.AddPlayer(_pView.ViewID);
+        _pView.RPC("Register", RpcTarget.AllBuffered);
 
         MoveSpeed = 7.0f;
         JumpPower = 6.0f;
@@ -72,13 +80,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _curTeamObject.Active();
+        if (_curTeamObject == null)
+            _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
+
+        LogManager.Log(_pView.Owner.NickName + " " + Team.ToString());
 
         isInit = true;
-    }
-
-    void Update()
-    {
-        if (!_pView.IsMine) { return; }
     }
 }

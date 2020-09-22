@@ -16,6 +16,4 @@ public class PlayerObjectData : MonoBehaviour
     public GameObject RightHand { get { return _rightHand; } }
 
     public void Active() => gameObject.SetActive(true);
-
-
 }

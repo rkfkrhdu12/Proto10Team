@@ -7,9 +7,9 @@ using Photon.Realtime;
 
 public enum eTeam
 {
+    None,
     Red,
     Blue,
-    None,
 }
 
 public class NetworkManager : MonoBehaviourPunCallbacks
@@ -28,7 +28,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Variable
 
     WaitForSeconds _playerSpawnTime = new WaitForSeconds(.5f);
-
 
     #endregion
 

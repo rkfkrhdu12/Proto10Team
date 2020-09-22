@@ -14,29 +14,29 @@ public class SuperPower : ItemBase
     {
         eTeam getCharTeam = getPlayer.Team;
 
-        var applyObjects = GameManager.Instance.InGameManager.GetPlayers(getCharTeam);
+        playerControllers = GameManager.Instance.InGameManager.playerCharacters;
 
-        for (int i = 0; i < applyObjects.Count; ++i)
+        for (int i = 0; i < playerControllers.Count; ++i)
         {
-            PlayerController pCtrl = applyObjects[i];
+            if (playerControllers[i].Team != getCharTeam) continue;
 
-            pCtrl.MoveSpeed *= 2;
-            pCtrl.Power *= 2;
-            pCtrl.ItemEffectStateCount[(int)eitemNum.SuperPower] += 1;
+            playerControllers[i].MoveSpeed *= 2;
+            playerControllers[i].Power *= 2;
+            playerControllers[i].ItemEffectStateCount[(int)eitemNum.SuperPower] += 1;
         }
 
         yield return _actionTime;
 
-        for (int i = 0; i < applyObjects.Count; ++i)
+        playerControllers = GameManager.Instance.InGameManager.playerCharacters;
+
+        for (int i = 0; i < playerControllers.Count; ++i)
         {
-            PlayerController pCtrl = applyObjects[i];
+            playerControllers[i].ItemEffectStateCount[(int)eitemNum.SuperPower] -= 1;
 
-            pCtrl.ItemEffectStateCount[(int)eitemNum.SuperPower] -= 1;
-
-            if (pCtrl.ItemEffectStateCount[(int)eitemNum.SuperPower] <= 0)
+            if (playerControllers[i].ItemEffectStateCount[(int)eitemNum.SuperPower] <= 0)
             {
-                pCtrl.MoveSpeed *= 2;
-                pCtrl.Power *= 2;
+                playerControllers[i].MoveSpeed *= 2;
+                playerControllers[i].Power *= 2;
             }
         }
     }
