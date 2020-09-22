@@ -21,6 +21,7 @@ public class Topping : MonoBehaviour
     public bool isCheck; //채점 때 사용함. 검사가 완료된 토핑인지?
 
     //정답 토핑일 경우에만 사용함...
+    public Vector3 answerPos;
     public float answerPosX;
     public float answerPosY;
     public float answerPosZ;
@@ -35,7 +36,7 @@ public class Topping : MonoBehaviour
 
     private void Update()
     {
-        nowToppingPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        nowToppingPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.z);
     }
 
     public void SetToppingInfo(int code, int size, int num, int type, float score, float x, float y, float z)//토핑의 여러가지 정보들을 Set
