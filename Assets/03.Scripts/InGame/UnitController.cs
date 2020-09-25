@@ -21,7 +21,7 @@ public class UnitController : MonoBehaviour
     private PhotonView _photonView;
 
     // 움직일때 타겟을 잡고 그쪽으로 Lerp하며 움직임
-    public Vector3 _targetPos;
+    public Transform _targetTrans = null;
 
     // 이동할때의 Smooth한 정도
     public float smoothTime = 5;
@@ -60,15 +60,15 @@ public class UnitController : MonoBehaviour
         // 매번 호출보단 캐싱이 빠름
         _transform = transform;
 
-        // 타겟 Position을 내 Position로 초기화
-        _targetPos = _transform.position;
-
         // 이 오브젝트의 바닥부분을 가져옴
         _objectBottomPos = transform.position;
         _objectBottomPos.y -= transform.localScale.y / 2;
 
         // 강체 초기화
         _rigid = GetComponent<Rigidbody>();
+
+        _targetTrans.gameObject.SetActive(true);
+        _targetTrans.SetParent(_transform.parent);
     }
 
     private void Start()
@@ -88,54 +88,65 @@ public class UnitController : MonoBehaviour
         if (!_photonView.IsMine) { return; }
 
         UpdateMove();
+        UpdateRotation();
         UpdateJump();
 
-        transform.position = Vector3.Lerp(_transform.position, _targetPos, Time.deltaTime * smoothTime);
+        transform.position = Vector3.Lerp(_transform.position, _targetTrans.position, Time.deltaTime * smoothTime);
     }
 
-    // string 을 그냥 넣는것보다 이게 더 좋을것 같다는 생각과 그렇다는 글을 어디서 본 기억이 있음 틀렸으면 지적 환영
+    // string 을 그냥 넣는것보다 이게 더 좋을것 같다는 생각과 그렇다는 글을 어디서 본 기억이 있. 틀렸으면 지적 환영
     private readonly string _axisKeyHorizontal = "Horizontal";
     private readonly string _axisKeyVertical = "Vertical";
 
-    float _inputWaitTime = 0.0f;
+    // float _inputWaitTime = 0.0f;
 
     private void UpdateMove()
     {
         // 현재 WASD의 Input값을 가져온 후 delta값과 이동속도를 곱함.
-        float moveX = Input.GetAxis(_axisKeyHorizontal) * Time.deltaTime * _moveSpeed;
-        float moveZ = Input.GetAxis(_axisKeyVertical) * Time.deltaTime * _moveSpeed;
+        float moveX = Input.GetAxis(_axisKeyHorizontal) * _moveSpeed;
+        float moveZ = Input.GetAxis(_axisKeyVertical) * _moveSpeed;
 
-        if(moveX == 0 && moveZ == 0)
-        {
-            _inputWaitTime += Time.fixedDeltaTime;
-            if (_inputWaitTime > .1f)
-            {
-                _inputWaitTime = 0;
-                _targetPos = _transform.position;
-            }
-        }
-        else
-        {
-            _inputWaitTime = 0;
-        }
+        Vector3 deltaPos = new Vector3(moveX, 0, moveZ);
 
-        // 타겟의 Position에 더하거나 초기화를 해준 후
-        _targetPos.x += moveX;
-        _targetPos.y = _transform.position.y;
-        _targetPos.z += moveZ;
+        //if (moveX == 0 && moveZ == 0)
+        //{
+        //    _inputWaitTime += Time.deltaTime;
+        //    if (_inputWaitTime > 1f)
+        //    {
+        //        _inputWaitTime = 0;
+        //        _targetTrans.localPosition = Vector3.zero;
+        //    }
+        //}
+        //else
+        //{
+        //    _inputWaitTime = 0;
+        //}
 
-        Vector3 dist = _targetPos - _transform.position;
+        float dist = Vector3.Distance(_targetTrans.position, _transform.position);
 
-        // 둘의 거리가 너무 멀어졌을 경우 타겟의 거리를 좁히거나 거리가 늘어나는 정도를 줄임
-        if (dist.sqrMagnitude > _moveSpeed * .3f)
+        _targetTrans.localPosition += (deltaPos * Time.deltaTime);
+
+        //// 둘의 거리가 너무 멀어졌을 경우 타겟의 거리를 좁히거나 거리가 늘어나는 정도를 줄임
+        //if (dist)
+        //{
+        //    _targetTrans.x -= moveX * 1.25f;
+        //    _targetTrans.z -= moveZ * 1.25f;
+        //}
+        //else if (dist.sqrMagnitude > _moveSpeed * .1f) 
+        //{
+        //    _targetTrans.x -= moveX * .5f;
+        //    _targetTrans.z -= moveZ * .5f;
+        //}
+    }
+
+    void UpdateRotation()
+    {
+        if (Input.GetMouseButton(1))
         {
-            _targetPos.x -= moveX * 1.25f;
-            _targetPos.z -= moveZ * 1.25f;
-        }
-        else if (dist.sqrMagnitude > _moveSpeed * .1f) 
-        {
-            _targetPos.x -= moveX * .5f;
-            _targetPos.z -= moveZ * .5f;
+            float horizontal = Input.GetAxis("Mouse X");
+
+            _targetTrans.localEulerAngles += new Vector3(0, horizontal * 200.0f * Time.deltaTime, 0);
+            _transform.LookAt(_targetTrans);
         }
     }
 

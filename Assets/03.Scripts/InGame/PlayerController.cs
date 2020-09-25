@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
         _pView.RPC("Register", RpcTarget.AllBuffered);
 
+        GameManager.Instance.PlayerCharacter = gameObject;
+
         MoveSpeed = 7.0f;
         JumpPower = 6.0f;
         ItemEffectStateCount = new float[6];
