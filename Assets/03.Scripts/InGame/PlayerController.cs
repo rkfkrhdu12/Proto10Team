@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     public float JumpPower { get => _datas._jumpPower;  set => _datas._jumpPower = _jumpPower._Value = value; }
     public float[] ItemEffectStateCount { get => _datas._itemEffect; set => _datas._itemEffect = value; }
     public GameObject HeadObj { get { return _curTeamObject.Head; } }
+    public GameObject LeftHandObj { get { return _curTeamObject.LeftHand; } } 
+    public GameObject RightHandObj { get { return _curTeamObject.RightHand; } } 
 
     public PhotonView _pView;
 

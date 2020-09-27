@@ -49,6 +49,11 @@ public class UnitController : MonoBehaviour
     // 매번 생성하는것보다 캐싱해놓는것이 더 좋음
     WaitForSeconds _waitTime = new WaitForSeconds(.1f);
 
+    // 해당 UnitCtrl를 컨트롤 하는 PlayerController
+    PlayerController _pCtrl = null;
+
+    CameraManager _cameraMgr = null;
+
     private void Awake()
     {
         // 현재 오브젝트가 자신의 클라이언트의 것이 아닐경우 현재 스크립트를 비활성화 후 return
@@ -73,10 +78,13 @@ public class UnitController : MonoBehaviour
 
     private void Start()
     {
-        PlayerController pCtrl = GetComponent<PlayerController>();
+        // 초기화
+        _cameraMgr = GameManager.Instance.CameraManager;
 
-        _refMoveSpeed = pCtrl.GetMoveSpeed();
-        _refJumpPower = pCtrl.GetJumpPower();
+        _pCtrl = GetComponent<PlayerController>();
+
+        _refMoveSpeed = _pCtrl.GetMoveSpeed();
+        _refJumpPower = _pCtrl.GetJumpPower();
 
         // 점프루틴이 없을 경우 시작시킴
         if (_jumpRoutine == null)
@@ -86,6 +94,8 @@ public class UnitController : MonoBehaviour
     private void Update()
     {
         if (!_photonView.IsMine) { return; }
+
+        UpdateMonobehaviour();
 
         UpdateMove();
         UpdateRotation();
@@ -98,7 +108,60 @@ public class UnitController : MonoBehaviour
     private readonly string _axisKeyHorizontal = "Horizontal";
     private readonly string _axisKeyVertical = "Vertical";
 
-    // float _inputWaitTime = 0.0f;
+    public enum eHandState
+    {
+        Default,
+        Catch,
+    }
+
+    eHandState _curHandState = eHandState.Default;
+    public eHandState CurHandState { get { return _curHandState; } }
+    
+    // Test
+    private void OnHandDefault()
+    {
+        SphereCollider[] handsCollider = new SphereCollider[2];
+        handsCollider[0] = _pCtrl.LeftHandObj.GetComponent<SphereCollider>();
+        handsCollider[1] = _pCtrl.RightHandObj.GetComponent<SphereCollider>();
+
+        for (int i = 0; i < 2; ++i)
+        {
+            handsCollider[i].enabled = false;
+            Vector3 defaultEulerAngle = handsCollider[i].transform.localEulerAngles;
+            handsCollider[i].transform.localEulerAngles = new Vector3(defaultEulerAngle.x, 0, defaultEulerAngle.z);
+        }
+    }
+
+    private void OnHandCatch()
+    {
+        SphereCollider[] handsCollider = new SphereCollider[2];
+        handsCollider[0] = _pCtrl.LeftHandObj.GetComponent<SphereCollider>();
+        handsCollider[1] = _pCtrl.RightHandObj.GetComponent<SphereCollider>();
+
+        for (int i = 0; i < 2; ++i)
+        {
+            handsCollider[i].enabled = true;
+            Vector3 defaultEulerAngle = handsCollider[i].transform.localEulerAngles;
+            handsCollider[i].transform.localEulerAngles = new Vector3(defaultEulerAngle.x, 50 * (i * -1), defaultEulerAngle.z);
+        }
+    }
+
+    private void UpdateMonobehaviour()
+    {
+        if (Input.GetMouseButton(0) && _curHandState != eHandState.Catch)
+        {
+            // 마우스 왼클릭을 누르고 있음
+            // 잡기 모드
+            _curHandState = eHandState.Catch;
+            OnHandCatch();
+        }
+        else if (!Input.GetMouseButton(0) && _curHandState != eHandState.Default)
+        {   // 마우스 왼클릭을 안 누르고 있음
+            // 기본 모드
+            _curHandState = eHandState.Default;
+            OnHandDefault();
+        }
+    }
 
     private void UpdateMove()
     {
@@ -108,46 +171,14 @@ public class UnitController : MonoBehaviour
 
         Vector3 deltaPos = new Vector3(moveX, 0, moveZ);
 
-        //if (moveX == 0 && moveZ == 0)
-        //{
-        //    _inputWaitTime += Time.deltaTime;
-        //    if (_inputWaitTime > 1f)
-        //    {
-        //        _inputWaitTime = 0;
-        //        _targetTrans.localPosition = Vector3.zero;
-        //    }
-        //}
-        //else
-        //{
-        //    _inputWaitTime = 0;
-        //}
-
         float dist = Vector3.Distance(_targetTrans.position, _transform.position);
 
         _targetTrans.localPosition += (deltaPos * Time.deltaTime);
-
-        //// 둘의 거리가 너무 멀어졌을 경우 타겟의 거리를 좁히거나 거리가 늘어나는 정도를 줄임
-        //if (dist)
-        //{
-        //    _targetTrans.x -= moveX * 1.25f;
-        //    _targetTrans.z -= moveZ * 1.25f;
-        //}
-        //else if (dist.sqrMagnitude > _moveSpeed * .1f) 
-        //{
-        //    _targetTrans.x -= moveX * .5f;
-        //    _targetTrans.z -= moveZ * .5f;
-        //}
     }
 
     void UpdateRotation()
     {
-        if (Input.GetMouseButton(1))
-        {
-            float horizontal = Input.GetAxis("Mouse X");
-
-            _targetTrans.localEulerAngles += new Vector3(0, horizontal * 200.0f * Time.deltaTime, 0);
-            _transform.LookAt(_targetTrans);
-        }
+         _cameraMgr.transform.forward
     }
 
     IEnumerator ActionJump()

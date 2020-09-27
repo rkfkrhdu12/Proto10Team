@@ -47,6 +47,13 @@ public class GameManager
         set { if (_playerChar == null) _playerChar = value; }
     }
 
+    private CameraManager _cameraMgr = null;
+    public CameraManager CameraManager
+    {
+        get { return _cameraMgr; }
+        set { if (_cameraMgr == null) _cameraMgr = value; }
+    }
+
     // 현재 씬의 상태
     public enum eSceneState
     {

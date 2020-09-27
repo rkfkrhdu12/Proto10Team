@@ -35,8 +35,7 @@ public class CameraManager : MonoBehaviour
             {
                 if (GameManager.Instance.PlayerCharacter != null)
                 {
-                    transform.SetParent(GameManager.Instance.PlayerCharacter.transform);
-                    // _playerCharTransform = GameManager.Instance.PlayerCharacter.transform;
+                    _playerCharTransform = GameManager.Instance.PlayerCharacter.transform;
                 }
             }
             yield return _waitTime;
@@ -48,40 +47,42 @@ public class CameraManager : MonoBehaviour
 
     void Start()
     {
-        //_isInit = false;
-        //_isOption = true;
+        _isInit = false;
+        _isOption = true;
 
         StartCoroutine(SetPlayerCharacter());
 
-        //_pivotTransform = transform;
+        _pivotTransform = transform;
+
+        GameManager.Instance.CameraManager = this;
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetMouseButton(1)) 
-    //    {
-    //        _isRotation = true;
-    //    }
-    //    else if(Input.GetMouseButtonUp(1))
-    //    {
-    //        _isRotation = false;
-    //    }
-        
-    //}
+    private void Update()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            _isRotation = true;
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            _isRotation = false;
+        }
 
-    //void LateUpdate()
-    //{
-    //    if (!_isOption || !_isInit) { return; }
+    }
 
-    //    // Position Update
-    //    _pivotTransform.position = Vector3.SmoothDamp(_pivotTransform.position, _playerCharTransform.position, ref _curVelocity, smoothTime);
+    void LateUpdate()
+    {
+        if (!_isOption || !_isInit) { return; }
 
-    //    if (_isRotation)
-    //    {
-    //        // Rotation Update
-    //        float horizontal = Input.GetAxis("Mouse X");
+        // Position Update
+        _pivotTransform.position = Vector3.SmoothDamp(_pivotTransform.position, _playerCharTransform.position, ref _curVelocity, smoothTime);
 
-    //        _pivotTransform.localEulerAngles += new Vector3(0, horizontal * _mouseSensitivity._Value * Time.deltaTime, 0);
-    //    }
-    //}
+        if (_isRotation)
+        {
+            // Rotation Update
+            float horizontal = Input.GetAxis("Mouse X");
+
+            _pivotTransform.localEulerAngles += new Vector3(0, horizontal * _mouseSensitivity._Value * Time.deltaTime, 0);
+        }
+    }
 }
