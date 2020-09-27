@@ -169,7 +169,7 @@ public class UnitController : MonoBehaviour
         float moveX = Input.GetAxis(_axisKeyHorizontal) * _moveSpeed;
         float moveZ = Input.GetAxis(_axisKeyVertical) * _moveSpeed;
 
-        Vector3 deltaPos = new Vector3(moveX, 0, moveZ);
+        Vector3 deltaPos = (moveX * _targetTrans.right) + (moveZ * _targetTrans.forward);
 
         float dist = Vector3.Distance(_targetTrans.position, _transform.position);
 
@@ -178,12 +178,12 @@ public class UnitController : MonoBehaviour
 
     void UpdateRotation()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
-            Debug.Log(_cameraMgr.transform.forward);
+            Vector3 cameraEulerAngle = _cameraMgr.transform.eulerAngles;
+            Vector3 defaultEulerAngle = _transform.eulerAngles;
 
-            _targetTrans.eulerAngles = _cameraMgr.transform.forward;
-            _transform.LookAt(_targetTrans);
+            _transform.eulerAngles = _targetTrans.eulerAngles = new Vector3(defaultEulerAngle.x, cameraEulerAngle.y, defaultEulerAngle.z);
         }
     }
 
