@@ -178,7 +178,13 @@ public class UnitController : MonoBehaviour
 
     void UpdateRotation()
     {
-         _cameraMgr.transform.forward
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.Log(_cameraMgr.transform.forward);
+
+            _targetTrans.eulerAngles = _cameraMgr.transform.forward;
+            _transform.LookAt(_targetTrans);
+        }
     }
 
     IEnumerator ActionJump()
