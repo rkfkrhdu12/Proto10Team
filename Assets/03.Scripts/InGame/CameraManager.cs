@@ -74,6 +74,9 @@ public class CameraManager : MonoBehaviour
     {
         if (!_isOption || !_isInit) { return; }
 
+        if(_playerCharTransform == null) { return; }
+        if(_pivotTransform == null) { return; }
+
         // Position Update
         _pivotTransform.position = Vector3.SmoothDamp(_pivotTransform.position, _playerCharTransform.position, ref _curVelocity, smoothTime);
 

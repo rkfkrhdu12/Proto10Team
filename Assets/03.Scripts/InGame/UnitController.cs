@@ -8,6 +8,39 @@ using Photon.Realtime;
 
 public class UnitController : MonoBehaviour
 {
+    public void OnHandDefault()
+    {
+        SphereCollider[] handsCollider = new SphereCollider[2];
+        handsCollider[0] = _pCtrl.LeftHandObj.GetComponent<SphereCollider>();
+        handsCollider[1] = _pCtrl.RightHandObj.GetComponent<SphereCollider>();
+
+        for (int i = 0; i < 2; ++i)
+        {
+            handsCollider[i].enabled = false;
+            Vector3 defaultEulerAngle = handsCollider[i].transform.localEulerAngles;
+            handsCollider[i].transform.localEulerAngles = new Vector3(defaultEulerAngle.x, 0, defaultEulerAngle.z);
+        }
+    }
+
+    public void OnHandCatch()
+    {
+        SphereCollider[] handsCollider = new SphereCollider[2];
+        handsCollider[0] = _pCtrl.LeftHandObj.GetComponent<SphereCollider>();
+        handsCollider[1] = _pCtrl.RightHandObj.GetComponent<SphereCollider>();
+
+        for (int i = 0; i < 2; ++i)
+        {
+            handsCollider[i].enabled = true;
+            Vector3 defaultEulerAngle = handsCollider[i].transform.localEulerAngles;
+
+            Vector3 curHandleEulerAngle = new Vector3(defaultEulerAngle.x, 50 * (i == 1 ? -1 : 1), defaultEulerAngle.z);
+
+            handsCollider[i].transform.localEulerAngles = curHandleEulerAngle;
+        }
+    }
+
+    #region Variable
+
     // 움직일 속도
     public RefData _refMoveSpeed = new RefData();
     private float _moveSpeed => _refMoveSpeed._Value;
@@ -54,6 +87,13 @@ public class UnitController : MonoBehaviour
 
     CameraManager _cameraMgr = null;
 
+    // string 을 그냥 넣는것보다 이게 더 좋을것 같다는 생각과 그렇다는 글을 어디서 본 기억이 있. 틀렸으면 지적 환영
+    private readonly string _axisKeyHorizontal = "Horizontal";
+    private readonly string _axisKeyVertical = "Vertical";
+
+    #endregion
+
+    #region Monobehaviour Function
     private void Awake()
     {
         // 현재 오브젝트가 자신의 클라이언트의 것이 아닐경우 현재 스크립트를 비활성화 후 return
@@ -95,73 +135,15 @@ public class UnitController : MonoBehaviour
     {
         if (!_photonView.IsMine) { return; }
 
-        UpdateMonobehaviour();
-
         UpdateMove();
         UpdateRotation();
         UpdateJump();
 
         transform.position = Vector3.Lerp(_transform.position, _targetTrans.position, Time.deltaTime * smoothTime);
     }
+    #endregion
 
-    // string 을 그냥 넣는것보다 이게 더 좋을것 같다는 생각과 그렇다는 글을 어디서 본 기억이 있. 틀렸으면 지적 환영
-    private readonly string _axisKeyHorizontal = "Horizontal";
-    private readonly string _axisKeyVertical = "Vertical";
-
-    public enum eHandState
-    {
-        Default,
-        Catch,
-    }
-
-    eHandState _curHandState = eHandState.Default;
-    public eHandState CurHandState { get { return _curHandState; } }
-    
-    // Test
-    private void OnHandDefault()
-    {
-        SphereCollider[] handsCollider = new SphereCollider[2];
-        handsCollider[0] = _pCtrl.LeftHandObj.GetComponent<SphereCollider>();
-        handsCollider[1] = _pCtrl.RightHandObj.GetComponent<SphereCollider>();
-
-        for (int i = 0; i < 2; ++i)
-        {
-            handsCollider[i].enabled = false;
-            Vector3 defaultEulerAngle = handsCollider[i].transform.localEulerAngles;
-            handsCollider[i].transform.localEulerAngles = new Vector3(defaultEulerAngle.x, 0, defaultEulerAngle.z);
-        }
-    }
-
-    private void OnHandCatch()
-    {
-        SphereCollider[] handsCollider = new SphereCollider[2];
-        handsCollider[0] = _pCtrl.LeftHandObj.GetComponent<SphereCollider>();
-        handsCollider[1] = _pCtrl.RightHandObj.GetComponent<SphereCollider>();
-
-        for (int i = 0; i < 2; ++i)
-        {
-            handsCollider[i].enabled = true;
-            Vector3 defaultEulerAngle = handsCollider[i].transform.localEulerAngles;
-            handsCollider[i].transform.localEulerAngles = new Vector3(defaultEulerAngle.x, 50 * (i * -1), defaultEulerAngle.z);
-        }
-    }
-
-    private void UpdateMonobehaviour()
-    {
-        if (Input.GetMouseButton(0) && _curHandState != eHandState.Catch)
-        {
-            // 마우스 왼클릭을 누르고 있음
-            // 잡기 모드
-            _curHandState = eHandState.Catch;
-            OnHandCatch();
-        }
-        else if (!Input.GetMouseButton(0) && _curHandState != eHandState.Default)
-        {   // 마우스 왼클릭을 안 누르고 있음
-            // 기본 모드
-            _curHandState = eHandState.Default;
-            OnHandDefault();
-        }
-    }
+    #region Private Function
 
     private void UpdateMove()
     {
@@ -187,7 +169,7 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    IEnumerator ActionJump()
+    private IEnumerator ActionJump()
     {
         // 오브젝트가 꺼지지않는 이상 계속 작동
         while (gameObject.activeSelf)
@@ -195,7 +177,7 @@ public class UnitController : MonoBehaviour
             // 점프를 하였으면
             if (!_isGround)
             {
-                if(_rigid.velocity.y < .05f && _rigid.velocity.y > -.05f)
+                if (_rigid.velocity.y < .05f && _rigid.velocity.y > -.05f)
                 {
                     yield return _waitTime;
 
@@ -219,5 +201,6 @@ public class UnitController : MonoBehaviour
 
             _rigid.AddForce(Vector3.up * _jumpPower * 100);
         }
-    }
+    } 
+    #endregion
 }

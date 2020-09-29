@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TeamManager : MonoBehaviour
 {
-    Dictionary<int, int> _viewIDIndex = new Dictionary<int, int>();
+    // index, ViewID
+    Dictionary<int, int> _indexViewidBox = new Dictionary<int, int>();
 
     [SerializeField]
     private CharacterUI[] _team1ChacUI = null;
@@ -14,11 +15,44 @@ public class TeamManager : MonoBehaviour
     int _maxTeamPlayerCount = 2;
     public void Register(PlayerController pCtrl)
     {
-        if(_viewIDIndex.ContainsKey(pCtrl._pView.ViewID)) { return; }
+        if(pCtrl == null) { return; }
+
+        List<PlayerController> pCtrls = GameManager.Instance.InGameManager.PlayerCharacters;
+
+        List<int> searchPlayer = new List<int>();
+
+        for (int i = 0; i < pCtrls.Count - 1; ++i)
+        { // 이번에 추가된 pCtrl 뺀 나머지를 Search
+            if (pCtrls[i] == null)
+            { // 현재 유저 데이터가 제대로 되지않은 경우 Error
+                LogManager.Log("Register DeletePlayer is Error !");
+                GameManager.Instance.InGameManager.PlayerCharacters.Remove(pCtrls[i]);
+                continue;
+            }
+
+            if (_indexViewidBox.ContainsValue(pCtrls[i]._pView.ViewID))
+            {
+                searchPlayer.Add(i);
+            }
+        }
+
+        var keys = _indexViewidBox.Keys;
+
+        foreach (int i in keys)
+        {
+            if (!searchPlayer.Contains(i))
+            {
+                _indexViewidBox.Remove(i);
+                break;
+            }
+        }
+
+
+        if (_indexViewidBox.ContainsValue(pCtrl._pView.ViewID)) { return; }
 
         for (int i = 0; i < _maxTeamPlayerCount * 2; ++i)
         {
-            if (!_viewIDIndex.ContainsValue(i))
+            if (!_indexViewidBox.ContainsKey(i))
             {
                 if (_maxTeamPlayerCount > i)
                 { // Red
@@ -39,10 +73,8 @@ public class TeamManager : MonoBehaviour
         pCtrl.Init(team);
 
         (team == eTeam.Red ? _team1ChacUI : _team2ChacUI)[index % 2].Init(pCtrl);
-        LogManager.Log(team + "  " + index.ToString());
 
-
-        _viewIDIndex.Add(pCtrl._pView.ViewID, index);
+        _indexViewidBox.Add(index, pCtrl._pView.ViewID);
     }
 
     public void Remove(int viewId)
