@@ -24,7 +24,7 @@ public struct PlayerData
     public float[] _itemEffect;
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPunObservable
 {
     PlayerData _datas;
 
@@ -53,6 +53,15 @@ public class PlayerController : MonoBehaviour
     private PlayerObjectData _curTeamObject = null;
 
     public bool isInit = false;
+
+    public enum eHandState
+    {
+        Default,
+        Catch,
+    }
+
+    eHandState _curHandState = eHandState.Default;
+    public eHandState CurHandState { get { return _curHandState; } }
 
     public void Init(eTeam team)
     {
@@ -90,5 +99,38 @@ public class PlayerController : MonoBehaviour
         LogManager.Log(_pView.Owner.NickName + " " + Team.ToString());
 
         isInit = true;
+    }
+
+    private void Update()
+    {
+        if (!_pView.IsMine) { return; }
+
+        if (Input.GetMouseButton(0) && _curHandState != eHandState.Catch)
+        {
+            // 마우스 왼클릭을 누르고 있음
+            // 잡기 모드
+            _curHandState = eHandState.Catch;
+            // OnHandCatch();
+        }
+        else if (!Input.GetMouseButton(0) && _curHandState != eHandState.Default)
+        {   // 마우스 왼클릭을 안 누르고 있음
+            // 기본 모드
+            _curHandState = eHandState.Default;
+            // OnHandDefault();
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext((int)_curHandState);
+        }
+        else
+        {
+            // Network player, receive data
+            _curHandState = (eHandState)stream.ReceiveNext();
+        }
     }
 }

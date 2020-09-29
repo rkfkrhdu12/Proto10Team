@@ -17,7 +17,7 @@ public class SuperPower : ItemBase
         eTeam getCharTeam = getPlayer.Team;
 
         // 전체 유저들(PlayerCharacter) Get
-        playerControllers = GameManager.Instance.InGameManager.playerCharacters;
+        playerControllers = GameManager.Instance.InGameManager.PlayerCharacters;
 
         // SuperPower 효과
         // 아군 팀 

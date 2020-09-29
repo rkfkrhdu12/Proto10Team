@@ -14,14 +14,22 @@ public class InGameManager : MonoBehaviour
     [SerializeField]
     private ScrollController _mouseSensitivityOptionScroll;
 
-    public List<PlayerController> playerCharacters = new List<PlayerController>();
+    public List<PlayerController> PlayerCharacters = new List<PlayerController>();
 
     [SerializeField]
     private TeamManager teamMgr = null;
 
     public void AddPlayer(PlayerController pCtrl)
     {
-        playerCharacters.Add(pCtrl);
+        for (int i = 0; i < PlayerCharacters.Count; ++i)
+        {
+            if(PlayerCharacters[i] == null)
+            {
+                PlayerCharacters.Remove(PlayerCharacters[i]);
+            }
+        }
+
+        PlayerCharacters.Add(pCtrl);
         teamMgr.Register(pCtrl);
     }
 

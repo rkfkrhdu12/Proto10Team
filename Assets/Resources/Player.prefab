@@ -188,6 +188,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1461252461771136836}
+  - {fileID: 6037959793252923441}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_RotationModel:
     SynchronizeEnabled: 1
     InterpolateOption: 1
-    InterpolateRotateTowardsSpeed: 180
+    InterpolateRotateTowardsSpeed: 480
     InterpolateLerpSpeed: 5
   m_ScaleModel:
     SynchronizeEnabled: 0
