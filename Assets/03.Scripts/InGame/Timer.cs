@@ -17,6 +17,12 @@ public class Timer : MonoBehaviour
 
     ItemEvent OnItemEvent;
 
+    private void Reset()
+    {
+        _remainingTime = 180;
+        _isStart = false;
+    }
+
     private void Awake()
     {
         _eventTime[0] = 150;
