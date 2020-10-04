@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        CheckScoreV2();
+       // CheckScoreV2();
     }
 
     void Update()
@@ -83,14 +83,23 @@ public class ScoreManager : MonoBehaviour
      * ㅇㅋ 해보자.
      */
 
+    public void Init()
+    {
+        myScore = 0;
+        for (int i = 0; i < myTart.toppingList.Count; i++)
+        {
+            myTart.toppingList[i].isCheck = false; //채점 완료 표시.
+        }
+
+    }
     public void log(object l)
     {
-        Debug.Log(l);
+        Debug.Log("ScoreManager : " + l);
     }
 
     public void CheckScoreV2()
     {
-
+        Init();
         Tart answerTart = tartManager.answerTart; //정답 타르트를 가져왔다.
 
         for (int i = 0; i < answerTart.toppingList.Count; i++)
