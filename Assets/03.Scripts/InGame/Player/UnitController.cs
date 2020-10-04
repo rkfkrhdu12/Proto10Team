@@ -68,6 +68,14 @@ public class UnitController : MonoBehaviour
     // 현재 점프가 가능한 상태인지 확인
     public bool _isGround = true;
 
+    // 점프시간
+    float _jumpTime = 0.0f;
+    // 점프 시작시 Position Y값
+    float _jumpStartPosY = 0.0f;
+
+    // 점프 중인가
+    bool _isJumping = false;
+
     // 점프를 시키기위해 오브젝트의 강체를 가져옴
     Rigidbody _rigid;
 
@@ -195,12 +203,28 @@ public class UnitController : MonoBehaviour
     private void UpdateJump()
     {
         // 현재 점프중이 아닐때 space바를 입력시 점프
-        if (Input.GetKeyDown(KeyCode.Space) && _isGround)
+        if (Input.GetKeyDown(KeyCode.Space) && _isGround && !_isJumping)
         {
             _isGround = false;
-
-            _rigid.AddForce(Vector3.up * _jumpPower * 100);
+            _isJumping = true;
+            _jumpStartPosY = _transform.position.y;
         }
-    } 
+
+        if (_isJumping)
+        {
+            float height = (_jumpTime * _jumpTime * (Physics.gravity.y) / 2) + (_jumpTime * _jumpPower);
+            _transform.position = new Vector3(_transform.position.x, _jumpStartPosY + height, _transform.position.z);
+            _jumpTime += Time.deltaTime;
+
+            // 처음의 높이 보다 더 내려 갔을때 => 점프전 상태로 복귀한다.
+            if (height < 0.0f)
+            {
+                _isJumping = false;
+                _jumpTime = 0.0f;
+                
+                // _transform.position = new Vector3(_transform.position.x, _jumpStartPosY, _transform.position.z);
+            }
+        }
+    }
     #endregion
 }
