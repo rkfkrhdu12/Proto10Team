@@ -29,10 +29,10 @@ public class Topping : MonoBehaviour
     [Tooltip("현재 토핑의 위치입니다. Update에서 계속 업데이트됨.")]
     public Vector2 nowToppingPos;
 
-    private void Awake()
-    {
-        isCheck = false;
-    }
+    //private void Awake()
+    //{
+    //    isCheck = false;
+    //}
 
     private void Update()
     {

@@ -14,6 +14,9 @@ public class TartSettingManager : MonoBehaviour
     public GameObject[] midSizeToppings;
     public GameObject[] largeSizeToppings;
 
+    [Header("젤리빈 프리팹")]
+    public GameObject[] jellyBeans;
+
     [Header("오류용 오브젝트")]
     public GameObject errorTopping;
 
@@ -21,8 +24,8 @@ public class TartSettingManager : MonoBehaviour
 
     private void Awake()
     {
-        scoreManager.TestTartInput();
-        AnswerTartSetting();
+        //scoreManager.TestTartInput();
+        //AnswerTartSetting();
 
     }
     void Start()
@@ -33,7 +36,7 @@ public class TartSettingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     /// <summary>
     /// 정답 타르트의 토핑들을 세팅(오브젝트 배치)합니다.
@@ -46,9 +49,9 @@ public class TartSettingManager : MonoBehaviour
 
         for (int i = 0; i < answerTart.toppingList.Count; i++)//오브젝트 배치를 위해 for문을 돌린다.
         {
-           // Debug.Log("현재 i : " + i);
-          //  Debug.Log("현재 토핑사이즈 : " + answerTart.toppingList[i].toppingSize);
-          //  Debug.Log("현재 토핑넘 : " + answerTart.toppingList[i].toppingNum);
+            // Debug.Log("현재 i : " + i);
+            //  Debug.Log("현재 토핑사이즈 : " + answerTart.toppingList[i].toppingSize);
+            //  Debug.Log("현재 토핑넘 : " + answerTart.toppingList[i].toppingNum);
             GameObject nowToppingObj = ReturnTopping(answerTart.toppingList[i].toppingSize,
              answerTart.toppingList[i].toppingNum,
              answerTart.toppingList[i].toppingType);
@@ -59,12 +62,12 @@ public class TartSettingManager : MonoBehaviour
                 answerTart.toppingList[i].answerPosY,
                 answerTart.toppingList[i].answerPosZ),
                 nowToppingObj.transform.rotation);
-         
+
 
             //아래 주석이 통하지 않는 이유:
             //타르트 매니저 자체에 Tart컴포넌트가 생성되어있기 때문에.
             //Tart의 게임오브젝트를 불러오면...당연히 타르트 매니저가 불러와진다...
-            
+
             //Topping tempTopping = tempToppingObj.GetComponent<Topping>();
             //if (tempTopping)
             //{
@@ -98,13 +101,28 @@ public class TartSettingManager : MonoBehaviour
 
         if (topSize == 1) //소형 사이즈 구간
         {
-            return smallSizeToppings[topNum - 1];
+            if (topNum == 4)//젤리빈일 경우
+            {
+                if (topType == 0)
+                {
+                    return smallSizeToppings[topNum - 1];
+                }
+                else
+                {
+                    return jellyBeans[topType - 1];
+                }
+            }
+            else
+            {
+                return smallSizeToppings[topNum - 1];
+            }
+
         }
-        else if (topSize ==2) //중형 사이즈 구간
+        else if (topSize == 2) //중형 사이즈 구간
         {
             return midSizeToppings[topNum - 1];
         }
-        else if (topSize ==3) //대형 사이즈 구간
+        else if (topSize == 3) //대형 사이즈 구간
         {
             return largeSizeToppings[topNum - 1];
         }

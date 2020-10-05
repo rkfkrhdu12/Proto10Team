@@ -67,7 +67,6 @@ public class CameraManager : MonoBehaviour
         {
             _isRotation = false;
         }
-
     }
 
     void LateUpdate()

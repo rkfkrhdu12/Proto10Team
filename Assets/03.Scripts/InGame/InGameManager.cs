@@ -17,7 +17,10 @@ public class InGameManager : MonoBehaviour
     public List<PlayerController> PlayerCharacters = new List<PlayerController>();
 
     [SerializeField]
-    private TeamManager teamMgr = null;
+    private TeamManager _teamMgr = null;
+
+    [SerializeField]
+    private Timer _Timer = null;
 
     public void AddPlayer(PlayerController pCtrl)
     {
@@ -30,7 +33,7 @@ public class InGameManager : MonoBehaviour
         }
 
         PlayerCharacters.Add(pCtrl);
-        teamMgr.Register(pCtrl);
+        _teamMgr.Register(pCtrl);
     }
 
     private void Awake()
@@ -42,5 +45,11 @@ public class InGameManager : MonoBehaviour
         CameraManager.SetMouseSensitivity(in _mouseSensitivityOptionScroll.Data);
 
         GameManager.Instance.CurState = GameManager.eSceneState.InGame;
+    }
+
+    [PunRPC]
+    public void OnItemEvent(int eventNum)
+    {
+
     }
 }

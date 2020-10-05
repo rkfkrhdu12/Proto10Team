@@ -37,6 +37,8 @@ MonoBehaviour:
   - DestroyRpc
   - DestroySpaceship
   - Fire
+  - OnChangeHand
+  - OnItemEvent
   - Register
   - RespawnSpaceship
   DisableAutoOpenWizard: 1
