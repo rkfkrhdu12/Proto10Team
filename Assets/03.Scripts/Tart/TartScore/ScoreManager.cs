@@ -195,8 +195,6 @@ public class ScoreManager : MonoBehaviour
                 }
 
             }
-
-
         }
 
         //마지막 감점 검사!
