@@ -8,7 +8,23 @@ public class TartSystemManager : MonoBehaviour
      * TartManager, TartSettingManager, ScoreManager 등을 통합(?)하지는 않았고...
      * 그냥 한꺼번에 쓰기 위해서 만든 녀석...
      */
+    private static TartSystemManager _instance;
 
+    public static TartSystemManager Instance
+    {
+        get
+        {
+            // 인스턴스가 없는 경우에 접근하려 하면 인스턴스를 할당해준다.
+            if (!_instance)
+            {
+                _instance = FindObjectOfType(typeof(TartSystemManager)) as TartSystemManager;
+
+                if (_instance == null)
+                    Debug.Log("없어....");
+            }
+            return _instance;
+        }
+    }
     public int teamRedScore;
     public int teamBlueScore;
 
@@ -19,6 +35,27 @@ public class TartSystemManager : MonoBehaviour
     public TartSettingManager tartSettingManager;
     public ToppingSpawnManager toppingSpawnManager;
     public ScoreManager scoreManager;
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        // 인스턴스가 존재하는 경우 새로생기는 인스턴스를 삭제한다.
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+
+    }
 
     public void RandomChoiceOfTart()
     {
@@ -56,13 +93,5 @@ public class TartSystemManager : MonoBehaviour
         Debug.Log(" TeamRed : " + teamRedScore + " | TeamBlue : " + teamBlueScore);
 
     }
-    void Start()
-    {
 
-    }
-
-    void Update()
-    {
-
-    }
 }

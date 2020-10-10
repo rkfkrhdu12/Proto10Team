@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+
+
     public TMP_Text uiScore;
 
     [Tooltip("타르트매니저 하나 만들어서 넣어주셔야 함")]
@@ -25,15 +27,19 @@ public class ScoreManager : MonoBehaviour
     [Header("이 정도 거리 차이는 정답으로 인정합니다.")]
     [Range(1, 3)]
     public float allowDis;
+    private void Awake()
+    {
+
+    }
 
     void Start()
     {
-       // CheckScoreV2();
+        // CheckScoreV2();
     }
 
     void Update()
     {
-        uiScore.text = "Perfection: "+System.Convert.ToString(myScore);
+        uiScore.text = "Perfection: " + System.Convert.ToString(myScore);
     }
 
     /// <summary>
@@ -155,7 +161,7 @@ public class ScoreManager : MonoBehaviour
                 Vector2 tempMyPos = new Vector2(myPosX, myPosZ);
                 log("이 토핑의 위치는" + tempMyPos);
                 Vector2 tempAnswerPos = new Vector2(answerTopping.answerPosX, answerTopping.answerPosZ);
-                float compareDis = Vector2.Distance(tempAnswerPos,tempMyPos);
+                float compareDis = Vector2.Distance(tempAnswerPos, tempMyPos);
                 log("현재 가장 가까운 거리는 " + minDis + " 입니다.");
                 log(myTart.toppingList[sameToppingIndex[k]].gameObject.name + "의 거리는 " + compareDis + "입니다.");
 
@@ -200,7 +206,7 @@ public class ScoreManager : MonoBehaviour
         //마지막 감점 검사!
         for (int i = 0; i < myTart.toppingList.Count; i++)
         {
-            if (myTart.toppingList[i].isCheck==false)
+            if (myTart.toppingList[i].isCheck == false)
             {
                 log("상관없는 토핑이 있습니다. 감점합니다.");
                 switch (myTart.toppingList[i].toppingSize)
@@ -219,9 +225,9 @@ public class ScoreManager : MonoBehaviour
                 }
             }
         }
-        if (myScore<=0)
+        if (myScore <= 0)
         {
-            myScore=0;
+            myScore = 0;
         }
         log("채점을 마쳤습니다. 총 점수는 " + myScore + "점 입니다.");
 
