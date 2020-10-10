@@ -38,12 +38,30 @@ public class TartSettingManager : MonoBehaviour
     {
 
     }
+
+    public void InitAnswerTartSetting()
+    {
+        if (scoreManager.tartManager.answerTart.gameObject.transform.childCount==0)
+        {
+            Debug.Log("처음 세팅하는 타르트");
+        }
+        else
+        {
+            Debug.Log("처음 세팅하는 타르트가 아님!!");
+            for (int i = 0; i < scoreManager.tartManager.answerTart.gameObject.transform.childCount; i++)
+            {
+                Destroy(scoreManager.tartManager.answerTart.gameObject.transform.GetChild(i).gameObject);
+            }
+        }
+
+    }
+
     /// <summary>
     /// 정답 타르트의 토핑들을 세팅(오브젝트 배치)합니다.
     /// </summary>
     public void AnswerTartSetting()
     {
-
+        InitAnswerTartSetting();
         Tart answerTart;
         answerTart = scoreManager.tartManager.answerTart;//비어있는(?) 정답 타르트를 가져온다.
 
@@ -61,11 +79,11 @@ public class TartSettingManager : MonoBehaviour
                 new Vector3(answerTart.toppingList[i].answerPosX * 1.5f,
                             answerTart.toppingList[i].answerPosY * 1.5f,
                             answerTart.toppingList[i].answerPosZ * 1.5f),
-                nowToppingObj.transform.rotation);
-            Destroy(tempToppingObj.GetComponent<Rigidbody>());
+                nowToppingObj.transform.rotation,scoreManager.tartManager.answerTart.gameObject.transform);
+            Destroy(tempToppingObj.transform.GetChild(0).gameObject.GetComponent<Rigidbody>());
 
 
-            tempToppingObj.transform.SetParent(scoreManager.tartManager.answerTart.gameObject.transform);
+           // tempToppingObj.transform.SetParent(scoreManager.tartManager.answerTart.gameObject.transform);
 
         }
     }

@@ -221,6 +221,10 @@ public class ScoreManager : MonoBehaviour
                 }
             }
         }
+        if (myScore<=0)
+        {
+            myScore=0;
+        }
         log("채점을 마쳤습니다. 총 점수는 " + myScore + "점 입니다.");
 
     }

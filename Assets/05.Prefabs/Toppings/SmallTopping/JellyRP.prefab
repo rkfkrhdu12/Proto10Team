@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1589975290439132790
+--- !u!1 &40945078600265369
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3807946539512614803}
-  - component: {fileID: 708363884217367821}
-  - component: {fileID: 7255288783874572657}
-  - component: {fileID: 2210485378925415813}
-  - component: {fileID: 1833893519004737868}
-  - component: {fileID: 2564981881626068721}
+  - component: {fileID: 8192335578436805704}
+  - component: {fileID: 4771110911148028691}
+  - component: {fileID: 3061141786354791558}
+  - component: {fileID: 7575924815248542715}
+  - component: {fileID: 661443435245541646}
+  - component: {fileID: 5439323346106194367}
   m_Layer: 0
-  m_Name: Jelly_GreenP
+  m_Name: Jelly_RedP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3807946539512614803
+--- !u!4 &8192335578436805704
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589975290439132790}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_GameObject: {fileID: 40945078600265369}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.37329206, y: 0.37329206, z: 0.37329206}
+  m_LocalScale: {x: 0.37329206, y: 0.37329203, z: 0.37329203}
   m_Children: []
-  m_Father: {fileID: 1932299102671404896}
+  m_Father: {fileID: 4329190944914985489}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!33 &708363884217367821
+--- !u!33 &4771110911148028691
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589975290439132790}
-  m_Mesh: {fileID: 6412623515549900752, guid: 633993a0a06e0234486deea03400357c, type: 3}
---- !u!23 &7255288783874572657
+  m_GameObject: {fileID: 40945078600265369}
+  m_Mesh: {fileID: 1678289250443766740, guid: 394bc184007989242a81eae4d965a0fa, type: 3}
+--- !u!23 &3061141786354791558
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589975290439132790}
+  m_GameObject: {fileID: 40945078600265369}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2fbea13743a75ac43b8fa3a75574c098, type: 2}
+  - {fileID: 2100000, guid: 62c42ffa803af22489120f9c36aa5efc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,13 +82,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2210485378925415813
+--- !u!114 &7575924815248542715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589975290439132790}
+  m_GameObject: {fileID: 40945078600265369}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 508ed151c2afac248b52c44704962970, type: 3}
@@ -97,7 +97,7 @@ MonoBehaviour:
   toppingCode: 0
   toppingSize: 1
   toppingNum: 4
-  toppingType: 2
+  toppingType: 3
   toppingScore: 0
   isCheck: 0
   answerPos: {x: 0, y: 0, z: 0}
@@ -105,13 +105,13 @@ MonoBehaviour:
   answerPosY: 0
   answerPosZ: 0
   nowToppingPos: {x: 0, y: 0}
---- !u!54 &1833893519004737868
+--- !u!54 &661443435245541646
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589975290439132790}
+  m_GameObject: {fileID: 40945078600265369}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -121,20 +121,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2564981881626068721
+--- !u!65 &5439323346106194367
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589975290439132790}
+  m_GameObject: {fileID: 40945078600265369}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4234548, y: 2.505217, z: 1.001029}
-  m_Center: {x: -0.033492267, y: 1.2587241, z: 0.00000005960465}
---- !u!1 &6313988709371192337
+  m_Size: {x: 1.4234548, y: 2.5052168, z: 1.001029}
+  m_Center: {x: -0.033492267, y: 1.2566406, z: 0.00000005960465}
+--- !u!1 &8168206697007122784
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,26 +142,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1932299102671404896}
+  - component: {fileID: 4329190944914985489}
   m_Layer: 0
-  m_Name: JellyGP
+  m_Name: JellyRP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1932299102671404896
+--- !u!4 &4329190944914985489
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6313988709371192337}
+  m_GameObject: {fileID: 8168206697007122784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3807946539512614803}
+  - {fileID: 8192335578436805704}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

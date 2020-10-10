@@ -11,12 +11,31 @@ public class TartManager : MonoBehaviour
 
     public List<Dictionary<string, object>> csvData; //그냥 csv 데이터를 담고있음.
 
+    public void InitTartTopping()
+    {
+        if (csvData==null)
+        {
+            Debug.Log("처음 Csv데이터를 읽어왔어...");
+        }
+        else
+        {
+            Debug.Log("처음으로 읽어온게 아니야...지우고 다시 한다...");
+            csvData.Clear();
+            answerTart.ClearTopping();
+            Destroy(gameObject.GetComponent<Tart>());
+            foreach (Topping testTopping in gameObject.GetComponents<Topping>())
+            {   
+                Destroy(testTopping);
+            }
+        }
+    }
 /// <summary>
 /// 
 /// </summary>
 /// <param name="tartCode">타르트의 코드입니다.</param>
     public void DataLoadAndSetAnswerTart(int tartCode)
     {
+        InitTartTopping();
         string finishFileName;
         finishFileName = "Tart_" + (string)System.Convert.ToString(tartCode);
         CsvDataLoad(finishFileName);

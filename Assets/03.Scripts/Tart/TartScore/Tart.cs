@@ -26,6 +26,10 @@ public class Tart : MonoBehaviour
     {
         toppingList.Remove(topping);
     }
+    public void ClearTopping()
+    {
+        toppingList.Clear();
+    }
 
 
 }
