@@ -3538,9 +3538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '180
-
-'
+  m_text: 190
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b55dea9289273440b2207bfe0ae6e39, type: 2}
   m_sharedMaterial: {fileID: -6336469063090418080, guid: 9b55dea9289273440b2207bfe0ae6e39,
@@ -3610,9 +3608,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1178754365}
-    characterCount: 4
+    characterCount: 3
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 1
     linkCount: 0
     lineCount: 1
@@ -4470,7 +4468,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 983d091e838b3a144b51820a0b036a10,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.913
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 983d091e838b3a144b51820a0b036a10,
         type: 3}
@@ -5110,6 +5108,7 @@ GameObject:
   - component: {fileID: 1941367298}
   - component: {fileID: 1941367297}
   - component: {fileID: 1941367296}
+  - component: {fileID: 1941367300}
   m_Layer: 0
   m_Name: InGameManager (1)
   m_TagString: Untagged
@@ -5135,8 +5134,7 @@ MonoBehaviour:
   - {fileID: 535668675}
   - {fileID: 599435980}
   - {fileID: 2127732027}
-  _itemBoxSpawnPointTransform:
-  - {fileID: 130268318}
+  _itemBoxSpawnPoint: {fileID: 130268318}
 --- !u!114 &1941367297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5193,6 +5191,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1941367300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941367295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1982292534
 PrefabInstance:
   m_ObjectHideFlags: 0

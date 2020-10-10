@@ -8,6 +8,8 @@ public class Darkness : ItemBase
     // 지속시간 Init
     void Start()
     {
+        _curItem = (int)eitemNum.Darkness;
+
         _actionTime = new WaitForSeconds(1f);
     }
 

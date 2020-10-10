@@ -80,10 +80,6 @@ public class Timer : MonoBehaviour
 
             (ItemEvents.Dequeue())();
         }
-
-        // Debug
-        if (Input.GetKeyDown(KeyCode.F9))
-            GameManager.Instance.PlayerCharacter.GetComponent<PhotonView>().RPC("OnDebugMode", RpcTarget.AllBuffered);
     }
 
     void OnEventCallRecipe()
@@ -99,7 +95,7 @@ public class Timer : MonoBehaviour
 
         LogManager.Log("OnEventCallItem");
 
-        _ingameMgr.OnItemEvent(_eventCount);
+        _ingameMgr.OnItemEvent();
 
         ++_eventCount;
     }

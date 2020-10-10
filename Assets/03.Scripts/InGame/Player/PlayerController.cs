@@ -75,6 +75,9 @@ public class PlayerController : MonoBehaviour
 
         _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
         _curTeamObject.Active();
+
+        LogManager.Log(_pView.Owner.NickName + " " + Team.ToString());
+        isInit = true;
     }
 
     public void OnDizziy()
@@ -94,8 +97,6 @@ public class PlayerController : MonoBehaviour
         _pView = GetComponent<PhotonView>();
         if (!_pView.IsMine) { return; }
 
-        _pView.RPC("Register", RpcTarget.AllBuffered);
-
         GameManager.Instance.PlayerCharacter = gameObject;
 
         MoveSpeed = 10.0f;
@@ -105,12 +106,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if (_curTeamObject == null)
-            _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
-
-        LogManager.Log(_pView.Owner.NickName + " " + Team.ToString());
-
-        isInit = true;
+        _pView.RPC("Register", RpcTarget.AllBuffered);
     }
 
     private void Update()

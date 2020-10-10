@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Photon.Pun;
-using Photon.Realtime;
-using Photon.Pun.UtilityScripts;
-
 public class InGameManager : MonoBehaviour
 {
     public CameraManager CameraManager;
@@ -128,7 +124,7 @@ public class InGameManager : MonoBehaviour
 
     }
 
-    public void OnItemEvent(int eventNum)
+    public void OnItemEvent()
     {
         if (_itemMgr == null) { _itemMgr = GetComponent<ItemManager>(); if (_itemMgr == null) return; }
 

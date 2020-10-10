@@ -7,9 +7,9 @@ public class PlayerObjectData : MonoBehaviour
     [SerializeField]
     private GameObject _head;
     [SerializeField]
-    private GameObject _leftHand;
-    [SerializeField]
     private GameObject _rightHand;
+    [SerializeField]
+    private GameObject _leftHand;
 
     public GameObject Head      { get { return _head; } }
     public GameObject LeftHand  { get { return _leftHand; } }

@@ -10,6 +10,7 @@ public class Stun : ItemBase
     // 지속시간 Init
     void Start()
     {
+        _curItem = (int)eitemNum.Stun;
         _actionTime = new WaitForSeconds(3f);
     }
 
