@@ -20,7 +20,7 @@ public class TartSystemManager : MonoBehaviour
                 _instance = FindObjectOfType(typeof(TartSystemManager)) as TartSystemManager;
 
                 if (_instance == null)
-                    Debug.Log("없어....");
+                    LogManager.Log("없어....");
             }
             return _instance;
         }
@@ -83,14 +83,14 @@ public class TartSystemManager : MonoBehaviour
         scoreManager.myTart = teamRedTart;
         CheckScore();
         teamRedScore = scoreManager.myScore;
-        Debug.Log("CheckBothScoreRed : " + teamRedScore);
+        LogManager.Log("CheckBothScoreRed : " + teamRedScore);
 
         scoreManager.myTart = teamBlueTart;
         CheckScore();
         teamBlueScore = scoreManager.myScore;
-        Debug.Log("CheckBothScore : " + teamBlueScore);
+        LogManager.Log("CheckBothScore : " + teamBlueScore);
 
-        Debug.Log(" TeamRed : " + teamRedScore + " | TeamBlue : " + teamBlueScore);
+        LogManager.Log(" TeamRed : " + teamRedScore + " | TeamBlue : " + teamBlueScore);
 
     }
 

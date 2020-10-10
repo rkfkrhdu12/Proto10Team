@@ -42,7 +42,7 @@ public class OverUIManager : MonoBehaviour
 
         if (lobbyManager ==null)
         {
-            Debug.Log("이상해;;;");
+            LogManager.Log("이상해;;;");
             lobbyManager = GameObject.FindObjectOfType<LobbyManager>(); //어차피 하나 밖에 없겠지?
         }
     }
@@ -84,7 +84,7 @@ public class OverUIManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log("ButtonExiting...");
+        LogManager.Log("ButtonExiting...");
         isExiting = true;
 
 
@@ -126,7 +126,7 @@ public class OverUIManager : MonoBehaviour
             }
             else if(targetOverTime >=successTime&&!isSuccess)
             {
-                Debug.Log("Success!");
+                LogManager.Log("Success!");
 
                 switch (buttonType)
                 {

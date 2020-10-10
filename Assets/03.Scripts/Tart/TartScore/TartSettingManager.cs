@@ -43,11 +43,11 @@ public class TartSettingManager : MonoBehaviour
     {
         if (scoreManager.tartManager.answerTart.gameObject.transform.childCount==0)
         {
-            Debug.Log("처음 세팅하는 타르트");
+            LogManager.Log("처음 세팅하는 타르트");
         }
         else
         {
-            Debug.Log("처음 세팅하는 타르트가 아님!!");
+            LogManager.Log("처음 세팅하는 타르트가 아님!!");
             for (int i = 0; i < scoreManager.tartManager.answerTart.gameObject.transform.childCount; i++)
             {
                 Destroy(scoreManager.tartManager.answerTart.gameObject.transform.GetChild(i).gameObject);
@@ -130,7 +130,7 @@ public class TartSettingManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("topSize는 1,2,3 중 하나여야 합니다. csv를 확인하라구~");
+            LogManager.Log("topSize는 1,2,3 중 하나여야 합니다. csv를 확인하라구~");
             return errorTopping;
         }
     }

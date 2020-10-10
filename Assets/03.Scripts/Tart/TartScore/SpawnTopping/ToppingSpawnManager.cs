@@ -117,7 +117,7 @@ public class ToppingSpawnManager : MonoBehaviour
 
     public void log(object l)
     {
-        Debug.Log("TartSpawnManager : " + l);
+        LogManager.Log("TartSpawnManager : " + l);
     }
     //public void SpawnTopping()
     //{

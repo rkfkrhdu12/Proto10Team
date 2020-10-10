@@ -15,11 +15,11 @@ public class TartManager : MonoBehaviour
     {
         if (csvData==null)
         {
-            Debug.Log("처음 Csv데이터를 읽어왔어...");
+            LogManager.Log("처음 Csv데이터를 읽어왔어...");
         }
         else
         {
-            Debug.Log("처음으로 읽어온게 아니야...지우고 다시 한다...");
+            LogManager.Log("처음으로 읽어온게 아니야...지우고 다시 한다...");
             csvData.Clear();
             answerTart.ClearTopping();
             Destroy(gameObject.GetComponent<Tart>());
@@ -45,7 +45,7 @@ public class TartManager : MonoBehaviour
     public void CsvDataLoad(string fileName) // filename.csv데이터를 읽어옵니다. 
     {
         csvData = CsvReader.Read("TartDataFiles/" + fileName);
-        Debug.Log("OK?...");
+        LogManager.Log("OK?...");
     }
     public void SetAnswerTart(int tartCode) // 읽어온 csvData를 바탕으로 answerTart를 세팅합니다.
     {
@@ -69,7 +69,7 @@ public class TartManager : MonoBehaviour
         {
             if ((int)csvData[nowVal]["TOPPING_CODE"] == 25)
             {
-                Debug.Log("임시 타르트에 모든 토핑을 추가 완료 하였습니다.");
+                LogManager.Log("임시 타르트에 모든 토핑을 추가 완료 하였습니다.");
                 break;
             }
 

@@ -100,7 +100,7 @@ public class ScoreManager : MonoBehaviour
     }
     public void log(object l)
     {
-        Debug.Log("ScoreManager : " + l);
+        LogManager.Log("ScoreManager : " + l);
     }
 
     public void CheckScoreV2()
