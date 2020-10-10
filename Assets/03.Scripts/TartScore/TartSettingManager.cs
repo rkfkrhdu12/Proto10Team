@@ -58,28 +58,12 @@ public class TartSettingManager : MonoBehaviour
 
             //복제
             GameObject tempToppingObj = Instantiate(nowToppingObj,
-                new Vector3(answerTart.toppingList[i].answerPosX,
-                answerTart.toppingList[i].answerPosY,
-                answerTart.toppingList[i].answerPosZ),
+                new Vector3(answerTart.toppingList[i].answerPosX * 1.5f,
+                            answerTart.toppingList[i].answerPosY * 1.5f,
+                            answerTart.toppingList[i].answerPosZ * 1.5f),
                 nowToppingObj.transform.rotation);
+            Destroy(tempToppingObj.GetComponent<Rigidbody>());
 
-
-            //아래 주석이 통하지 않는 이유:
-            //타르트 매니저 자체에 Tart컴포넌트가 생성되어있기 때문에.
-            //Tart의 게임오브젝트를 불러오면...당연히 타르트 매니저가 불러와진다...
-
-            //Topping tempTopping = tempToppingObj.GetComponent<Topping>();
-            //if (tempTopping)
-            //{
-
-            //}
-            //tempTopping.toppingSize = answerTart.toppingList[i].toppingSize;
-            //tempTopping.toppingNum = answerTart.toppingList[i].toppingNum;
-            //tempTopping.toppingScore = answerTart.toppingList[i].toppingScore;
-            //tempTopping.toppingType = answerTart.toppingList[i].toppingType;
-            //tempTopping.answerPosX = answerTart.toppingList[i].answerPosX;
-            //tempTopping.answerPosY= answerTart.toppingList[i].answerPosY;
-            //tempTopping.answerPosZ = answerTart.toppingList[i].answerPosZ;
 
             tempToppingObj.transform.SetParent(scoreManager.tartManager.answerTart.gameObject.transform);
 
