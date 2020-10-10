@@ -9,18 +9,19 @@ public enum eApplyTeam
     All,
 }
 
-
 public class ItemBase : MonoBehaviour
 {
-    protected enum eitemNum
+    public enum eitemNum
     {
-        SuperPower,
-        Twinkle, // Stun
-        Dizzle, // 크아 악마
-        Dark,
-        Slow,
-        Float,
+        SuperPower      ,
+        Stun            , // Stun
+        Dizzlness       , // 크아 악마
+        Darkness        ,
+        Slowly          ,
+        Floating        ,
     }
+
+    protected int _curItem;
 
     protected List<PlayerController> playerControllers;
 
@@ -29,11 +30,13 @@ public class ItemBase : MonoBehaviour
 
     readonly string _playerTagName = "Player";
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(_playerTagName))
         {
+            LogManager.Log("Item Action " + (eitemNum)_curItem);
             StartCoroutine(Action(other.GetComponent<PlayerController>()));
+            gameObject.SetActive(false);
         }
     }
 }

@@ -70,7 +70,7 @@ namespace NetWork
 
         // 현재 네트워크 상태를 알려줄 변수
         [SerializeField]
-        private eNetWorkState _curState;
+        private eNetWorkState _curState = eNetWorkState.Unstable;
         // 현재 네트워크 상태를 다른 스크립트에서도 알수 잇게 해줄 변수
         public eNetWorkState CurState { get { return _curState; } }
 
@@ -90,7 +90,7 @@ namespace NetWork
         // Awake Update
         #region Monobehaviour Function
 
-        private void Awake()
+        private void Start()
         {
             Time.maximumDeltaTime = 1f / 3f;
             Time.fixedDeltaTime = 1f / 60f;
@@ -98,12 +98,12 @@ namespace NetWork
             useGUILayout = false;
             Screen.SetResolution(960, 540, false);
 
-            UpdateState(eNetWorkState.Disconnect);
-
             // 게임 버젼을 PhotonNetwork 에 등록
             PhotonNetwork.GameVersion = _gameVersion;
             // 마스터 클라이언트와 일반 클라이언트의 씬을 동기화한다. 
             PhotonNetwork.AutomaticallySyncScene = true;
+
+            UpdateState(eNetWorkState.Disconnect);
         }
 
         public void Update()

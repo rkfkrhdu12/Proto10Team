@@ -8,6 +8,7 @@ public class SuperPower : ItemBase
     // 지속시간 Init
     void Start()
     {
+        _curItem = (int)eitemNum.SuperPower;
         _actionTime = new WaitForSeconds(7f);
     }
 
@@ -27,13 +28,15 @@ public class SuperPower : ItemBase
             if (playerControllers[i] == null) continue;
 
             // 아군팀에게 적용
-            if (playerControllers[i].Team != getCharTeam) continue;
+            if (playerControllers[i].Team != getCharTeam) { playerControllers.Remove(playerControllers[i]);  continue; }
 
-            playerControllers[i].MoveSpeed *= 2;
-            playerControllers[i].Power *= 2;
-
+            if (playerControllers[i].ItemEffectStateCount[_curItem] == 0)
+            {
+                playerControllers[i].MoveSpeed *= 2;
+                playerControllers[i].Power *= 2;
+            }
             // 혹시 아이템을 또 획득할 시 지속시간을 연장시킬 수단(야매) 
-            playerControllers[i].ItemEffectStateCount[(int)eitemNum.SuperPower] += 1;
+            playerControllers[i].ItemEffectStateCount[_curItem] += 1;
         }
 
         yield return _actionTime;
@@ -43,14 +46,16 @@ public class SuperPower : ItemBase
             if (playerControllers[i] == null) continue;
 
             // 지속시간 체크
-            playerControllers[i].ItemEffectStateCount[(int)eitemNum.SuperPower] -= 1;
+            playerControllers[i].ItemEffectStateCount[_curItem] -= 1;
 
             // 지속시간 확인
-            if (playerControllers[i].ItemEffectStateCount[(int)eitemNum.SuperPower] <= 0)
+            if (playerControllers[i].ItemEffectStateCount[_curItem] <= 0)
             {
-                playerControllers[i].MoveSpeed *= 2;
-                playerControllers[i].Power *= 2;
+                playerControllers[i].MoveSpeed *= .5f;
+                playerControllers[i].Power *= .5f;
             }
         }
+
+        LogManager.Log("Item End " + (eitemNum)_curItem);
     }
 }

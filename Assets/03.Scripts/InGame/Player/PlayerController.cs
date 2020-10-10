@@ -77,6 +77,18 @@ public class PlayerController : MonoBehaviour
         _curTeamObject.Active();
     }
 
+    public void OnDizziy()
+    {
+
+    }
+
+    public void OnStun()
+    {
+
+    }
+
+    #region Monobehaviour Function
+
     void Awake()
     {
         _pView = GetComponent<PhotonView>();
@@ -86,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
         GameManager.Instance.PlayerCharacter = gameObject;
 
-        MoveSpeed = 7.0f;
+        MoveSpeed = 10.0f;
         JumpPower = 10.0f;
         ItemEffectStateCount = new float[6];
     }
@@ -123,6 +135,8 @@ public class PlayerController : MonoBehaviour
             _pView.RPC("OnChangeHand", RpcTarget.All, (int)eHandState.Default);
         }
     }
+
+    #endregion
 
     [PunRPC]
     void Register()
