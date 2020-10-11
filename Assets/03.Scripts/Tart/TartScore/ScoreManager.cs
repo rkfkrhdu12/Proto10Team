@@ -39,7 +39,11 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        uiScore.text = "Perfection: " + System.Convert.ToString(myScore);
+        if (uiScore!=null)
+        {
+            uiScore.text = "Perfection: " + System.Convert.ToString(myScore);
+        }
+
     }
 
     /// <summary>

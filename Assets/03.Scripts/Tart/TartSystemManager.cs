@@ -8,6 +8,9 @@ public class TartSystemManager : MonoBehaviour
      * TartManager, TartSettingManager, ScoreManager 등을 통합(?)하지는 않았고...
      * 그냥 한꺼번에 쓰기 위해서 만든 녀석...
      */
+    public GameObject answerTartObj;
+
+    public GameObject answerTartRealPos;
     private static TartSystemManager _instance;
 
     public static TartSystemManager Instance
@@ -35,17 +38,27 @@ public class TartSystemManager : MonoBehaviour
     public TartSettingManager tartSettingManager;
     public ToppingSpawnManager toppingSpawnManager;
     public ScoreManager scoreManager;
+
+    private Vector3 tartManagerMovePos;
+    private Vector3 answerTartMoveRealPos;
+
     private void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
         }
-        // 인스턴스가 존재하는 경우 새로생기는 인스턴스를 삭제한다.
         else if (_instance != this)
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
+
+        if (answerTartRealPos==null)
+        {
+            LogManager.Log("answerTartRealPos 없음");
+        }
+
     }
     void Start()
     {
@@ -59,9 +72,14 @@ public class TartSystemManager : MonoBehaviour
 
     public void RandomChoiceOfTart()
     {
+        tartManager.gameObject.transform.position = Vector3.zero;
+        answerTartObj.transform.position = Vector3.zero;
+        gameObject.transform.position = Vector3.zero;
         int randVal = Random.Range(1, 5);
         tartManager.DataLoadAndSetAnswerTart(randVal);
         tartSettingManager.AnswerTartSetting();
+        tartManager.gameObject.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y + 1f, answerTartRealPos.transform.position.z);
+        answerTartObj.transform.position= new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y, answerTartRealPos.transform.position.z);
     }
 
     public void SpawnToppings()

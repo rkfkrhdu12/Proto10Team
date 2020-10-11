@@ -7,7 +7,10 @@ using UnityEngine.Assertions.Must;
 public class TartManager : MonoBehaviour
 {
     [Tooltip("정답 타르트입니다.")]
-    public Tart answerTart; 
+    public Tart answerTart;
+
+    [Tooltip("정답 타르트의 게임오브젝트")]
+    public GameObject answerTartObj;
 
     public List<Dictionary<string, object>> csvData; //그냥 csv 데이터를 담고있음.
 
