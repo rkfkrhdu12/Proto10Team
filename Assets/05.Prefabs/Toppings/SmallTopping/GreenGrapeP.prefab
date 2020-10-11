@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7522225756702714183}
   m_Layer: 0
   m_Name: GreenGrapeP
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8443108501422459645}
   m_Layer: 0
   m_Name: greenGrape
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

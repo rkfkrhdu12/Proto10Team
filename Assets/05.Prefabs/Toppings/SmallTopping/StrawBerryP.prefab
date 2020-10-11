@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6555455044534702642}
   m_Layer: 0
   m_Name: strawberryP
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 8063718993311252540}
   m_Layer: 0
   m_Name: StrawBerryP
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

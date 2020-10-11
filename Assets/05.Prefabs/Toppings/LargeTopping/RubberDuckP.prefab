@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3850266468639494671}
   m_Layer: 0
   m_Name: LoverDuckP
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 1952654761027712012}
   m_Layer: 0
   m_Name: RubberDuckP
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -32,10 +32,6 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    void Start()
-    {
-        // CheckScoreV2();
-    }
 
     void Update()
     {

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2329219008165811438}
   m_Layer: 0
   m_Name: smallCream
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 8696207407608895879}
   m_Layer: 0
   m_Name: SmallCreamP
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

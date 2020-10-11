@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+using Photon.Realtime;
 public class TartSystemManager : MonoBehaviour
 {
     /*TartSystemManager : 
@@ -53,11 +55,6 @@ public class TartSystemManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-
-        
-
-
-
     }
 
     public void Init()
@@ -75,20 +72,16 @@ public class TartSystemManager : MonoBehaviour
         {
             teamBlueTart = GameObject.FindGameObjectWithTag("TeamBlueTart").GetComponent<Tart>();
         }
-
     }
     void Start()
     {
         Init();
     }
 
-    void Update()
-    {
-
-    }
-
     public void RandomChoiceOfTart()
     {
+        DontDestroyOnLoad(teamRedTart.gameObject);
+        DontDestroyOnLoad(teamBlueTart.gameObject);
         tartManager.gameObject.transform.position = Vector3.zero;
         answerTartObj.transform.position = Vector3.zero;
         gameObject.transform.position = Vector3.zero;
@@ -99,6 +92,15 @@ public class TartSystemManager : MonoBehaviour
         answerTartObj.transform.position= new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y, answerTartRealPos.transform.position.z);
     }
 
+    public void SceneAndTartMove()
+    {
+
+        PhotonNetwork.LoadLevel(3);
+ 
+        tartManager.gameObject.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y + 1f, answerTartRealPos.transform.position.z);
+        answerTartObj.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y, answerTartRealPos.transform.position.z);
+
+    }
     public void SpawnToppings()
     {
         toppingSpawnManager.InitAndGoSpawnTopping();

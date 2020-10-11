@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - TeamRedTart
   - TeamBlueTart
+  - Topping
   layers:
   - Default
   - TransparentFX

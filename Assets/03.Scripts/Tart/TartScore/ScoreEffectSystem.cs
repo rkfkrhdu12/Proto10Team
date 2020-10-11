@@ -117,7 +117,11 @@ public class ScoreEffectSystem : MonoBehaviour
 
     public void GoHomeScene()
     {
+        Destroy(TartSystemManager.Instance.teamRedTart.gameObject);
+        Destroy(TartSystemManager.Instance.teamRedTart.gameObject);
+        
         UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
+
     }
     /// <summary>
     /// 내 팀이 뭔지 정합니다. 결산 화면에서 사용됩니다. 0 : None, 1 : Red, 2 : Blue
@@ -125,6 +129,8 @@ public class ScoreEffectSystem : MonoBehaviour
     /// <param name="teamNumber">0 : None, 1 : Red, 2 : Blue</param>
     public void SetMyTeam(int teamNumber)
     {
+
+
         if (teamNumber == 0 || teamNumber == 1 || teamNumber == 2)
         {
             teamColor = (TeamColor)teamNumber;

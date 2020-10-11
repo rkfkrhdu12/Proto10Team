@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5086772406364749479}
   m_Layer: 0
   m_Name: OreoP
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 26450453651952293}
   m_Layer: 0
   m_Name: oreuP
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
