@@ -117,7 +117,7 @@ public class ScoreEffectSystem : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("IntroScene");
     }
     /// <summary>
-    /// 내 팀이 뭔지 정합니다. 결산 화면에서 사용됩니다.
+    /// 내 팀이 뭔지 정합니다. 결산 화면에서 사용됩니다. 0 : None, 1 : Red, 2 : Blue
     /// </summary>
     /// <param name="teamNumber">0 : None, 1 : Red, 2 : Blue</param>
     public void SetMyTeam(int teamNumber)
