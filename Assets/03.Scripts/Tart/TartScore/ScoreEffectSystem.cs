@@ -112,9 +112,9 @@ public class ScoreEffectSystem : MonoBehaviour
 
     }
 
-    public void GoIntroScene()
+    public void GoHomeScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("IntroScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
     }
     /// <summary>
     /// 내 팀이 뭔지 정합니다. 결산 화면에서 사용됩니다. 0 : None, 1 : Red, 2 : Blue
