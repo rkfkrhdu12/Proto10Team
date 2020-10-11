@@ -307,6 +307,7 @@ public class ScoreEffectSystem : MonoBehaviour
                 break;
 
             default:
+                LogManager.Log("WhoIsWinner에서 다른 값 발생");
                 break;
         }
 
