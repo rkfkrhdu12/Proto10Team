@@ -36,7 +36,7 @@ public class SuperPower : ItemBase
                 playerControllers[i].MoveSpeed *= 2;
                 playerControllers[i].Power *= 2;
             }
-            // 혹시 아이템을 또 획득할 시 지속시간을 연장시킬 수단(야매) 
+            // 혹시 아이템을 또 획득할 시 지속시간을 연장시킬 수단(야매)
             playerControllers[i].OnEffect(_curItem);
         }
     }

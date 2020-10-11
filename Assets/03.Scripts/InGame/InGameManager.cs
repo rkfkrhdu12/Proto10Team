@@ -28,16 +28,19 @@ public class InGameManager : MonoBehaviour
     Queue<GameSequence> GameSequences = new Queue<GameSequence>();
 
     [SerializeField]
+    TartSystemManager _tartMgr; 
+
+    [SerializeField]
     int _score = -1;
 
     [SerializeField]
     bool _isTimeOut = false;
     public bool IsTimeOut { get { return _isTimeOut; } }
 
-
     PhotonView _pView;
 
-    
+    [SerializeField]
+    private GameObject[] _playerSpawnPoints = null;
 
     public void SetScore(int score)
     {
@@ -110,9 +113,15 @@ public class InGameManager : MonoBehaviour
             // 예외처리
 
 
+            for (int i = 0; i < PlayerCharacters.Count; ++i)
+            {
+                PlayerCharacters[i].transform.position = _playerSpawnPoints[i].transform.position;
+            }
+
             LogManager.Log("Player All In GameStart");
             _Timer.OnStart();
             // 타르트 시스템 Start
+            _tartMgr.RandomChoiceOfTart();
 
             GameSequences.Dequeue();
         }

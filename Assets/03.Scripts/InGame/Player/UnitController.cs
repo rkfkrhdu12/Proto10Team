@@ -119,7 +119,7 @@ public class UnitController : MonoBehaviour
 
         // 강체 초기화
         _rigid = GetComponent<Rigidbody>();
-
+        
         _targetTrans.gameObject.SetActive(true);
         _targetTrans.SetParent(_transform.parent);
     }
