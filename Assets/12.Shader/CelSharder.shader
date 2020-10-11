@@ -1,77 +1,76 @@
 Shader "Unlit/CelShader"
 {
-    Properties
-    {
-        ///이게 기획자가 넣은거
-        _ASEOutlineColor( "Outline Color", Color ) = (0.1226415,0.1226415,0.1226415,0)
-        _MainTex("Main Texture", 2D) = "white" {}
-        _Color("Color", Color) = (0,0,0,0)
-        _BumpMap("NormalMap", 2D) = "bump" {}
+  	Properties
+  	{
+  		_OutlineColor ("Outline color", Color) = (1,0.5,0,1)
+  		_OutlineWidth ("Outlines width", Range (0.0, 5.0)) = 0.1
+      _Band_Tex("Band LUT", 2D) = "white" {}
+      _Color("Main Tex Color", Color) = (1,1,1,1)
+      _MainTex("Main Texture", 2D) = "white" {}
+      _BumpMap("NormalMap", 2D) = "bump" {}
+      _Outline_Bold("Outline Bold", Range(0, 1)) = 0.1
+  	}
 
-        _Outline_Bold("Outline Bold", Range(0, 1)) = 0.1
+  	CGINCLUDE
+  	#include "UnityCG.cginc"
 
-        _Band_Tex("Band LUT", 2D) = "white" {}
+  	struct appdata
+  	{
+  		float4 vertex : POSITION;
+  		float3 normal : NORMAL;
+  	};
 
-        ///이게 이펙터가 넣은거
-        _ASEOutlineColor( "Outline Color", Color ) = (0.1226415,0.1226415,0.1226415,0)
-        _ASEOutlineWidth( "Outline Width", Float ) = 0.02
-        _normal("normal", 2D) = "bump" {}
-        _albedo("albedo", 2D) = "white" {}
-        _Color0("Color 0", Color) = (0,0,0,0)
-        [HideInInspector] _texcoord( "", 2D ) = "white" {}
-        [HideInInspector] __dirty( "", Int ) = 1
-    }
+  	struct v2f
+  	{
+  		float4 pos : POSITION;
+  	};
 
+  	uniform float _OutlineWidth;
+  	uniform float4 _OutlineColor;
 
-    SubShader
-    {
-        Tags { "RenderType"="Opaque" }
+  	ENDCG
 
-        cull front    //! 1Pass는 앞면을 그리지 않는다.
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex _VertexFuc
-            #pragma fragment _FragmentFuc
-            #include "UnityCG.cginc"
+  	SubShader
+  	{
+  		Tags{ "Queue" = "Transparent+1" "IgnoreProjector" = "True" }
 
-                struct ST_VertexInput    //! 버텍스 쉐이더 Input
-                {
-                    float4 vertex : POSITION;
-                    float3 normal : NORMAL;
-                };
+  		Pass
+  		{
+  			ZWrite Off
+  			Cull Front
 
-                struct ST_VertexOutput    //! 버텍스 쉐이더 Output
-                {
-                    float4 vertex : SV_POSITION;
-                };
+  			CGPROGRAM
 
-                float _Outline_Bold;
+  			#pragma vertex vert
+  			#pragma fragment frag
 
-                ST_VertexOutput _VertexFuc(ST_VertexInput stInput)
-                {
-                    ST_VertexOutput stOutput;
-
-                    float3 fNormalized_Normal = normalize(stInput.normal);        //! 로컬 노말 벡터를 정규화 시킴
-                    float3 fOutline_Position = stInput.vertex + fNormalized_Normal * (_Outline_Bold * 0.1f); //! 버텍스 좌표에 노말 방향으로 더한다.
-
-                    stOutput.vertex = UnityObjectToClipPos(fOutline_Position);    //! 노말 방향으로 더해진 버텍스 좌표를 카메라 클립 공간으로 변환
-                    return stOutput;
-                }
+  			v2f vert(appdata v)
+  			{
 
 
-                float4 _FragmentFuc(ST_VertexOutput i) : SV_Target
-                {
-                    return 0.0f;
-                }
+  				v2f o;
+  				o.pos = UnityObjectToClipPos(v.vertex);
 
-            ENDCG
-        }
+  				float3 norm   = mul ((float3x3)UNITY_MATRIX_IT_MV, v.normal);
+  				float2 offset = TransformViewToProjection(norm.xy);
+  				o.pos.xy += offset * o.pos.z * _OutlineWidth;
+
+  				return o;
+
+  			}
+
+  			half4 frag(v2f i) : COLOR
+  			{
+  				return _OutlineColor;
+  			}
+
+  			ENDCG
+  		}
 
         cull back    //! 2Pass는 뒷면을 그리지 않는다.
         CGPROGRAM
 
-        #pragma surface surf _BandedLighting    //! 커스텀 라이트 사용
+        #pragma surface surf _BandedLighting
 
         struct Input
         {
@@ -79,6 +78,8 @@ Shader "Unlit/CelShader"
             float2 uv_Band_Tex;
             float2 uv_BumpMap;
         };
+
+        float4 _Outlinecolor;
 
         struct SurfaceOutputCustom        //! Custom SurfaceOutput 구조체, BandLUT 텍스처를 넣기 위해 만듬
         {
@@ -109,9 +110,10 @@ Shader "Unlit/CelShader"
 
             float3 fNormalTex = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
             o.Normal = fNormalTex;
+
         }
 
-        //! 커스텀 라이트 함수
+
         float4 Lighting_BandedLighting(SurfaceOutputCustom s, float3 lightDir, float3 viewDir, float atten)
         {
             //! BandedDiffuse 조명 처리 연산
