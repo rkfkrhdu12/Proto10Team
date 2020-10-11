@@ -154,7 +154,7 @@ public class ScoreEffectSystem : MonoBehaviour
     }
     private IEnumerator GoEndScreen()
     {
-        teamColor = (TeamColor)GameManager.Instance.PlayerCharacter.GetComponent<PlayerController>().Team;
+        //teamColor = (TeamColor)GameManager.Instance.PlayerCharacter.GetComponent<PlayerController>().Team;
         if (teamColor == 0)
         {
             LogManager.Log("Team None. -> Team Blue");
