@@ -44,7 +44,7 @@ public class Timer : MonoBehaviour
     {
         int count = -1;
         _eventTime[++count] = 180;
-        _eventTime[++count] = 150;
+        _eventTime[++count] = 170;
         _eventTime[++count] = 120;
         _eventTime[++count] = 90;
         _eventTime[++count] = 60;
