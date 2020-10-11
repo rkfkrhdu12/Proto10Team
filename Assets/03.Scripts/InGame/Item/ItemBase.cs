@@ -2,41 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+using Photon.Realtime;
+
 public enum eApplyTeam
 {
     Friend,
     Enemy,
     All,
 }
-
-public class ItemBase : MonoBehaviour
+namespace Steam_Item
 {
     public enum eitemNum
     {
-        SuperPower      ,
-        Stun            , // Stun
-        Dizzlness       , // 크아 악마
-        Darkness        ,
-        Slowly          ,
-        Floating        ,
+        SuperPower,
+        Stun,
+        Dizzlness, // 크아 악마
+        Darkness,
+        Slowly,
+        Floating,
     }
 
-    protected int _curItem;
-
-    protected List<PlayerController> playerControllers;
-
-    public virtual IEnumerator Action(PlayerController getPlayer) { yield return null; }
-    protected WaitForSeconds _actionTime = null;
-
-    readonly string _playerTagName = "Player";
-
-    protected void OnTriggerEnter(Collider other)
+    public class ItemBase : MonoBehaviour
     {
-        if (other.CompareTag(_playerTagName))
+        protected int _curItem;
+        protected ItemManager _itemMgr;
+        protected WaitForSeconds _actionTime;
+        protected virtual void Start()
         {
-            LogManager.Log("Item Action " + (eitemNum)_curItem);
-            StartCoroutine(Action(other.GetComponent<PlayerController>()));
-            gameObject.SetActive(false);
+            _itemMgr = GameManager.Instance.InGameManager.GetComponent<ItemManager>();
+        }
+
+        protected virtual void OnTriggerEnter(Collider other)
+        {
+
         }
     }
+
 }

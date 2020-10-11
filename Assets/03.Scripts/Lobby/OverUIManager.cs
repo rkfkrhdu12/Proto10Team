@@ -40,9 +40,8 @@ public class OverUIManager : MonoBehaviour
             buttonImage = GetComponent<Image>();
         }
 
-        if (lobbyManager ==null)
+        if (lobbyManager == null)
         {
-            LogManager.Log("이상해;;;");
             lobbyManager = GameObject.FindObjectOfType<LobbyManager>(); //어차피 하나 밖에 없겠지?
         }
     }

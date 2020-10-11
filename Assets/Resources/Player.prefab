@@ -64,8 +64,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 37752699530093974}
   - {fileID: 4423235159096868237}
+  - {fileID: 37752699530093974}
   - {fileID: 2081377646361168716}
   - {fileID: 6908976455686992207}
   - {fileID: 3223272915844692813}
@@ -94,7 +94,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &9178759364080370608
 CapsuleCollider:
@@ -141,9 +141,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b1f779c6caef54ca079df80e2a3d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _datas:
+    _curTeam: 0
+    _moveSpeed: 0
+    _defaultMoveSpeed: 0
+    _jumpPower: 0
+    _defaultJumpPower: 0
+    _power: 0
+    _defaultPower: 0
+    _itemEffect: []
   _pView: {fileID: 0}
-  _redObject: {fileID: 6189543980033347519}
-  _blueObject: {fileID: 5996646333629681897}
+  _redObject: {fileID: 5996646333629681897}
+  _blueObject: {fileID: 6189543980033347519}
   isInit: 0
 --- !u!114 &5855374713646140786
 MonoBehaviour:
@@ -210,7 +219,7 @@ PrefabInstance:
     - target: {fileID: 126751948908810691, guid: 07866e7650fd629499e67e52fc699b5f,
         type: 3}
       propertyPath: m_Name
-      value: Character2
+      value: Character1
       objectReference: {fileID: 0}
     - target: {fileID: 4006244206415356880, guid: 07866e7650fd629499e67e52fc699b5f,
         type: 3}
@@ -250,7 +259,7 @@ PrefabInstance:
     - target: {fileID: 4006244206415356880, guid: 07866e7650fd629499e67e52fc699b5f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4006244206415356880, guid: 07866e7650fd629499e67e52fc699b5f,
         type: 3}
@@ -379,10 +388,15 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4085615458483816318, guid: c2ba42409efec644f9d274f8dbc2cd87,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4809635266915004375, guid: c2ba42409efec644f9d274f8dbc2cd87,
         type: 3}
       propertyPath: m_Name
-      value: Character1
+      value: Character2
       objectReference: {fileID: 0}
     - target: {fileID: 4809635266915004375, guid: c2ba42409efec644f9d274f8dbc2cd87,
         type: 3}
@@ -427,7 +441,7 @@ PrefabInstance:
     - target: {fileID: 8422883668682218948, guid: c2ba42409efec644f9d274f8dbc2cd87,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8422883668682218948, guid: c2ba42409efec644f9d274f8dbc2cd87,
         type: 3}

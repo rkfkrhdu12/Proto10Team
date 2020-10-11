@@ -41,6 +41,15 @@ MonoBehaviour:
   - Register
   - RespawnSpaceship
   - OnItemSpawn
+  - OnActive
+  - Action
+  - Disable
+  - Enable
+  - Rpc
+  - OnRpc
+  - AddRpc
+  - AddItemEffect
+  - SetGetItemTeam
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

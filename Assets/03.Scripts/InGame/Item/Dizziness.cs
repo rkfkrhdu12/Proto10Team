@@ -3,54 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+using Steam_Item;
 public class Dizziness : ItemBase
 { // Item
 
     PlayerController target = null;
+
     // 지속시간 Init
-    void Start()
+    private void Start()
     {
         _curItem = (int)eitemNum.Dizzlness;
         _actionTime = new WaitForSeconds(3f);
     }
 
-    public override IEnumerator Action(PlayerController getPlayer)
+    public  IEnumerator Action(PlayerController getPlayer)
     {
         // 현재 아이템을 획득한 팀 Get
         eTeam getCharTeam = getPlayer.Team;
 
         // 전체 유저들(PlayerCharacter) Get
-        playerControllers = GameManager.Instance.InGameManager.PlayerCharacters;
+        var _playerControllers = GameManager.Instance.InGameManager.PlayerCharacters;
 
         // Dizziness 효과
         // 적팀 팀 
         // 한명에게 조작키를 반대로 바꿔버림
-        for (int i = 0; i < playerControllers.Count; ++i)
+        for (int i = 0; i < _playerControllers.Count; ++i)
         {
-            if (playerControllers[i] == null) continue;
-
             // 적군팀에게 적용
-            if (playerControllers[i].Team == getCharTeam) { playerControllers.Remove(playerControllers[i]); continue; }
+            if (_playerControllers[i].Team == getCharTeam || _playerControllers[i] == null) { _playerControllers.Remove(_playerControllers[i]); continue; }
+        }
 
-            if (playerControllers[i].ItemEffectStateCount[_curItem] == 0)
-            {
-                var targets = playerControllers.OrderBy(x => x.Team != getCharTeam).ToList();
+        if (_playerControllers.Count != 0)
+        {
+            target = _playerControllers[Random.Range(0, _playerControllers.Count)];
 
-                target = targets[Random.Range(0, targets.Count)];
-
-                // PlayerController 에서 직접 작업
-                target.ItemEffectStateCount[_curItem] += 1;
-            }
+            // PlayerController 에서 직접 작업
+            target.OnEffect(_curItem);
         }
 
         yield return _actionTime;
 
-        for (int i = 0; i < playerControllers.Count; ++i)
+        for (int i = 0; i < _playerControllers.Count; ++i)
         {
             if (target == null) continue;
 
             // 지속시간 체크
-            target.ItemEffectStateCount[_curItem] -= 1;
+            target.OffEffect(_curItem);
         }
 
         LogManager.Log("Item End " + (eitemNum)_curItem);

@@ -139,15 +139,15 @@ public class UnitController : MonoBehaviour
             _jumpRoutine = StartCoroutine(ActionJump());
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!_photonView.IsMine) { return; }
 
         UpdateMove();
         UpdateRotation();
-        UpdateJump();
+        // UpdateJump();
 
-        transform.position = Vector3.Lerp(_transform.position, _targetTrans.position, Time.deltaTime * smoothTime);
+        transform.position = Vector3.Lerp(_transform.position, _targetTrans.position, Time.fixedDeltaTime * smoothTime);
     }
     #endregion
 
@@ -162,8 +162,17 @@ public class UnitController : MonoBehaviour
         Vector3 deltaPos = (moveX * _targetTrans.right) + (moveZ * _targetTrans.forward);
 
         float dist = Vector3.Distance(_targetTrans.position, _transform.position);
+        // LogManager.Log(dist.ToString() + "   "  + (dist > 2.0f).ToString());
 
-        _targetTrans.localPosition += (deltaPos * Time.deltaTime);
+        if (dist > _moveSpeed * .2f)
+        {
+            if (_isJumping)
+                _targetTrans.localPosition = _transform.localPosition;
+            else
+                _targetTrans.localPosition = new Vector3(_transform.localPosition.x, 0, _transform.localPosition.z);
+        }
+        else
+            _targetTrans.localPosition += deltaPos * Time.fixedDeltaTime;
     }
 
     void UpdateRotation()
@@ -177,51 +186,63 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    bool _isJumpCoolTime = false;
     private IEnumerator ActionJump()
     {
         // 오브젝트가 꺼지지않는 이상 계속 작동
         while (gameObject.activeSelf)
         {
-            // 점프를 하였으면
-            if (!_isGround)
-            {
-                if (_rigid.velocity.y < .05f && _rigid.velocity.y > -.05f)
-                {
-                    yield return _waitTime;
+            yield return _waitTime;
 
-                    if (_rigid.velocity.y < .05f && _rigid.velocity.y > -.05f)
-                        _isGround = true;
-                }
+            // 점프를 하였으면
+            if (_isJumpCoolTime)
+            {
+                // yield return _waitTime;
+                _isJumpCoolTime = false;
+
+                _isJumping = false;
+                _jumpTime = 0.0f;
             }
 
-            yield return _waitTime;
         }
 
         _jumpRoutine = null;
     }
 
+    private void Update()
+    {
+        if (!_photonView.IsMine) { return; }
+
+        UpdateJump();
+    }
+
+    float height = 0.0f;
     private void UpdateJump()
     {
         // 현재 점프중이 아닐때 space바를 입력시 점프
-        if (Input.GetKeyDown(KeyCode.Space) && _isGround && !_isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
-            _isGround = false;
+            //_isGround = false;
             _isJumping = true;
             _jumpStartPosY = _transform.position.y;
         }
 
         if (_isJumping)
         {
-            float height = (_jumpTime * _jumpTime * (Physics.gravity.y) / 2) + (_jumpTime * _jumpPower);
-            _transform.position = new Vector3(_transform.position.x, _jumpStartPosY + height, _transform.position.z);
-            _jumpTime += Time.deltaTime;
+            if (!_isJumpCoolTime)
+            {
+                height = (_jumpTime * _jumpTime * (Physics.gravity.y) / 2) + (_jumpTime * _jumpPower);
+                _transform.position = new Vector3(_transform.position.x, _jumpStartPosY + height, _transform.position.z);
+                _jumpTime += Time.deltaTime;
+            }
 
             // 처음의 높이 보다 더 내려 갔을때 => 점프전 상태로 복귀한다.
-            if (height < 0.0f)
+            if (height < 0.0f) 
             {
-                _isJumping = false;
-                _jumpTime = 0.0f;
-                
+                _isJumpCoolTime = true;
+
+                _targetTrans.localPosition = new Vector3(_targetTrans.localPosition.x, 0, _targetTrans.localPosition.z);
+
                 // _transform.position = new Vector3(_transform.position.x, _jumpStartPosY, _transform.position.z);
             }
         }

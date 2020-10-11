@@ -4,7 +4,11 @@ using UnityEngine;
 
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 
+using Steam_Item;
+
+[Serializable]
 public struct PlayerData
 {
     public eTeam _curTeam;
@@ -27,6 +31,7 @@ public struct PlayerData
 public class PlayerController : MonoBehaviour
 {
     #region Variable
+    [SerializeField]
     PlayerData _datas;
 
     UnitController _uCtrl;
@@ -36,10 +41,18 @@ public class PlayerController : MonoBehaviour
     RefData _power = new RefData(); public ref RefData GetPower() => ref _power;
 
     public eTeam Team { get => _datas._curTeam; set => _datas._curTeam = value; }
+
     public float MoveSpeed { get => _datas._moveSpeed; set => _datas._moveSpeed = _moveSpeed._Value = value; }
+    public void ResetMoveSpeed() { MoveSpeed = _datas._defaultMoveSpeed; }
+
     public float Power { get => _datas._power; set => _datas._power = _power._Value = value; }
+    public void ResetPower() { Power = _datas._power; }
+
     public float JumpPower { get => _datas._jumpPower; set => _datas._jumpPower = _jumpPower._Value = value; }
+    public void ResetJumpPower() { JumpPower = _datas._defaultJumpPower; }
+
     public float[] ItemEffectStateCount { get => _datas._itemEffect; set => _datas._itemEffect = value; }
+
     public GameObject HeadObj { get { return _curTeamObject.Head; } }
     public GameObject LeftHandObj { get { return _curTeamObject.LeftHand; } }
     public GameObject RightHandObj { get { return _curTeamObject.RightHand; } }
@@ -66,7 +79,6 @@ public class PlayerController : MonoBehaviour
     public eHandState CurHandState { get { return _curHandState; } }
 
     bool _isJump;
-
     #endregion
 
     public void Init(eTeam team)
@@ -76,17 +88,43 @@ public class PlayerController : MonoBehaviour
         _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
         _curTeamObject.Active();
 
+        _datas._defaultMoveSpeed = MoveSpeed;
+        _datas._defaultJumpPower = JumpPower;
+        _datas._defaultPower = Power;
+
         LogManager.Log(_pView.Owner.NickName + " " + Team.ToString());
         isInit = true;
     }
 
-    public void OnDizziy()
+    public void OnEffect(int curActiveItem)
     {
+        // SuperPower      ,
+        // Stun            ,
+        // Dizzlness       , // 크아 악마
+        // Darkness        ,
+        // Slowly          ,
+        // Floating        ,
 
+        ++ItemEffectStateCount[curActiveItem];
+
+        LogManager.Log(((eitemNum)curActiveItem).ToString());
+
+        switch (curActiveItem)
+        {
+            case (int)eitemNum.SuperPower:          break;
+            case (int)eitemNum.Stun:                break;
+            case (int)eitemNum.Dizzlness:           break;
+            case (int)eitemNum.Darkness:            break;
+            case (int)eitemNum.Slowly:              break;
+            case (int)eitemNum.Floating:            break;
+        }
     }
 
-    public void OnStun()
+    public void OffEffect(int curActiveItem)
     {
+        LogManager.Log(((eitemNum)curActiveItem).ToString());
+
+        --ItemEffectStateCount[curActiveItem];
 
     }
 
@@ -95,13 +133,14 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _pView = GetComponent<PhotonView>();
-        if (!_pView.IsMine) { return; }
-
-        GameManager.Instance.PlayerCharacter = gameObject;
 
         MoveSpeed = 10.0f;
         JumpPower = 10.0f;
         ItemEffectStateCount = new float[6];
+
+        if (!_pView.IsMine) { return; }
+
+        GameManager.Instance.PlayerCharacter = gameObject;
     }
 
     private void Start()

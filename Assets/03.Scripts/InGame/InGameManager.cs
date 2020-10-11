@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using System.Linq;
 
 public class InGameManager : MonoBehaviour
 {
@@ -31,6 +34,11 @@ public class InGameManager : MonoBehaviour
     bool _isTimeOut = false;
     public bool IsTimeOut { get { return _isTimeOut; } }
 
+
+    PhotonView _pView;
+
+    
+
     public void SetScore(int score)
     {
         if (_score == -1)
@@ -50,6 +58,8 @@ public class InGameManager : MonoBehaviour
 
     public void AddPlayer(PlayerController pCtrl)
     {
+        if (PlayerCharacters.Contains(pCtrl)) { return; }
+
         for (int i = 0; i < PlayerCharacters.Count; ++i)
         {
             if (PlayerCharacters[i] == null)
@@ -79,6 +89,8 @@ public class InGameManager : MonoBehaviour
 
         GameSequences.Enqueue(new GameSequence(PlayerAllIn));
         GameSequences.Enqueue(new GameSequence(GameTimeOut));
+
+        _pView = gameObject.GetPhotonView();
     }
 
     private void Update()
@@ -126,6 +138,7 @@ public class InGameManager : MonoBehaviour
 
     public void OnItemEvent()
     {
+        if (!_pView.IsMine) { return; }
         if (_itemMgr == null) { _itemMgr = GetComponent<ItemManager>(); if (_itemMgr == null) return; }
 
         _itemMgr.Spawn();
