@@ -20,8 +20,6 @@ public class TartSettingManager : MonoBehaviour
     [Header("오류용 오브젝트")]
     public GameObject errorTopping;
 
-    // Start is called before the first frame update
-
     private void Awake()
     {
         //scoreManager.TestTartInput();
@@ -33,11 +31,6 @@ public class TartSettingManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void InitAnswerTartSetting()
     {

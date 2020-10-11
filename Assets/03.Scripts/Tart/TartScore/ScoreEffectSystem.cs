@@ -7,6 +7,8 @@ using NetWork;
 
 public class ScoreEffectSystem : MonoBehaviour
 {
+
+    #region 변수들
     enum TeamColor
     {
         None,
@@ -62,8 +64,15 @@ public class ScoreEffectSystem : MonoBehaviour
     public Image teamWin;
     public Image teamLose;
     public Image teamDraw;
+    public TMP_Text teamScoreText;
+
+    public Button goIntroButton;
+
+    #endregion
     public void Init()
     {
+        goIntroButton.gameObject.SetActive(false);
+        teamScoreText.enabled = false;
         teamWin.enabled = false;
         teamLose.enabled = false;
         teamDraw.enabled = false;
@@ -95,21 +104,25 @@ public class ScoreEffectSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isLightOn==false)
+        if (isLightOn == false)
         {
             redTeamText.text = System.Convert.ToString(redScore) + "%";
-            blueTeamText.text = System.Convert.ToString(blueScore)+ "%";
+            blueTeamText.text = System.Convert.ToString(blueScore) + "%";
         }
 
     }
 
+    public void GoIntroScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("IntroScene");
+    }
     /// <summary>
-    /// 내 팀이 뭔지 정합니다. 결산 화면에서 사용됩니다.
+    /// 내 팀이 뭔지 정합니다. 결산 화면에서 사용됩니다. 0 : None, 1 : Red, 2 : Blue
     /// </summary>
     /// <param name="teamNumber">0 : None, 1 : Red, 2 : Blue</param>
     public void SetMyTeam(int teamNumber)
     {
-        if (teamNumber==0||teamNumber==1||teamNumber==2)
+        if (teamNumber == 0 || teamNumber == 1 || teamNumber == 2)
         {
             teamColor = (TeamColor)teamNumber;
         }
@@ -126,11 +139,11 @@ public class ScoreEffectSystem : MonoBehaviour
 
     private WinCheck WhoIsWinner()
     {
-        if (redScore>blueScore)
+        if (redScore > blueScore)
         {
             return WinCheck.RedWin;
         }
-        else if (blueScore>redScore)
+        else if (blueScore > redScore)
         {
             return WinCheck.BlueWin;
         }
@@ -142,13 +155,14 @@ public class ScoreEffectSystem : MonoBehaviour
     private IEnumerator GoEndScreen()
     {
 
-        if (teamColor==0)
+        if (teamColor == 0)
         {
             LogManager.Log("Team None. -> Team Blue");
             teamColor = TeamColor.Blue;
         }
 
         whitePanel.enabled = true;
+        goIntroButton.gameObject.SetActive(true);
 
         WinCheck winCheckTemp = WhoIsWinner();
         RedCharacter.SetActive(false);
@@ -163,32 +177,40 @@ public class ScoreEffectSystem : MonoBehaviour
             case TeamColor.Red:
                 LogManager.Log("Red Team");
                 RedCharacter.SetActive(true);
-                if (winCheckTemp==WinCheck.RedWin)
+                teamScoreText.enabled = true;
+                if (winCheckTemp == WinCheck.RedWin)
                 {
+                    teamScoreText.text = redScore + "% 완성!";
                     teamWin.enabled = true;
                 }
-                else if (winCheckTemp==WinCheck.Draw)
+                else if (winCheckTemp == WinCheck.Draw)
                 {
+                    teamScoreText.text = redScore + "% 완성";
                     teamDraw.enabled = true;
                 }
                 else
                 {
+                    teamScoreText.text = redScore + "% 완성...";
                     teamLose.enabled = true;
                 }
                 break;
             case TeamColor.Blue:
                 LogManager.Log("Blue Team");
+                teamScoreText.enabled = true;
                 BlueCharacter.SetActive(true);
                 if (winCheckTemp == WinCheck.BlueWin)
                 {
+                    teamScoreText.text = blueScore + "% 완성!";
                     teamWin.enabled = true;
                 }
                 else if (winCheckTemp == WinCheck.Draw)
                 {
+                    teamScoreText.text = blueScore + "% 완성";
                     teamDraw.enabled = true;
                 }
                 else
                 {
+                    teamScoreText.text = blueScore + "% 완성...";
                     teamLose.enabled = true;
                 }
                 break;
@@ -229,7 +251,7 @@ public class ScoreEffectSystem : MonoBehaviour
             redScore = Random.Range(11, 98);
             spotLightRed.enabled = true;
             spotLightBlue.enabled = false;
-            
+
             yield return new WaitForSecondsRealtime(tararaTerm);
 
             blueScore = Random.Range(11, 98);
@@ -285,12 +307,13 @@ public class ScoreEffectSystem : MonoBehaviour
                 break;
 
             default:
+                LogManager.Log("WhoIsWinner에서 다른 값 발생");
                 break;
         }
 
         #endregion
 
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(3f);
         StartCoroutine(GoEndScreen());
 
     }

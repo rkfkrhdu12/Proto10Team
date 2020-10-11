@@ -54,15 +54,32 @@ public class TartSystemManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        if (answerTartRealPos==null)
+        
+
+
+
+    }
+
+    public void Init()
+    {
+        if (answerTartRealPos == null)
         {
             LogManager.Log("answerTartRealPos 없음");
+        }
+
+        if (teamRedTart == null)
+        {
+            teamRedTart = GameObject.FindGameObjectWithTag("TeamRedTart").GetComponent<Tart>();
+        }
+        if (teamBlueTart == null)
+        {
+            teamBlueTart = GameObject.FindGameObjectWithTag("TeamBlueTart").GetComponent<Tart>();
         }
 
     }
     void Start()
     {
-
+        Init();
     }
 
     void Update()
