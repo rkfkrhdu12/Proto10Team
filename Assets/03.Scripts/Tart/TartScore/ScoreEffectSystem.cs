@@ -24,6 +24,7 @@ public class ScoreEffectSystem : MonoBehaviour
     private TeamColor teamColor;
     private WinCheck winCheck;
 
+    public GameObject endingGroup;
     public Image recipeOne;
     public Image recipeTwo;
     public GameObject recipeGroup;
@@ -71,6 +72,7 @@ public class ScoreEffectSystem : MonoBehaviour
     #endregion
     public void Init()
     {
+        
         goIntroButton.gameObject.SetActive(false);
         teamScoreText.enabled = false;
         teamWin.enabled = false;
@@ -95,6 +97,7 @@ public class ScoreEffectSystem : MonoBehaviour
         crownRedImg.enabled = false;
 
         recipeGroup.transform.position = recipeOne.transform.position;
+        endingGroup.SetActive(false);
     }
 
     private void Awake()
@@ -314,6 +317,7 @@ public class ScoreEffectSystem : MonoBehaviour
         #endregion
 
         yield return new WaitForSecondsRealtime(3f);
+        endingGroup.SetActive(true);
         StartCoroutine(GoEndScreen());
 
     }
