@@ -574,7 +574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC900\uBE44!"
+  m_text: "\uC785\uC7A5!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1a3eb9897c6926b4aac15371841fcbf1, type: 2}
   m_sharedMaterial: {fileID: 2714725661467755162, guid: 1a3eb9897c6926b4aac15371841fcbf1,
@@ -1439,7 +1439,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1760,6 +1760,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1146233516}
     m_Modifications:
+    - target: {fileID: 1534429623394229685, guid: 18ee675d362308f4abbdccdb12d9e11d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b116fe12e6be81428cd84724efcda40, type: 2}
+    - target: {fileID: 1963515519660823926, guid: 18ee675d362308f4abbdccdb12d9e11d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d681f759b46e36746923eb5134c565f5, type: 2}
+    - target: {fileID: 2796590146063897074, guid: 18ee675d362308f4abbdccdb12d9e11d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e1ec71a97906fd1479f79e93b6ebc1e6, type: 2}
+    - target: {fileID: 3765436806017510352, guid: 18ee675d362308f4abbdccdb12d9e11d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b116fe12e6be81428cd84724efcda40, type: 2}
     - target: {fileID: 4804356597855475736, guid: 18ee675d362308f4abbdccdb12d9e11d,
         type: 3}
       propertyPath: m_Name
