@@ -95,11 +95,11 @@ public class TartSystemManager : MonoBehaviour
     void Start()
     {
         endingSceneIndex = UnityEngine.SceneManagement.SceneManager.GetSceneByName("EndingScene").buildIndex;
-        Debug.Log(endingSceneIndex);
+        //LogManager.Log(endingSceneIndex);
         DontDestroyOnLoad(teamRedTart.gameObject);
         DontDestroyOnLoad(teamBlueTart.gameObject);
         Init();
-        //StartCoroutine(TartSystemTest());
+        StartCoroutine(TartSystemTest());
 
     }
 
