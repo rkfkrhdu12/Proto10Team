@@ -99,7 +99,7 @@ public class TartSystemManager : MonoBehaviour
         DontDestroyOnLoad(teamRedTart.gameObject);
         DontDestroyOnLoad(teamBlueTart.gameObject);
         Init();
-        StartCoroutine(TartSystemTest());
+        //StartCoroutine(TartSystemTest());
 
     }
 
