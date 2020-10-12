@@ -6688,7 +6688,7 @@ GameObject:
   - component: {fileID: 1045425193}
   m_Layer: 0
   m_Name: AnswerTart
-  m_TagString: Untagged
+  m_TagString: AnswerTart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7255,6 +7255,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137999043}
   m_CullTransparentMesh: 0
+--- !u!1 &1148273837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1148273838}
+  m_Layer: 0
+  m_Name: RedTartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1148273838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148273837}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 9.2, y: -15.8, z: 0.005902768}
+  m_LocalScale: {x: 1.5169005, y: 1.5169009, z: 1.5169007}
+  m_Children: []
+  m_Father: {fileID: 1527331699}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149617115
 GameObject:
   m_ObjectHideFlags: 0
@@ -7477,6 +7507,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170854422}
   m_CullTransparentMesh: 0
+--- !u!1 &1175913100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1175913101}
+  m_Layer: 0
+  m_Name: BlueTartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1175913101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175913100}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: -9, y: -15.8, z: -0.054097652}
+  m_LocalScale: {x: 1.5169005, y: 1.5169009, z: 1.5169007}
+  m_Children: []
+  m_Father: {fileID: 1527331699}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1192845946
 GameObject:
   m_ObjectHideFlags: 0
@@ -10419,12 +10479,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerTartObj: {fileID: 1045425191}
   answerTartRealPos: {fileID: 1592878336}
-  redTeamTartMovePos: {fileID: 0}
-  blueTeamTartMovePos: {fileID: 0}
+  redTeamTartMovePos: {fileID: 1148273837}
+  blueTeamTartMovePos: {fileID: 1175913100}
   teamRedScore: 0
   teamBlueScore: 0
-  teamRedTart: {fileID: 0}
-  teamBlueTart: {fileID: 0}
+  teamRedTart: {fileID: 265752897}
+  teamBlueTart: {fileID: 574663815}
   tartManager: {fileID: 1431034538}
   tartSettingManager: {fileID: 636218603}
   toppingSpawnManager: {fileID: 1605396780}
@@ -10447,6 +10507,8 @@ Transform:
   - {fileID: 1605396781}
   - {fileID: 701408479}
   - {fileID: 636218604}
+  - {fileID: 1175913101}
+  - {fileID: 1148273838}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10544,7 +10606,7 @@ GameObject:
   - component: {fileID: 1592878337}
   m_Layer: 0
   m_Name: AnswerTartRealPos
-  m_TagString: Untagged
+  m_TagString: AnswerTartPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

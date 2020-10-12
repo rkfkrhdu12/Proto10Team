@@ -9,6 +9,8 @@ TagManager:
   - TeamRedTart
   - TeamBlueTart
   - Topping
+  - AnswerTart
+  - AnswerTartPos
   layers:
   - Default
   - TransparentFX

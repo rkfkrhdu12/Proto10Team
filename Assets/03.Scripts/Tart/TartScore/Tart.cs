@@ -45,12 +45,19 @@ public class Tart : MonoBehaviour
     }
     public void AddTopping(Topping topping) //토핑을 추가합니다.
     {
-        toppingList.Add(topping);
+        if (!isFixed)
+        {
+            toppingList.Add(topping);
+
+        }
     }
 
     public void RemoveTopping(Topping topping)
     {
-        toppingList.Remove(topping);
+        if (!isFixed)
+        {
+            toppingList.Remove(topping);
+        }
     }
     public void ClearTopping()
     {
@@ -68,7 +75,7 @@ public class Tart : MonoBehaviour
         //{ // 토핑
 
         //}
-        if (other.CompareTag(_ToppingTagKey)&&!isFixed)
+        if (other.CompareTag(_ToppingTagKey) && !isFixed)
         { //지정된 태그의 오브젝트만 True
             AddTopping(other.gameObject.GetComponent<Topping>());
         }
@@ -76,7 +83,7 @@ public class Tart : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(_ToppingTagKey)&&!isFixed)
+        if (other.CompareTag(_ToppingTagKey) && !isFixed)
         {
             RemoveTopping(other.gameObject.GetComponent<Topping>());
         }

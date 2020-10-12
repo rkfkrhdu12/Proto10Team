@@ -4,6 +4,8 @@ using UnityEngine;
 
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
+
 public class TartSystemManager : MonoBehaviour
 {
     /*TartSystemManager : 
@@ -59,6 +61,7 @@ public class TartSystemManager : MonoBehaviour
         }
         else if (_instance != this)
         {
+            LogManager.Log("얘 떄문에 오류나니?");
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
@@ -79,40 +82,76 @@ public class TartSystemManager : MonoBehaviour
         {
             teamBlueTart = GameObject.FindGameObjectWithTag("TeamBlueTart").GetComponent<Tart>();
         }
+
+        if (answerTartObj == null)
+        {
+            answerTartObj = GameObject.FindGameObjectWithTag("AnswerTart");
+        }
+
     }
     void Start()
     {
-        Init();
-    }
-
-    public void RandomChoiceOfTart()
-    {
         DontDestroyOnLoad(teamRedTart.gameObject);
         DontDestroyOnLoad(teamBlueTart.gameObject);
-        tartManager.gameObject.transform.position = Vector3.zero;
-        answerTartObj.transform.position = Vector3.zero;
-        gameObject.transform.position = Vector3.zero;
-        int randVal = Random.Range(1, tartVal+1);
+        Init();
+        StartCoroutine(TartSystemTest());
+    }
+
+    public IEnumerator TartSystemTest()
+    {
+        RandomChoiceOfTart();
+        LogManager.Log("타르트 세팅 완료...2초 뒤 씬 이동 합니다.");
+        yield return new WaitForSecondsRealtime(2f);
+        SceneAndTartMove();
+        LogManager.Log("이동 완료. 2초 뒤 정답 타르트 위치 이동합니다.");
+        yield return new WaitForSecondsRealtime(2f);
+        AnswerTartMove();
+        LogManager.Log("이동 완료. 2초 뒤 팀 타르트 위치 이동합니다.");
+        TeamTartMove();
+        LogManager.Log("이동 완료. 어떤지?");
+
+    }
+    public void RandomChoiceOfTart()
+    {
+
+        //tartManager.gameObject.transform.position = Vector3.zero;
+        //answerTartObj.transform.position = Vector3.zero;
+        //gameObject.transform.position = Vector3.zero;
+        int randVal = Random.Range(1, tartVal + 1);
         tartManager.DataLoadAndSetAnswerTart(randVal);
         tartSettingManager.AnswerTartSetting();
-        tartManager.gameObject.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y + 1f, answerTartRealPos.transform.position.z);
-        answerTartObj.transform.position= new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y, answerTartRealPos.transform.position.z);
+        AnswerTartMove();
+
     }
 
     public void SceneAndTartMove()
     {
-
         PhotonNetwork.LoadLevel(3);
- 
-        tartManager.gameObject.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y + 1f, answerTartRealPos.transform.position.z);
-        answerTartObj.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y, answerTartRealPos.transform.position.z);
+
 
     }
     public void SpawnToppings()
     {
         toppingSpawnManager.InitAndGoSpawnTopping();
     }
+    public void TeamTartMove()
+    {
+        Vector3 redPos = redTeamTartMovePos.transform.position;
+        Vector3 bluePos = blueTeamTartMovePos.transform.position;
+        teamRedTart.transform.position = new Vector3(redPos.x, redPos.y, redPos.z);
+        teamBlueTart.transform.position = new Vector3(bluePos.x, bluePos.y, bluePos.z);
+    }
+    public void AnswerTartMove()
+    {
+        if (answerTartRealPos == null)
+        {
+            LogManager.Log("정답 타르트 위치가 업슴.");
+            answerTartRealPos = GameObject.FindGameObjectWithTag("AnswerTartPos");
+        }
+        tartManager.gameObject.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y + 1f, answerTartRealPos.transform.position.z);
+        answerTartObj.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y, answerTartRealPos.transform.position.z);
 
+    }
     public void CheckScore()
     {
 
