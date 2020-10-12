@@ -42,7 +42,7 @@ public class HomeMenuSystem : MonoBehaviour
     }
     public void GoGameStart()
     {
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(1);
     }
     public void GoExitGame()
     {

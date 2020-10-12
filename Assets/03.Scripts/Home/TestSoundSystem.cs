@@ -40,8 +40,6 @@ public class TestSoundSystem : MonoBehaviour
     private void Awake()
     {
         Init();
-
-        GameManager.Instance.NetManager.JoinRandomRoom();
     }
     // Start is called before the first frame update
     void Start()

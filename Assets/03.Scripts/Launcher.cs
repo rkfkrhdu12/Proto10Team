@@ -92,11 +92,13 @@ namespace NetWork
 
         private void Start()
         {
+            //
             Time.maximumDeltaTime = 1f / 3f;
             Time.fixedDeltaTime = 1f / 60f;
             Application.targetFrameRate = 60;
             useGUILayout = false;
             Screen.SetResolution(960, 540, false);
+
 
             // 게임 버젼을 PhotonNetwork 에 등록
             PhotonNetwork.GameVersion = _gameVersion;
