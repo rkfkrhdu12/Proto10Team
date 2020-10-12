@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
+using TMPro;
+using UnityEditor;
 
 public class HomeMenuSystem : MonoBehaviour
 {
@@ -20,10 +22,13 @@ public class HomeMenuSystem : MonoBehaviour
     public Slider bgmSlider;
     public Slider sfxSlider;
 
+    public TMP_Text versionText;
+
     private int introSceneIndex;
 
     private void Awake()
     {
+        versionText.text = PlayerSettings.bundleVersion;
         introSceneIndex = UnityEngine.SceneManagement.SceneManager.GetSceneByName("IntroScene").buildIndex;
         settingErrorButtonObj.SetActive(false);
     }

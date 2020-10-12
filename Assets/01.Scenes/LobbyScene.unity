@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450136e2d9a4c2f4f91190900f6d0670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 0}
+  lobbyManager: {fileID: 185470397}
   targetObject: {fileID: 1146233511}
   isTargetOver: 0
   targetOverTime: 0

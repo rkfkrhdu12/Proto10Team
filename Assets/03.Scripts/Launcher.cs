@@ -161,7 +161,7 @@ namespace NetWork
             Instantiate(_netMgrPrefab);
 
             PhotonNetwork.LocalPlayer.NickName = GameManager.Instance.PlayerName;
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(2);
         }
         #endregion
     }
