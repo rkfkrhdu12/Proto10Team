@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
         public const string JumpDelta = "JumpDelta";
         public const string TakeObjectWeight = "TakeObjectWeight";
         public const string IsTake = "IsTake";
+        public const string IsJumpInput = "IsJumpInput";
         public const string IsFloating = "IsFloating";
         public const string Expect = "Expect";
         public const string Win = "Win";
@@ -32,8 +33,12 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (_uCtrl == null) { return; }
 
-        _anim.SetFloat(AniKey.MoveDelta, _uCtrl.MoveDelta);
+        _anim.SetFloat(AniKey.MoveDelta, _uCtrl.MoveDelta.normalized.sqrMagnitude);
         _anim.SetFloat(AniKey.JumpDelta, _uCtrl.JumpDelta);
         _anim.SetBool(AniKey.IsFloating, _uCtrl.IsJump);
+        _anim.SetBool(AniKey.IsJumpInput, _uCtrl.IsJumpInput);
+
+        if (_uCtrl.IsJumpInput)
+            _uCtrl.IsJumpInput = false;
     }
 }

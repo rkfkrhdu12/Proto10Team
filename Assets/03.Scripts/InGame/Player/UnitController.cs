@@ -48,6 +48,7 @@ public class UnitController : MonoBehaviour
             _jumpRoutine = StartCoroutine(ActionJump());
 
         _targetTrans.gameObject.SetActive(true);
+        if(_transform == null) { _transform = transform; }
         _targetTrans.SetParent(_transform.parent);
 
         _targetTrans.localPosition = _transform.localPosition;
@@ -59,8 +60,8 @@ public class UnitController : MonoBehaviour
 
     // 움직일 속도
     public RefData _refMoveSpeed = new RefData();
-    public float MoveDelta { get { return _moveDelta; } }
-    private float _moveDelta = 0.0f;
+    public Vector3 MoveDelta { get { return _moveDelta; } }
+    private Vector3 _moveDelta = Vector3.zero;
     private float _moveSpeed => _refMoveSpeed._Value;
 
     // 점프할 힘
@@ -68,6 +69,8 @@ public class UnitController : MonoBehaviour
     public bool IsJump { get { return _isJumping; } }
     public float JumpDelta { get { return _rigid.velocity.y; } }
     private float _jumpPower => _refJumpPower._Value;
+    public bool IsJumpInput { get { return _isJumpInput; } set { _isJumpInput = value; } }
+    private bool _isJumpInput = false;
 
     // 점프 중인가
     bool _isJumping = false;
@@ -171,8 +174,7 @@ public class UnitController : MonoBehaviour
                                                  _transform.localPosition.y   + deltaPos.y * Time.deltaTime,
                                                  _targetTrans.localPosition.z + deltaPos.z * Time.deltaTime);
 
-        deltaPos.Normalize();
-        _moveDelta = deltaPos.sqrMagnitude;
+        _moveDelta = deltaPos;
     }
 
     void UpdateRotation()
@@ -197,6 +199,7 @@ public class UnitController : MonoBehaviour
             if (_isJumping)
             {
                 yield return _jumpTime;
+                _isJumpInput = false;
 
                 if (Mathf.Approximately(_rigid.velocity.y, 0))
                     _isJumping = false;
@@ -213,6 +216,7 @@ public class UnitController : MonoBehaviour
         // 현재 점프중이 아닐때 space바를 입력시 점프
         if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
+            _isJumpInput = true;
             _isJumping = true; 
             
             _rigid.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);

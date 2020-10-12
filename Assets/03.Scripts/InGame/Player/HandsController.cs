@@ -5,18 +5,79 @@ using UnityEngine;
 public class HandsController : MonoBehaviour
 {
     PlayerController.eHandState _prevHandState = PlayerController.eHandState.Default;
+    PlayerController.eHandState curHandState;
 
+    GameObject _catchingObject = null;
+    Vector3 _collidePoint = Vector3.zero;
+    List<GameObject> _catchedToppings = new List<GameObject>();
+    bool _isCatch = false;
+
+    static readonly string _toppingTag = "Topping";
+
+    [SerializeField]
     PlayerController _pCtrl;
 
-     
+    [SerializeField]
+    UnitController _uCtrl = null;
 
     private void Update()
     {
-        // if(_prevHandState != )
+        curHandState = _pCtrl.CurHandState;
+
+        if (curHandState == PlayerController.eHandState.Catch)
+        {
+            if (_catchingObject == null) { return; }
+
+            _collidePoint += _uCtrl.MoveDelta;
+            _collidePoint.y += _uCtrl.JumpDelta;
+
+            _catchingObject.transform.position = _collidePoint;
+        }
     }
 
-    private void ChangeMotion()
+    private void LateUpdate()
     {
+        _prevHandState = curHandState;
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (curHandState == PlayerController.eHandState.Catch)
+        {
+            if(other.CompareTag(_toppingTag))
+            {
+                _catchedToppings.Add(other.gameObject);
+                if (_catchingObject == null)
+                {
+                    _catchingObject = _catchedToppings[0];
+
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position, _catchingObject.transform.position, out hit, 2.0f))
+                    {
+                        _collidePoint = hit.point;
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //if (curHandState == PlayerController.eHandState.Catch)
+        {
+            if (other.CompareTag(_toppingTag))
+            {
+                GameObject curTopping = other.gameObject;
+                if (_catchedToppings.Contains(curTopping))
+                    _catchedToppings.Remove(curTopping);
+
+                if (_catchingObject == curTopping)
+                {
+                    _catchingObject = _catchedToppings[0];
+                }
+            }
+        }
     }
 }
