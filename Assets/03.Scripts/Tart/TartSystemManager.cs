@@ -13,6 +13,9 @@ public class TartSystemManager : MonoBehaviour
     public GameObject answerTartObj;
 
     public GameObject answerTartRealPos;
+    public GameObject redTeamTartMovePos;
+    public GameObject blueTeamTartMovePos;
+
     private static TartSystemManager _instance;
 
     public static TartSystemManager Instance
@@ -41,8 +44,10 @@ public class TartSystemManager : MonoBehaviour
     public ToppingSpawnManager toppingSpawnManager;
     public ScoreManager scoreManager;
 
-    private Vector3 tartManagerMovePos;
-    private Vector3 answerTartMoveRealPos;
+    //private Vector3 tartManagerMovePos;
+    //private Vector3 answerTartMoveRealPos;
+
+
 
     [Header("랜덤으로 나올 타르트의 개수")]
     public int tartVal;

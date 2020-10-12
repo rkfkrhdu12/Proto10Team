@@ -1921,6 +1921,8 @@ MonoBehaviour:
   - {fileID: 0}
   limitPos1: {fileID: 1275639799}
   limitPos2: {fileID: 1313005141}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!23 &265752898
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4233,6 +4235,8 @@ MonoBehaviour:
   - {fileID: 0}
   limitPos1: {fileID: 146009566}
   limitPos2: {fileID: 1313313633}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!23 &574663816
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6719,6 +6723,8 @@ MonoBehaviour:
   - {fileID: 0}
   limitPos1: {fileID: 0}
   limitPos2: {fileID: 0}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!65 &1045425193
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10413,6 +10419,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerTartObj: {fileID: 1045425191}
   answerTartRealPos: {fileID: 1592878336}
+  redTeamTartMovePos: {fileID: 0}
+  blueTeamTartMovePos: {fileID: 0}
   teamRedScore: 0
   teamBlueScore: 0
   teamRedTart: {fileID: 0}
@@ -10421,6 +10429,7 @@ MonoBehaviour:
   tartSettingManager: {fileID: 636218603}
   toppingSpawnManager: {fileID: 1605396780}
   scoreManager: {fileID: 1802097661}
+  tartVal: 10
 --- !u!4 &1527331699
 Transform:
   m_ObjectHideFlags: 0
@@ -10548,7 +10557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592878336}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -10.49, y: 0, z: -6.56}
+  m_LocalPosition: {x: -10.49, y: 431.26, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

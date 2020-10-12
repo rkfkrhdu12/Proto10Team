@@ -8328,6 +8328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerTartObj: {fileID: 1399372497}
   answerTartRealPos: {fileID: 306901592}
+  redTeamTartMovePos: {fileID: 0}
+  blueTeamTartMovePos: {fileID: 0}
   teamRedScore: 0
   teamBlueScore: 0
   teamRedTart: {fileID: 1167567588}
@@ -8336,7 +8338,7 @@ MonoBehaviour:
   tartSettingManager: {fileID: 447276976}
   toppingSpawnManager: {fileID: 740726466}
   scoreManager: {fileID: 341561058}
-  tartVal: 5
+  tartVal: 10
 --- !u!4 &1366849318
 Transform:
   m_ObjectHideFlags: 0
