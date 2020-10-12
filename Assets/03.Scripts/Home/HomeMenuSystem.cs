@@ -24,11 +24,7 @@ public class HomeMenuSystem : MonoBehaviour
     {
         settingErrorButtonObj.SetActive(false);
     }
-    private void Start()
-    {
-            bgmPlayer.PlayOneShotBGM(0);
-            bgmPlayer.bgmSource.loop = true;
-    }
+
     void Update()
     {
         logoObj.gameObject.transform.localScale = new Vector3(Mathf.PingPong(Time.time*speed, scaleVal)+1, Mathf.PingPong(Time.time*speed, scaleVal)+1, 1);
@@ -38,7 +34,7 @@ public class HomeMenuSystem : MonoBehaviour
     }
     public void GoGameStart()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("InGameScene");
+        PhotonNetwork.LoadLevel(1);
     }
     public void GoExitGame()
     {

@@ -1008,7 +1008,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 0}
   sfxSource: {fileID: 0}
-  bgmClips: []
+  bgmClips:
+  - {fileID: 8300000, guid: d727754356ece684a9f7e1a9c9b2d3e0, type: 3}
+  - {fileID: 8300000, guid: a822082eb1f327143a09ab236b39b0e3, type: 3}
   sfxClips: []
 --- !u!4 &299125691
 Transform:
@@ -1871,7 +1873,7 @@ MonoBehaviour:
   scaleVal: 0.025
   bgmPlayer: {fileID: 299125690}
   bgmSlider: {fileID: 728574731}
-  sfxSlider: {fileID: 0}
+  sfxSlider: {fileID: 96840382}
 --- !u!4 &1077679108
 Transform:
   m_ObjectHideFlags: 0

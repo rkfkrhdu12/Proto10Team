@@ -25,7 +25,7 @@ public class TestSoundSystem : MonoBehaviour
    // public float volumeScale;
     public void Init()
     {
-       nowSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        nowSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
         bgmSource = gameObject.AddComponent<AudioSource>();
         sfxSource = gameObject.AddComponent<AudioSource>();
@@ -41,13 +41,26 @@ public class TestSoundSystem : MonoBehaviour
     private void Awake()
     {
         Init();
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
 
     }
     // Start is called before the first frame update
     void Start()
     {
-  
+        switch (nowSceneName)
+        {
+            case "HomeScene":
+                PlayOneShotBGM(0);
+                bgmSource.loop = true;
+                break;
+            case "LobbyScene":
+                PlayOneShotBGM(1);
+                bgmSource.loop = true;
+                break;
+
+            default:
+                break;
+        }
     }
 
     // Update is called once per frame
