@@ -989,7 +989,7 @@ GameObject:
   - component: {fileID: 299125690}
   - component: {fileID: 299125692}
   m_Layer: 0
-  m_Name: HomeBGMSystem
+  m_Name: BGMSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

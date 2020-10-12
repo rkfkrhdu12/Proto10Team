@@ -13,14 +13,23 @@ public class TestSoundSystem : MonoBehaviour
     //}
 
     //private BgmName bgmName;
-    public AudioSource audioSource;
-    public AudioClip[] audioClips;
 
-    public float volumeScale;
+    string nowSceneName;
+
+
+    public AudioSource bgmSource;
+    public AudioSource sfxSource;
+
+    public AudioClip[] bgmClips;
+    public AudioClip[] sfxClips;
+   // public float volumeScale;
     public void Init()
     {
-        audioSource = gameObject.GetComponent<AudioSource>();
-        
+       nowSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        bgmSource = gameObject.AddComponent<AudioSource>();
+        sfxSource = gameObject.AddComponent<AudioSource>();
+
         //for (int i = 0; i < audioSources.Length; i++)
         //{
         //    audioSources[i].playOnAwake = false;
@@ -32,6 +41,7 @@ public class TestSoundSystem : MonoBehaviour
     private void Awake()
     {
         Init();
+        DontDestroyOnLoad(this.gameObject);
 
     }
     // Start is called before the first frame update
@@ -41,26 +51,37 @@ public class TestSoundSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()   
     {
-        audioSource.volume = volumeScale;
+        //audioSource.volume = volumeScale;
+        bgmSource.volume = PlayerPrefs.GetFloat("BgmVolume", 0.1f);
+        sfxSource.volume = PlayerPrefs.GetFloat("sfxVolume", 0.1f);
     }
     public void SetVolume(float v)
     {
-        audioSource.volume = v;
+        bgmSource.volume = v;
+    }
+    public void SetSFXVolume(float v)
+    {
+        sfxSource.volume = v;
     }
     public void PlayOneShotBGM(int index)
     {
-        audioSource.PlayOneShot(audioClips[index], volumeScale);
+        bgmSource.PlayOneShot(bgmClips[index]);
         LogManager.Log("Play.");
+
+    }
+
+    public void PlayOneShotSFX(int index)
+    {
 
     }
     public void SetLoop(int index, bool b)
     {
-        audioSource.loop = b;
+        bgmSource.loop = b;
     }
     public void StopBGM(int index)
     {
-        audioSource.Stop();
+        bgmSource.Stop();
     }
 }
