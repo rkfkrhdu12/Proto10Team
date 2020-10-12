@@ -73,6 +73,15 @@ public class InGameManager : MonoBehaviour
 
         PlayerCharacters.Add(pCtrl);
         _teamMgr.Register(pCtrl);
+
+        int curPlayerCharCount = PlayerCharacters.Count - 1;
+
+        PlayerCharacters[curPlayerCharCount].transform.position 
+            = _playerSpawnPoints[curPlayerCharCount].transform.position;
+
+        LogManager.Log("AddPlayer : " + pCtrl.gameObject.GetPhotonView().name);
+
+        pCtrl.Init();
     }
 
     private void OnStart()

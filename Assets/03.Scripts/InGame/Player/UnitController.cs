@@ -39,6 +39,22 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    public void Init()
+    {
+        LogManager.Log("Init : " + gameObject.GetPhotonView().name);
+
+        // 점프루틴이 없을 경우 시작시킴
+        if (_jumpRoutine == null)
+            _jumpRoutine = StartCoroutine(ActionJump());
+
+        _targetTrans.gameObject.SetActive(true);
+        _targetTrans.SetParent(_transform.parent);
+
+        _targetTrans.localPosition = _transform.localPosition;
+
+        _isInit = true;
+    }
+
     #region Variable
 
     // 움직일 속도
@@ -68,27 +84,13 @@ public class UnitController : MonoBehaviour
     // 현재 점프가 가능한 상태인지 확인
     public bool _isGround = true;
 
-    // 점프시간
-    float _jumpTime = 0.0f;
-    // 점프 시작시 Position Y값
-    float _jumpStartPosY = 0.0f;
-
     // 점프 중인가
     bool _isJumping = false;
 
-    // 점프를 시키기위해 오브젝트의 강체를 가져옴
-    Rigidbody _rigid;
-
-    // 현재 오브젝트의 바닥부분 Position
-    Vector3 _objectBottomPos;
-
-    // 점프 후 아무 오브젝트에 충돌하였는지 확인
-    private RaycastHit _hitGround;
-    // 충돌로 인식할 레이어마스크
-    public LayerMask _HitLayerMask;
-
     // 매번 생성하는것보다 캐싱해놓는것이 더 좋음
     WaitForSeconds _waitTime = new WaitForSeconds(.1f);
+
+    WaitForSeconds _jumpTime = new WaitForSeconds(0.5f);
 
     // 해당 UnitCtrl를 컨트롤 하는 PlayerController
     PlayerController _pCtrl = null;
@@ -99,6 +101,7 @@ public class UnitController : MonoBehaviour
     private readonly string _axisKeyHorizontal = "Horizontal";
     private readonly string _axisKeyVertical = "Vertical";
 
+    bool _isInit = false;
     #endregion
 
     #region Monobehaviour Function
@@ -112,16 +115,6 @@ public class UnitController : MonoBehaviour
 
         // 매번 호출보단 캐싱이 빠름
         _transform = transform;
-
-        // 이 오브젝트의 바닥부분을 가져옴
-        _objectBottomPos = transform.position;
-        _objectBottomPos.y -= transform.localScale.y / 2;
-
-        // 강체 초기화
-        _rigid = GetComponent<Rigidbody>();
-        
-        _targetTrans.gameObject.SetActive(true);
-        _targetTrans.SetParent(_transform.parent);
     }
 
     private void Start()
@@ -133,15 +126,17 @@ public class UnitController : MonoBehaviour
 
         _refMoveSpeed = _pCtrl.GetMoveSpeed();
         _refJumpPower = _pCtrl.GetJumpPower();
+    }
+    private void Update()
+    {
+        if (!_photonView.IsMine || !_isInit) { return; }
 
-        // 점프루틴이 없을 경우 시작시킴
-        if (_jumpRoutine == null)
-            _jumpRoutine = StartCoroutine(ActionJump());
+        UpdateJump();
     }
 
     private void FixedUpdate()
     {
-        if (!_photonView.IsMine) { return; }
+        if (!_photonView.IsMine || !_isInit) { return; }
 
         UpdateMove();
         UpdateRotation();
@@ -156,23 +151,27 @@ public class UnitController : MonoBehaviour
     private void UpdateMove()
     {
         // 현재 WASD의 Input값을 가져온 후 delta값과 이동속도를 곱함.
-        float moveX = Input.GetAxis(_axisKeyHorizontal) * _moveSpeed;
-        float moveZ = Input.GetAxis(_axisKeyVertical) * _moveSpeed;
+        float moveX = Input.GetAxis(_axisKeyHorizontal) * _moveSpeed,
+              moveZ = Input.GetAxis(_axisKeyVertical) * _moveSpeed;
 
         Vector3 deltaPos = (moveX * _targetTrans.right) + (moveZ * _targetTrans.forward);
 
-        float dist = Vector3.Distance(_targetTrans.position, _transform.position);
-        // LogManager.Log(dist.ToString() + "   "  + (dist > 2.0f).ToString());
+        Vector2 playerPos = new Vector2(_transform.position.z,   _transform.position.x);
+        Vector2 targetPos = new Vector2(_targetTrans.position.z, _targetTrans.position.x);
 
-        if (dist > _moveSpeed * .2f)
-        {
-            if (_isJumping)
-                _targetTrans.localPosition = _transform.localPosition;
-            else
-                _targetTrans.localPosition = new Vector3(_transform.localPosition.x, 0, _transform.localPosition.z);
-        }
-        else
-            _targetTrans.localPosition += deltaPos * Time.fixedDeltaTime;
+        //float dist = Vector2.Distance(playerPos, targetPos);
+        //if (dist > _moveSpeed * .2f)
+        //{
+        //    _targetTrans.localPosition = new Vector3(_transform.localPosition.x,
+        //                                             _transform.localPosition.y, 
+        //                                             _transform.localPosition.z);
+        //}
+        //else
+        //    _targetTrans.localPosition += deltaPos * Time.fixedDeltaTime;
+
+        _targetTrans.localPosition = new Vector3(_targetTrans.localPosition.x + deltaPos.x * Time.deltaTime,
+                                                 _transform.localPosition.y   + deltaPos.y * Time.deltaTime,
+                                                 _targetTrans.localPosition.z + deltaPos.z * Time.deltaTime);
     }
 
     void UpdateRotation()
@@ -186,7 +185,6 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    bool _isJumpCoolTime = false;
     private IEnumerator ActionJump()
     {
         // 오브젝트가 꺼지지않는 이상 계속 작동
@@ -195,13 +193,12 @@ public class UnitController : MonoBehaviour
             yield return _waitTime;
 
             // 점프를 하였으면
-            if (_isJumpCoolTime)
+            if (_isJumping)
             {
-                // yield return _waitTime;
-                _isJumpCoolTime = false;
+                yield return _jumpTime;
 
-                _isJumping = false;
-                _jumpTime = 0.0f;
+                if (Mathf.Approximately(_rigid.velocity.y, 0))
+                    _isJumping = false;
             }
 
         }
@@ -209,42 +206,18 @@ public class UnitController : MonoBehaviour
         _jumpRoutine = null;
     }
 
-    private void Update()
-    {
-        if (!_photonView.IsMine) { return; }
+    [SerializeField]
+    Rigidbody _rigid;
 
-        UpdateJump();
-    }
-
-    float height = 0.0f;
     private void UpdateJump()
     {
         // 현재 점프중이 아닐때 space바를 입력시 점프
         if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
             //_isGround = false;
-            _isJumping = true;
-            _jumpStartPosY = _transform.position.y;
-        }
-
-        if (_isJumping)
-        {
-            if (!_isJumpCoolTime)
-            {
-                height = (_jumpTime * _jumpTime * (Physics.gravity.y) / 2) + (_jumpTime * _jumpPower);
-                _transform.position = new Vector3(_transform.position.x, _jumpStartPosY + height, _transform.position.z);
-                _jumpTime += Time.deltaTime;
-            }
-
-            // 처음의 높이 보다 더 내려 갔을때 => 점프전 상태로 복귀한다.
-            if (height < 0.0f) 
-            {
-                _isJumpCoolTime = true;
-
-                _targetTrans.localPosition = new Vector3(_targetTrans.localPosition.x, 0, _targetTrans.localPosition.z);
-
-                // _transform.position = new Vector3(_transform.position.x, _jumpStartPosY, _transform.position.z);
-            }
+            _isJumping = true; 
+            
+            _rigid.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
         }
     }
     #endregion
