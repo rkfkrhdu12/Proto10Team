@@ -129,13 +129,12 @@ Shader "Unlit/CelShader"
             float3 fSpecularColor;
             float3 fHalfVector = normalize(lightDir + viewDir);
             float fHDotN = saturate(dot(fHalfVector, s.Normal));
-            float fPowedHDotN = pow(fHDotN, 1000000000000000.0f);
-
-            float fSpecularSmooth = smoothstep(0.005, 0.01f, fPowedHDotN);
-            fSpecularColor = fSpecularSmooth * 1.0f;
+            float fPowedHDotN = pow(fHDotN, 100000000000000000000000000000000000000.0f);
+            fSpecularColor = fPowedHDotN * 1.0f;
 
 
 
+            //! 최종 컬러 출력
             float4 fFinalColor;
             fFinalColor.rgb = ((s.Albedo * _Color) + fSpecularColor) *
                                  fBandedDiffuse * _LightColor0.rgb * atten;
@@ -143,6 +142,7 @@ Shader "Unlit/CelShader"
 
             return fFinalColor;
         }
+
 
         ENDCG
     }
