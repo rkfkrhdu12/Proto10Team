@@ -9256,6 +9256,60 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437521387}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1481238404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1481238406}
+  - component: {fileID: 1481238405}
+  m_Layer: 0
+  m_Name: BGMSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1481238405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481238404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6e147b4ac8f0e418041952af0d06f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  bgmClips:
+  - {fileID: 8300000, guid: d727754356ece684a9f7e1a9c9b2d3e0, type: 3}
+  - {fileID: 8300000, guid: a822082eb1f327143a09ab236b39b0e3, type: 3}
+  sfxClips:
+  - {fileID: 8300000, guid: d5bc671547c23dc44a2d4b81544e6e30, type: 3}
+  - {fileID: 8300000, guid: 3a52cb5c272ad5d49a9a54012ce8fd22, type: 3}
+  - {fileID: 8300000, guid: 648584cbd7148614ba089e631ce00eea, type: 3}
+  - {fileID: 8300000, guid: 8d0fa9a82b03610488ca42007977d398, type: 3}
+  - {fileID: 8300000, guid: 4af1785328e41f04495d8a59bfca8534, type: 3}
+--- !u!4 &1481238406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481238404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1490110761
 GameObject:
   m_ObjectHideFlags: 0
@@ -11467,7 +11521,7 @@ MonoBehaviour:
   sabackPos: {fileID: 1988623443}
   crownRedImg: {fileID: 482582579}
   crownBlueImg: {fileID: 844135766}
-  tararaSec: 2
+  tararaSec: 3
   tararaTerm: 0.05
   redScore: 0
   blueScore: 0
@@ -11479,6 +11533,7 @@ MonoBehaviour:
   teamDraw: {fileID: 1974090300}
   teamScoreText: {fileID: 1126846234}
   goIntroButton: {fileID: 304467182}
+  testSoundSystem: {fileID: 1481238405}
 --- !u!4 &1919377887
 Transform:
   m_ObjectHideFlags: 0

@@ -69,6 +69,8 @@ public class ScoreEffectSystem : MonoBehaviour
 
     public Button goIntroButton;
 
+    [Header("사운드 관련")]
+    public TestSoundSystem testSoundSystem;
     #endregion
     public void Init()
     {
@@ -114,23 +116,19 @@ public class ScoreEffectSystem : MonoBehaviour
         }
 
     }
-
-    public void GoHomeScene()
+    public void StartTarara()
     {
-        Destroy(TartSystemManager.Instance.teamRedTart.gameObject);
-        Destroy(TartSystemManager.Instance.teamRedTart.gameObject);
-        
-        UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
+
+        StartCoroutine(GoTarara());
 
     }
+
     /// <summary>
     /// 내 팀이 뭔지 정합니다. 결산 화면에서 사용됩니다. 0 : None, 1 : Red, 2 : Blue
     /// </summary>
     /// <param name="teamNumber">0 : None, 1 : Red, 2 : Blue</param>
     public void SetMyTeam(int teamNumber)
     {
-
-
         if (teamNumber == 0 || teamNumber == 1 || teamNumber == 2)
         {
             teamColor = (TeamColor)teamNumber;
@@ -140,13 +138,15 @@ public class ScoreEffectSystem : MonoBehaviour
             LogManager.Log("teamNumber는 0, 1, 2 중 하나여야 함.");
         }
     }
-    public void StartTarara()
-    {
 
-        StartCoroutine(GoTarara());
+    public void GoHomeScene()
+    {
+        Destroy(TartSystemManager.Instance.teamRedTart.gameObject);
+        Destroy(TartSystemManager.Instance.teamRedTart.gameObject);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
 
     }
-
     private WinCheck WhoIsWinner()
     {
         if (redScore > blueScore)
@@ -162,78 +162,10 @@ public class ScoreEffectSystem : MonoBehaviour
             return WinCheck.Draw;
         }
     }
-    private IEnumerator GoEndScreen()
-    {
-        //teamColor = (TeamColor)GameManager.Instance.PlayerCharacter.GetComponent<PlayerController>().Team;
-        if (teamColor == 0)
-        {
-            LogManager.Log("Team None. -> Team Blue");
-            teamColor = TeamColor.Blue;
-        }
-
-        whitePanel.enabled = true;
-        goIntroButton.gameObject.SetActive(true);
-
-        WinCheck winCheckTemp = WhoIsWinner();
-        RedCharacter.SetActive(false);
-        BlueCharacter.SetActive(false);
-        switch (teamColor)
-        {
-            case TeamColor.None:
-                LogManager.Log("None Team");
-                RedCharacter.SetActive(false);
-                BlueCharacter.SetActive(false);
-                break;
-            case TeamColor.Red:
-                LogManager.Log("Red Team");
-                RedCharacter.SetActive(true);
-                teamScoreText.enabled = true;
-                if (winCheckTemp == WinCheck.RedWin)
-                {
-                    teamScoreText.text = redScore + "% 완성!";
-                    teamWin.enabled = true;
-                }
-                else if (winCheckTemp == WinCheck.Draw)
-                {
-                    teamScoreText.text = redScore + "% 완성";
-                    teamDraw.enabled = true;
-                }
-                else
-                {
-                    teamScoreText.text = redScore + "% 완성...";
-                    teamLose.enabled = true;
-                }
-                break;
-            case TeamColor.Blue:
-                LogManager.Log("Blue Team");
-                teamScoreText.enabled = true;
-                BlueCharacter.SetActive(true);
-                if (winCheckTemp == WinCheck.BlueWin)
-                {
-                    teamScoreText.text = blueScore + "% 완성!";
-                    teamWin.enabled = true;
-                }
-                else if (winCheckTemp == WinCheck.Draw)
-                {
-                    teamScoreText.text = blueScore + "% 완성";
-                    teamDraw.enabled = true;
-                }
-                else
-                {
-                    teamScoreText.text = blueScore + "% 완성...";
-                    teamLose.enabled = true;
-                }
-                break;
-            default:
-                break;
-        }
-        yield return null;
-    }
-
+   
     private IEnumerator GoTarara()
     {
         Init();
-
         #region 레시피 이동
         float timer = 0f;
         while (true)
@@ -251,9 +183,13 @@ public class ScoreEffectSystem : MonoBehaviour
         #endregion
 
         yield return new WaitForSecondsRealtime(0.75f);
-
+        testSoundSystem.PlayOneShotSFX(1);
+        //testSoundSystem.SetSFXLoop(false);
         doTararaStop = false;
         StartCoroutine(StopTarara(tararaSec));
+
+
+
         while (doTararaStop == false)
         {
             #region 스포트라이트 이미지 깜빡임 연출
@@ -287,9 +223,9 @@ public class ScoreEffectSystem : MonoBehaviour
         spotLightBlue.enabled = false;
 
         #region 이미지 이동 연출구간 2
-
         yield return new WaitForSecondsRealtime(1f);
-
+        testSoundSystem.StopSFX();
+        testSoundSystem.PlayOneShotSFX(2);
 
         isLightOn = false;
 
@@ -320,7 +256,7 @@ public class ScoreEffectSystem : MonoBehaviour
                 LogManager.Log("WhoIsWinner에서 다른 값 발생");
                 break;
         }
-
+        
         #endregion
 
         yield return new WaitForSecondsRealtime(3f);
@@ -328,6 +264,81 @@ public class ScoreEffectSystem : MonoBehaviour
         StartCoroutine(GoEndScreen());
 
     }
+    private IEnumerator GoEndScreen()
+    {
+        //teamColor = (TeamColor)GameManager.Instance.PlayerCharacter.GetComponent<PlayerController>().Team;
+        if (teamColor == 0)
+        {
+            LogManager.Log("Team None. -> Team Blue");
+            teamColor = TeamColor.Blue;
+        }
+
+        whitePanel.enabled = true;
+        goIntroButton.gameObject.SetActive(true);
+
+        WinCheck winCheckTemp = WhoIsWinner();
+        RedCharacter.SetActive(false);
+        BlueCharacter.SetActive(false);
+        switch (teamColor)
+        {
+            case TeamColor.None:
+                LogManager.Log("None Team");
+                RedCharacter.SetActive(false);
+                BlueCharacter.SetActive(false);
+                break;
+            case TeamColor.Red:
+                LogManager.Log("Red Team");
+                RedCharacter.SetActive(true);
+                teamScoreText.enabled = true;
+                if (winCheckTemp == WinCheck.RedWin)
+                {
+                    testSoundSystem.PlayOneShotSFX(3);
+                    teamScoreText.text = redScore + "% 완성!";
+                    teamWin.enabled = true;
+                }
+                else if (winCheckTemp == WinCheck.Draw)
+                {
+                    testSoundSystem.PlayOneShotSFX(4);
+                    teamScoreText.text = redScore + "% 완성";
+                    teamDraw.enabled = true;
+                }
+                else
+                {
+                    testSoundSystem.PlayOneShotSFX(4);
+                    teamScoreText.text = redScore + "% 완성...";
+                    teamLose.enabled = true;
+                }
+                break;
+            case TeamColor.Blue:
+                LogManager.Log("Blue Team");
+                teamScoreText.enabled = true;
+                BlueCharacter.SetActive(true);
+                if (winCheckTemp == WinCheck.BlueWin)
+                {
+                    testSoundSystem.PlayOneShotSFX(3);
+                    teamScoreText.text = blueScore + "% 완성!";
+                    teamWin.enabled = true;
+                }
+                else if (winCheckTemp == WinCheck.Draw)
+                {
+                    testSoundSystem.PlayOneShotSFX(4);
+                    teamScoreText.text = blueScore + "% 완성";
+                    teamDraw.enabled = true;
+                }
+                else
+                {
+                    testSoundSystem.PlayOneShotSFX(4);
+                    teamScoreText.text = blueScore + "% 완성...";
+                    teamLose.enabled = true;
+                }
+                break;
+            default:
+                break;
+        }
+        yield return null;
+    }
+
+
     private IEnumerator StopTarara(float sec)
     {
         yield return new WaitForSecondsRealtime(sec);

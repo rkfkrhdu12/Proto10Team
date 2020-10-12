@@ -31,6 +31,8 @@ public class OverUIManager : MonoBehaviour
 
     private Image buttonImage;
 
+    public TestSoundSystem testSoundSystem;
+
     [Tooltip("버튼의 타입임. 게임시작버튼 = 1, ...")]
     public int buttonType;
     private void Awake()
@@ -146,6 +148,14 @@ public class OverUIManager : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == targetObject)
+        {
+            isTargetOver = true;
+            testSoundSystem.PlayOneShotSFX(0);
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == targetObject)
@@ -154,4 +164,5 @@ public class OverUIManager : MonoBehaviour
             StartCoroutine(ExitButton());
         }
     }
+    
 }

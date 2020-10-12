@@ -20,8 +20,11 @@ public class HomeMenuSystem : MonoBehaviour
     public Slider bgmSlider;
     public Slider sfxSlider;
 
+    private int introSceneIndex;
+
     private void Awake()
     {
+        introSceneIndex = UnityEngine.SceneManagement.SceneManager.GetSceneByName("IntroScene").buildIndex;
         settingErrorButtonObj.SetActive(false);
     }
 

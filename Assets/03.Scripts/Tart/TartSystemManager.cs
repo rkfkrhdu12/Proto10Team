@@ -46,6 +46,7 @@ public class TartSystemManager : MonoBehaviour
     public ToppingSpawnManager toppingSpawnManager;
     public ScoreManager scoreManager;
 
+    private int endingSceneIndex;
     //private Vector3 tartManagerMovePos;
     //private Vector3 answerTartMoveRealPos;
 
@@ -55,6 +56,7 @@ public class TartSystemManager : MonoBehaviour
     public int tartVal;
     private void Awake()
     {
+        Init();
         if (_instance == null)
         {
             _instance = this;
@@ -69,6 +71,7 @@ public class TartSystemManager : MonoBehaviour
 
     public void Init()
     {
+
         if (answerTartRealPos == null)
         {
             LogManager.Log("answerTartRealPos 없음");
@@ -91,10 +94,13 @@ public class TartSystemManager : MonoBehaviour
     }
     void Start()
     {
+        endingSceneIndex = UnityEngine.SceneManagement.SceneManager.GetSceneByName("EndingScene").buildIndex;
+        Debug.Log(endingSceneIndex);
         DontDestroyOnLoad(teamRedTart.gameObject);
         DontDestroyOnLoad(teamBlueTart.gameObject);
         Init();
         StartCoroutine(TartSystemTest());
+
     }
 
     public IEnumerator TartSystemTest()
@@ -103,12 +109,12 @@ public class TartSystemManager : MonoBehaviour
         LogManager.Log("타르트 세팅 완료...2초 뒤 씬 이동 합니다.");
         yield return new WaitForSecondsRealtime(2f);
         SceneAndTartMove();
-        LogManager.Log("이동 완료. 2초 뒤 정답 타르트 위치 이동합니다.");
+        LogManager.Log("이동 완료. 2초 뒤 정답 타르트 위치 이동한다...");
         yield return new WaitForSecondsRealtime(2f);
         AnswerTartMove();
-        LogManager.Log("이동 완료. 2초 뒤 팀 타르트 위치 이동합니다.");
+        LogManager.Log("이동 완료. 2초 뒤 팀 타르트 위치 이동한다...");
         TeamTartMove();
-        LogManager.Log("이동 완료. 어떤지?");
+        LogManager.Log("이동 완료. 어떰??");
 
     }
     public void RandomChoiceOfTart()
@@ -126,8 +132,7 @@ public class TartSystemManager : MonoBehaviour
 
     public void SceneAndTartMove()
     {
-        PhotonNetwork.LoadLevel(3);
-
+        PhotonNetwork.LoadLevel(4);
 
     }
     public void SpawnToppings()

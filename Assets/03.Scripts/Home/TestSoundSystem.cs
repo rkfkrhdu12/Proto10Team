@@ -81,20 +81,32 @@ public class TestSoundSystem : MonoBehaviour
     public void PlayOneShotBGM(int index)
     {
         bgmSource.PlayOneShot(bgmClips[index]);
-        LogManager.Log("Play.");
+        LogManager.Log("BGM Play.");
 
     }
 
     public void PlayOneShotSFX(int index)
     {
 
+        sfxSource.PlayOneShot(sfxClips[index]);
+        LogManager.Log("SFX Play.");
     }
-    public void SetLoop(int index, bool b)
+    public void SetLoop(bool b)
     {
         bgmSource.loop = b;
     }
-    public void StopBGM(int index)
+    public void SetSFXLoop(bool b)
+    {
+        sfxSource.loop = b;
+    }
+    public void StopBGM()
     {
         bgmSource.Stop();
     }
+    public void StopSFX()
+    {
+        sfxSource.Stop();
+
+    }
+
 }

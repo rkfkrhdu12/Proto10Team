@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameManager
 {
+    struct GameEndData
+    {
+        public int teamNumber;
+    }
     public static GameManager Instance
     {
         get

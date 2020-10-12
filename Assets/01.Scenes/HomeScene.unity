@@ -399,6 +399,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 299125690}
+        m_MethodName: PlayOneShotSFX
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &62788201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,7 +607,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1011,7 +1022,11 @@ MonoBehaviour:
   bgmClips:
   - {fileID: 8300000, guid: d727754356ece684a9f7e1a9c9b2d3e0, type: 3}
   - {fileID: 8300000, guid: a822082eb1f327143a09ab236b39b0e3, type: 3}
-  sfxClips: []
+  sfxClips:
+  - {fileID: 8300000, guid: d5bc671547c23dc44a2d4b81544e6e30, type: 3}
+  - {fileID: 8300000, guid: 3a52cb5c272ad5d49a9a54012ce8fd22, type: 3}
+  - {fileID: 8300000, guid: 648584cbd7148614ba089e631ce00eea, type: 3}
+  - {fileID: 8300000, guid: 8d0fa9a82b03610488ca42007977d398, type: 3}
 --- !u!4 &299125691
 Transform:
   m_ObjectHideFlags: 0
@@ -1425,6 +1440,17 @@ MonoBehaviour:
       - m_Target: {fileID: 1077679107}
         m_MethodName: GoGameStart
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 299125690}
+        m_MethodName: PlayOneShotSFX
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3107,6 +3133,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 299125690}
+        m_MethodName: PlayOneShotSFX
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1922255020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3230,6 +3267,17 @@ MonoBehaviour:
       - m_Target: {fileID: 1077679107}
         m_MethodName: GoExitGame
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 299125690}
+        m_MethodName: PlayOneShotSFX
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

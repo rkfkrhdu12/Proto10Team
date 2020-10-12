@@ -396,6 +396,7 @@ MonoBehaviour:
   successTime: 3
   successPer: 0
   isSuccess: 0
+  testSoundSystem: {fileID: 203992378}
   buttonType: 1
 --- !u!1 &104716641
 GameObject:
@@ -517,6 +518,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &203992377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203992379}
+  - component: {fileID: 203992378}
+  m_Layer: 0
+  m_Name: BGMSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &203992378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203992377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6e147b4ac8f0e418041952af0d06f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  bgmClips:
+  - {fileID: 8300000, guid: d727754356ece684a9f7e1a9c9b2d3e0, type: 3}
+  - {fileID: 8300000, guid: a822082eb1f327143a09ab236b39b0e3, type: 3}
+  sfxClips:
+  - {fileID: 8300000, guid: d5bc671547c23dc44a2d4b81544e6e30, type: 3}
+  - {fileID: 8300000, guid: 3a52cb5c272ad5d49a9a54012ce8fd22, type: 3}
+  - {fileID: 8300000, guid: 648584cbd7148614ba089e631ce00eea, type: 3}
+  - {fileID: 8300000, guid: 8d0fa9a82b03610488ca42007977d398, type: 3}
+--- !u!4 &203992379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203992377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342790377
 GameObject:
@@ -772,55 +826,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &588580447
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 588580449}
-  - component: {fileID: 588580448}
-  m_Layer: 0
-  m_Name: BGMSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &588580448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588580447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd6e147b4ac8f0e418041952af0d06f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmSource: {fileID: 0}
-  sfxSource: {fileID: 0}
-  bgmClips:
-  - {fileID: 8300000, guid: d727754356ece684a9f7e1a9c9b2d3e0, type: 3}
-  - {fileID: 8300000, guid: a822082eb1f327143a09ab236b39b0e3, type: 3}
-  sfxClips: []
---- !u!4 &588580449
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588580447}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &787236059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1130,7 @@ MonoBehaviour:
   successTime: 5
   successPer: 0
   isSuccess: 0
+  testSoundSystem: {fileID: 203992378}
   buttonType: 0
 --- !u!65 &942378437
 BoxCollider:
@@ -2070,8 +2076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC798 \uBAA8\uB974\uACA0\uC9C0\uB9CC \uC77C\uB2E8\n\uC774 \uC704\uC5D0
-    \uC62C\uB77C\uC624\uB294\n\uC0AC\uB78C\uC774 \uC788\uC744\uAE4C"
+  m_text: "\uC5EC\uAE34 \uBB50\uC9C0?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1a3eb9897c6926b4aac15371841fcbf1, type: 2}
   m_sharedMaterial: {fileID: 2714725661467755162, guid: 1a3eb9897c6926b4aac15371841fcbf1,
@@ -2100,8 +2105,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 6.7
-  m_fontSizeBase: 6.7
+  m_fontSize: 14.51
+  m_fontSizeBase: 14.51
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2141,12 +2146,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -0.75452805, w: 0}
   m_textInfo:
     textComponent: {fileID: 1779701335}
-    characterCount: 28
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 7
-    wordCount: 8
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 3
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
