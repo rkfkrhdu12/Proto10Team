@@ -72,6 +72,8 @@ public class OverUIManager : MonoBehaviour
     {
         LogManager.Log("입장!! 해야하는데 어케 해야 하는지 몰라서 걍 남겨둠");
         //입장 버튼 위에 올라가면
+
+        GameManager.Instance.NetManager.JoinRandomRoom();
     }
 
     IEnumerator ExitButton()

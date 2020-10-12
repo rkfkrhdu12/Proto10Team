@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: bde4620a0ca601c4cbcaf2ed7973b3be
+guid: 39d70eaff1acff24ab0d20d52cf584c8
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
-      74: -6258421802006391744
-    second: Hard
+      74: 5029710099000895372
+    second: victory
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Hard
-      takeName: Hard
+      name: victory
+      takeName: victory
       internalID: 0
       firstFrame: 1
-      lastFrame: 30
+      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

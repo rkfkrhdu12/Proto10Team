@@ -59,11 +59,17 @@ public class UnitController : MonoBehaviour
 
     // 움직일 속도
     public RefData _refMoveSpeed = new RefData();
+    public float MoveDelta { get { return _moveDelta; } }
+    private float _moveDelta = 0.0f;
     private float _moveSpeed => _refMoveSpeed._Value;
 
     // 점프할 힘
     public RefData _refJumpPower = new RefData();
+    public bool IsJump { get { return _isJumping; } }
     private float _jumpPower => _refJumpPower._Value;
+
+    // 점프 중인가
+    bool _isJumping = false;
 
     // 현재 오브젝트가 현재 클라이언트에서 자신의 것인지 확인
     [SerializeField]
@@ -84,9 +90,6 @@ public class UnitController : MonoBehaviour
     // 현재 점프가 가능한 상태인지 확인
     public bool _isGround = true;
 
-    // 점프 중인가
-    bool _isJumping = false;
-
     // 매번 생성하는것보다 캐싱해놓는것이 더 좋음
     WaitForSeconds _waitTime = new WaitForSeconds(.1f);
 
@@ -102,6 +105,9 @@ public class UnitController : MonoBehaviour
     private readonly string _axisKeyVertical = "Vertical";
 
     bool _isInit = false;
+
+    [SerializeField]
+    Rigidbody _rigid;
     #endregion
 
     #region Monobehaviour Function
@@ -158,20 +164,14 @@ public class UnitController : MonoBehaviour
 
         Vector2 playerPos = new Vector2(_transform.position.z,   _transform.position.x);
         Vector2 targetPos = new Vector2(_targetTrans.position.z, _targetTrans.position.x);
-
-        //float dist = Vector2.Distance(playerPos, targetPos);
-        //if (dist > _moveSpeed * .2f)
-        //{
-        //    _targetTrans.localPosition = new Vector3(_transform.localPosition.x,
-        //                                             _transform.localPosition.y, 
-        //                                             _transform.localPosition.z);
-        //}
-        //else
-        //    _targetTrans.localPosition += deltaPos * Time.fixedDeltaTime;
+        
 
         _targetTrans.localPosition = new Vector3(_targetTrans.localPosition.x + deltaPos.x * Time.deltaTime,
                                                  _transform.localPosition.y   + deltaPos.y * Time.deltaTime,
                                                  _targetTrans.localPosition.z + deltaPos.z * Time.deltaTime);
+
+        deltaPos.Normalize();
+        _moveDelta = deltaPos.sqrMagnitude;
     }
 
     void UpdateRotation()
@@ -206,15 +206,12 @@ public class UnitController : MonoBehaviour
         _jumpRoutine = null;
     }
 
-    [SerializeField]
-    Rigidbody _rigid;
 
     private void UpdateJump()
     {
         // 현재 점프중이 아닐때 space바를 입력시 점프
         if (Input.GetKeyDown(KeyCode.Space) && !_isJumping)
         {
-            //_isGround = false;
             _isJumping = true; 
             
             _rigid.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
