@@ -132,6 +132,8 @@ public class TartSystemManager : MonoBehaviour
 
     public void SceneAndTartMove()
     {
+        teamRedTart.InputToppingToChildObject();
+        teamBlueTart.InputToppingToChildObject();
         PhotonNetwork.LoadLevel(4);
 
     }

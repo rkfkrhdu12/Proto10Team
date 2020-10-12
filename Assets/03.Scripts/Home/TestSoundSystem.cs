@@ -85,12 +85,19 @@ public class TestSoundSystem : MonoBehaviour
 
     }
 
-    public void PlayOneShotSFX(int index)
+    public void PlaySFX(int index)
     {
 
+        sfxSource.clip = sfxClips[index];
+        sfxSource.Play();
+        LogManager.Log("SFX Play.");
+    }
+    public void PlayOneShotSFX(int index)
+    {
         sfxSource.PlayOneShot(sfxClips[index]);
         LogManager.Log("SFX Play.");
     }
+
     public void SetLoop(bool b)
     {
         bgmSource.loop = b;
@@ -99,6 +106,7 @@ public class TestSoundSystem : MonoBehaviour
     {
         sfxSource.loop = b;
     }
+
     public void StopBGM()
     {
         bgmSource.Stop();
