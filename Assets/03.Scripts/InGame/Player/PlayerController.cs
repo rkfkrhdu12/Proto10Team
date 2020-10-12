@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     PlayerData _datas;
 
+    [SerializeField]
     UnitController _uCtrl;
-
     RefData _moveSpeed = new RefData(); public ref RefData GetMoveSpeed() => ref _moveSpeed;
     RefData _jumpPower = new RefData(); public ref RefData GetJumpPower() => ref _jumpPower;
     RefData _power = new RefData(); public ref RefData GetPower() => ref _power;
@@ -81,6 +81,14 @@ public class PlayerController : MonoBehaviour
     bool _isJump;
     #endregion
 
+    public void Init()
+    {
+        if (_uCtrl == null) { _uCtrl = GetComponent<UnitController>(); }
+        
+        LogManager.Log("pCtrl : " + gameObject.GetPhotonView().name);
+        _uCtrl.Init();
+    }
+
     public void Init(eTeam team)
     {
         _datas._curTeam = team;
@@ -93,6 +101,7 @@ public class PlayerController : MonoBehaviour
         _datas._defaultPower = Power;
 
         LogManager.Log(_pView.Owner.NickName + " " + Team.ToString());
+
         isInit = true;
     }
 
@@ -132,7 +141,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        _pView = GetComponent<PhotonView>();
+        if (_pView == null)
+            _pView = gameObject.GetPhotonView();
 
         MoveSpeed = 10.0f;
         JumpPower = 10.0f;

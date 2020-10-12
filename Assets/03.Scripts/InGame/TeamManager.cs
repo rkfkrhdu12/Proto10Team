@@ -47,7 +47,6 @@ public class TeamManager : MonoBehaviour
             }
         }
 
-
         if (_indexViewidBox.ContainsValue(pCtrl._pView.ViewID)) { return; }
 
         for (int i = 0; i < _maxTeamPlayerCount * 2; ++i)
