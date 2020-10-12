@@ -8336,7 +8336,7 @@ MonoBehaviour:
   tartSettingManager: {fileID: 447276976}
   toppingSpawnManager: {fileID: 740726466}
   scoreManager: {fileID: 341561058}
-  tartVal: 10
+  tartVal: 5
 --- !u!4 &1366849318
 Transform:
   m_ObjectHideFlags: 0
