@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class TestSoundSystem : MonoBehaviour
@@ -36,13 +37,11 @@ public class TestSoundSystem : MonoBehaviour
         //}
     }
 
-
-
     private void Awake()
     {
         Init();
-        //DontDestroyOnLoad(this.gameObject);
 
+        GameManager.Instance.NetManager.JoinRandomRoom();
     }
     // Start is called before the first frame update
     void Start()
