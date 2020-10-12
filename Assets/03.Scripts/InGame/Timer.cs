@@ -16,12 +16,13 @@ public class Timer : MonoBehaviour
     TMP_Text _timeText = null;
 
     int _eventCount = 0;
-    int[] _eventTime = new int[_eventCountRecipe + _eventCountItem + _eventCountFever + _eventCountTimeOut];
+    int[] _eventTime = new int[_eventCountCountDown + _eventCountRecipe + _eventCountItem + _eventCountFever + _eventCountTimeOut];
     /// <summary>
     /// _eventTime[_eventCount]
     /// </summary>
     int _curEventTime { get { return _eventCount >= _eventTime.Length ? 0 : _eventTime[_eventCount]; } }
 
+    const int _eventCountCountDown = 4;
     const int _eventCountRecipe = 1;
     const int _eventCountItem = 5;
     const int _eventCountFever = 1;
@@ -32,17 +33,23 @@ public class Timer : MonoBehaviour
     delegate void ItemEvent();
     Queue<ItemEvent> ItemEvents = new Queue<ItemEvent>();
 
+    [SerializeField]
+    InGameUIController _uiContoller = null;
+
     public void OnStart()
     {
         LogManager.Log("Timer On !");
 
-        _remainingTime = 190;
+        _remainingTime = 184;
         _isStart = true;
     }
 
     private void Awake()
     {
         int count = -1;
+        _eventTime[++count] = 183;
+        _eventTime[++count] = 182;
+        _eventTime[++count] = 181;
         _eventTime[++count] = 180;
         _eventTime[++count] = 170;
         _eventTime[++count] = 120;
@@ -52,11 +59,15 @@ public class Timer : MonoBehaviour
         _eventTime[++count] = 20;
         _eventTime[++count] = 0;
 
+        ItemEvent OnEvent = new ItemEvent(OnEventCallCountDown);
+        for (int i = 0; i < _eventCountCountDown; ++i)
+            ItemEvents.Enqueue(OnEvent);
+
         ItemEvents.Enqueue(OnEventCallRecipe);
 
-        ItemEvent OnItemEvent = new ItemEvent(OnEventCallItem);
+        OnEvent = new ItemEvent(OnEventCallItem);
         for (int i = 0; i < _eventCountItem; ++i)
-            ItemEvents.Enqueue(OnItemEvent);
+            ItemEvents.Enqueue(OnEvent);
 
         ItemEvents.Enqueue(OnEventCallFever);
         ItemEvents.Enqueue(OnEventCallTimeOut);
@@ -82,6 +93,18 @@ public class Timer : MonoBehaviour
         }
     }
 
+    void OnEventCallCountDown()
+    {
+        if (_uiContoller == null) { return; }
+
+        if (_curEventTime == 180)
+            _uiContoller.OnStartUI();
+        else
+            _uiContoller.OnCountDownUI();
+
+        ++_eventCount;
+    }
+
     void OnEventCallRecipe()
     {
         LogManager.Log("OnEventCallRecipe");
@@ -93,8 +116,6 @@ public class Timer : MonoBehaviour
     {
         if (_ingameMgr == null) _ingameMgr = GameManager.Instance.InGameManager;
 
-        LogManager.Log("OnEventCallItem");
-
         _ingameMgr.OnItemEvent();
 
         ++_eventCount;
@@ -103,8 +124,9 @@ public class Timer : MonoBehaviour
     void OnEventCallFever()
     {
         if (_ingameMgr == null) _ingameMgr = GameManager.Instance.InGameManager;
+        if (_uiContoller == null) { return; }
 
-        LogManager.Log("OnEventCallFever");
+        _uiContoller.OnFeverUI();
 
         _ingameMgr.OnFever();
         ++_eventCount;
@@ -113,9 +135,9 @@ public class Timer : MonoBehaviour
     void OnEventCallTimeOut()
     {
         if (_ingameMgr == null) _ingameMgr = GameManager.Instance.InGameManager;
+        if (_uiContoller == null) { return; }
 
-        LogManager.Log("OnEventCallTimeOut");
-
+        _uiContoller.OnTimeOutUI();
         _ingameMgr.OnTimeOut();
         ++_eventCount;
     }
