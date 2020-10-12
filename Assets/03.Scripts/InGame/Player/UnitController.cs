@@ -66,6 +66,7 @@ public class UnitController : MonoBehaviour
     // 점프할 힘
     public RefData _refJumpPower = new RefData();
     public bool IsJump { get { return _isJumping; } }
+    public float JumpDelta { get { return _rigid.velocity.y; } }
     private float _jumpPower => _refJumpPower._Value;
 
     // 점프 중인가

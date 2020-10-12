@@ -13,7 +13,8 @@ public class PlayerAnimation : MonoBehaviour
 
     private struct AniKey
     {
-        public const string MoveValue = "MoveValue";
+        public const string MoveDelta = "MoveDelta";
+        public const string JumpDelta = "JumpDelta";
         public const string TakeObjectWeight = "TakeObjectWeight";
         public const string IsTake = "IsTake";
         public const string IsFloating = "IsFloating";
@@ -31,8 +32,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (_uCtrl == null) { return; }
 
-        LogManager.Log(" " + _uCtrl.MoveDelta + "   " + _uCtrl.IsJump);
-
-        // _anim.SetFloat(AniKey.MoveValue, _uCtrl.MoveDelta);
+        _anim.SetFloat(AniKey.MoveDelta, _uCtrl.MoveDelta);
+        _anim.SetFloat(AniKey.JumpDelta, _uCtrl.JumpDelta);
+        _anim.SetBool(AniKey.IsFloating, _uCtrl.IsJump);
     }
 }
