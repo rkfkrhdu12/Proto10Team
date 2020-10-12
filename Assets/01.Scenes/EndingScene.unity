@@ -1238,6 +1238,36 @@ Transform:
   m_Father: {fileID: 435719371}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &278595117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 278595118}
+  m_Layer: 0
+  m_Name: RedTartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &278595118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278595117}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: -9, y: -15.8, z: -0.054097652}
+  m_LocalScale: {x: 1.5169005, y: 1.5169009, z: 1.5169007}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &304467180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,7 +1409,7 @@ GameObject:
   - component: {fileID: 306901597}
   m_Layer: 0
   m_Name: AnswerTartRealPos
-  m_TagString: Untagged
+  m_TagString: AnswerTartPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2045,7 +2075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &435719367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2146,7 +2176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435719366}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 9.2, y: -15.8, z: 0.005902768}
+  m_LocalPosition: {x: 9.2, y: 63, z: 0.005902768}
   m_LocalScale: {x: 1.5169005, y: 1.5169009, z: 1.5169007}
   m_Children:
   - {fileID: 1490110764}
@@ -7137,7 +7167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1167567587
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7232,7 +7262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167567585}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -9, y: -15.8, z: -0.054097652}
+  m_LocalPosition: {x: -9, y: 63.000004, z: -0.054097652}
   m_LocalScale: {x: 1.5169005, y: 1.5169009, z: 1.5169007}
   m_Children:
   - {fileID: 126388015}
@@ -8313,7 +8343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1366849317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8328,8 +8358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerTartObj: {fileID: 1399372497}
   answerTartRealPos: {fileID: 306901592}
-  redTeamTartMovePos: {fileID: 0}
-  blueTeamTartMovePos: {fileID: 0}
+  redTeamTartMovePos: {fileID: 278595117}
+  blueTeamTartMovePos: {fileID: 1372127320}
   teamRedScore: 0
   teamBlueScore: 0
   teamRedTart: {fileID: 1167567588}
@@ -8540,6 +8570,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508ed151c2afac248b52c44704962970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1372127320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1372127321}
+  m_Layer: 0
+  m_Name: BlueTartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1372127321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372127320}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 9.2, y: -15.8, z: 0.005902768}
+  m_LocalScale: {x: 1.5169005, y: 1.5169009, z: 1.5169007}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1373543863
 GameObject:
   m_ObjectHideFlags: 0
@@ -11080,13 +11140,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842298709}
-  m_LocalRotation: {x: 0.33808705, y: -0, z: -0, w: 0.94111484}
-  m_LocalPosition: {x: 0, y: 8.2, z: -20.2}
+  m_LocalRotation: {x: 0, y: 0.9411141, z: -0.33808917, w: 0}
+  m_LocalPosition: {x: 0, y: 8.2, z: 20.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 39.521004, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 39.521004, y: 180, z: 0}
 --- !u!1001 &1859473671
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -142,6 +142,7 @@ public class ScoreEffectSystem : MonoBehaviour
     }
     public void StartTarara()
     {
+
         StartCoroutine(GoTarara());
 
     }
