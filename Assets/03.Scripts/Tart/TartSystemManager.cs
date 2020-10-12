@@ -108,11 +108,11 @@ public class TartSystemManager : MonoBehaviour
         RandomChoiceOfTart();
         LogManager.Log("타르트 세팅 완료...2초 뒤 씬 이동 합니다.");
         yield return new WaitForSecondsRealtime(2f);
-        SceneAndTartMove();
+        SceneAndTartFix();
         LogManager.Log("이동 완료. 2초 뒤 정답 타르트 위치 이동한다...");
         yield return new WaitForSecondsRealtime(2f);
         AnswerTartMove();
-        LogManager.Log("이동 완료. 2초 뒤 팀 타르트 위치 이동한다...");
+        LogManager.Log("이동 완료. 팀 타르트 위치 이동한다...");
         TeamTartMove();
         LogManager.Log("이동 완료. 어떰??");
 
@@ -130,7 +130,7 @@ public class TartSystemManager : MonoBehaviour
 
     }
 
-    public void SceneAndTartMove()
+    public void SceneAndTartFix()
     {
         teamRedTart.InputToppingToChildObject();
         teamBlueTart.InputToppingToChildObject();
