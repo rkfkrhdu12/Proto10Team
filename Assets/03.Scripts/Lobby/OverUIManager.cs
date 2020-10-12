@@ -68,7 +68,11 @@ public class OverUIManager : MonoBehaviour
         successPer = targetOverTime / successTime;
         buttonImage.fillAmount = successPer;
     }
-
+    public void IpZang()
+    {
+        LogManager.Log("입장!! 해야하는데 어케 해야 하는지 몰라서 걍 남겨둠");
+        //입장 버튼 위에 올라가면
+    }
 
     IEnumerator ExitButton()
     {
@@ -133,7 +137,8 @@ public class OverUIManager : MonoBehaviour
                 {
                     case 1:
                         isSuccess = true;
-                        lobbyManager.JoinRandomRoom();
+                        IpZang();
+                        //lobbyManager.JoinRandomRoom();
                         break;
 
                     default:
