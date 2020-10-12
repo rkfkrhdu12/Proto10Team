@@ -2134,7 +2134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &223761046
 Transform:
   m_ObjectHideFlags: 0
@@ -2767,6 +2767,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: kitchen (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 3a923cb35d0f70f4d840436b1990e295,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a923cb35d0f70f4d840436b1990e295, type: 3}
@@ -5076,7 +5081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &549755189
 Light:
   m_ObjectHideFlags: 0
@@ -6473,6 +6478,8 @@ MonoBehaviour:
   - {fileID: 0}
   limitPos1: {fileID: 1753298202}
   limitPos2: {fileID: 486981088}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!23 &653228204
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9847,6 +9854,8 @@ MonoBehaviour:
   - {fileID: 0}
   limitPos1: {fileID: 1827161540}
   limitPos2: {fileID: 488423285}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!23 &988642556
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11032,6 +11041,8 @@ MonoBehaviour:
   - {fileID: 0}
   limitPos1: {fileID: 0}
   limitPos2: {fileID: 0}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!65 &1108049118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12777,7 +12788,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1357376657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13678,6 +13689,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: kitchen (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 3a923cb35d0f70f4d840436b1990e295,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a923cb35d0f70f4d840436b1990e295, type: 3}
@@ -14678,6 +14694,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerTartObj: {fileID: 1108049115}
   answerTartRealPos: {fileID: 610723494}
+  redTeamTartMovePos: {fileID: 0}
+  blueTeamTartMovePos: {fileID: 0}
   teamRedScore: 0
   teamBlueScore: 0
   teamRedTart: {fileID: 0}
@@ -14686,6 +14704,7 @@ MonoBehaviour:
   tartSettingManager: {fileID: 807638396}
   toppingSpawnManager: {fileID: 1117520012}
   scoreManager: {fileID: 931857054}
+  tartVal: 0
 --- !u!4 &1599365986
 Transform:
   m_ObjectHideFlags: 0
@@ -16913,7 +16932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &1839657338
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -17874,7 +17893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1941367296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19426,7 +19445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2070026964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20288,6 +20307,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a6726b17ade533f4ca204c33b3478aa7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 721056895991426811, guid: a6726b17ade533f4ca204c33b3478aa7,
         type: 3}
