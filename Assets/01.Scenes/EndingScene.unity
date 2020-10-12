@@ -2089,6 +2089,8 @@ MonoBehaviour:
   - {fileID: 1151759987}
   limitPos1: {fileID: 251627106}
   limitPos2: {fileID: 1041540853}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!23 &435719369
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7173,6 +7175,8 @@ MonoBehaviour:
   - {fileID: 1179889220}
   limitPos1: {fileID: 526317335}
   limitPos2: {fileID: 528511694}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!23 &1167567589
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8332,6 +8336,7 @@ MonoBehaviour:
   tartSettingManager: {fileID: 447276976}
   toppingSpawnManager: {fileID: 740726466}
   scoreManager: {fileID: 341561058}
+  tartVal: 10
 --- !u!4 &1366849318
 Transform:
   m_ObjectHideFlags: 0
@@ -8832,6 +8837,8 @@ MonoBehaviour:
   - {fileID: 0}
   limitPos1: {fileID: 0}
   limitPos2: {fileID: 0}
+  toppingGroupObj: {fileID: 0}
+  isFixed: 0
 --- !u!23 &1399372500
 MeshRenderer:
   m_ObjectHideFlags: 0

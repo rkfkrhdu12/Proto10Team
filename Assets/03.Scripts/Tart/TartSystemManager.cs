@@ -44,6 +44,8 @@ public class TartSystemManager : MonoBehaviour
     private Vector3 tartManagerMovePos;
     private Vector3 answerTartMoveRealPos;
 
+    [Header("랜덤으로 나올 타르트의 개수")]
+    public int tartVal;
     private void Awake()
     {
         if (_instance == null)
@@ -85,7 +87,7 @@ public class TartSystemManager : MonoBehaviour
         tartManager.gameObject.transform.position = Vector3.zero;
         answerTartObj.transform.position = Vector3.zero;
         gameObject.transform.position = Vector3.zero;
-        int randVal = Random.Range(1, 5);
+        int randVal = Random.Range(1, tartVal+1);
         tartManager.DataLoadAndSetAnswerTart(randVal);
         tartSettingManager.AnswerTartSetting();
         tartManager.gameObject.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y + 1f, answerTartRealPos.transform.position.z);
