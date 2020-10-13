@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 7851433012703726442}
   - component: {fileID: 672613156909270885}
   - component: {fileID: 4161123766910663700}
+  - component: {fileID: 1310902280665214566}
+  - component: {fileID: 8268867270779627261}
   m_Layer: 0
   m_Name: starP
   m_TagString: Topping
@@ -165,3 +167,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4654427, y: 2.3608906, z: 0.9532843}
   m_Center: {x: 0, y: 1.2015394, z: -0.0000002980233}
+--- !u!114 &1310902280665214566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7851433012703726441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 8268867270779627261}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &8268867270779627261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7851433012703726441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

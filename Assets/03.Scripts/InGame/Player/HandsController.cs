@@ -57,14 +57,15 @@ public class HandsController : MonoBehaviour
     {
         if (curHandState == PlayerController.eHandState.Catch)
         {
-            if(other.CompareTag(_toppingTag))
+            if (other.CompareTag(_toppingTag))
             {
+                LogManager.Log(other.name);
+
                 _catchedToppings.Add(other.gameObject);
                 if (_catchingObject == null)
                 {
                     _catchingObject = _catchedToppings[0];
 
-                    LogManager.Log(_catchingObject.name);
                     _catchingObject.transform.SetParent(transform);
                 }
             }

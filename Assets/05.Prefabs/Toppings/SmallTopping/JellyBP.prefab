@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3501293115792925733}
   - component: {fileID: 6143343699612991777}
   - component: {fileID: 8285719727063512325}
+  - component: {fileID: 8262742987213040863}
+  - component: {fileID: 7337742997067081773}
   m_Layer: 0
   m_Name: Jelly_BlueP
   m_TagString: Topping
@@ -134,6 +136,43 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4234546, y: 2.5052173, z: 1.0010293}
   m_Center: {x: -0.033492263, y: 1.2555889, z: 0.000000029802347}
+--- !u!114 &8262742987213040863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37967240685996767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 7337742997067081773}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &7337742997067081773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37967240685996767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &6474250310983018149
 GameObject:
   m_ObjectHideFlags: 0

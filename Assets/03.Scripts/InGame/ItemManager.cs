@@ -76,16 +76,16 @@ public class ItemManager : MonoBehaviour
 
     public void Spawn()
     {
-        if (_itemBoxObjects == null) return;
-        if (_itemBoxSpawnPoint == null || _indexCount == 0) return;
+        //if (_itemBoxObjects == null) return;
+        //if (_itemBoxSpawnPoint == null || _indexCount == 0) return;
 
-        if (_pView == null) { _pView = gameObject.GetPhotonView(); }
+        //if (_pView == null) { _pView = gameObject.GetPhotonView(); }
 
-        _curItem = (int)eitemNum.SuperPower; // (ItemBase.eitemNum)Random.Range((int)ItemBase.eitemNum.SuperPower, (int)ItemBase.eitemNum.Floating + 1);
+        //_curItem = (int)eitemNum.SuperPower; // (ItemBase.eitemNum)Random.Range((int)ItemBase.eitemNum.SuperPower, (int)ItemBase.eitemNum.Floating + 1);
 
-        LogManager.Log("_curItem " + _curItem);
+        //LogManager.Log("_curItem " + _curItem);
 
-        _pView.RPC("OnItemSpawn", RpcTarget.All, (int)_curItem);
+        //_pView.RPC("OnItemSpawn", RpcTarget.All, (int)_curItem);
     }
 
     [PunRPC]
