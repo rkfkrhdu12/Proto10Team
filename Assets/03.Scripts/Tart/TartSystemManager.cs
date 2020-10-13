@@ -158,9 +158,9 @@ public class TartSystemManager : MonoBehaviour
         answerTartObj.transform.position = new Vector3(answerTartRealPos.transform.position.x, answerTartRealPos.transform.position.y, answerTartRealPos.transform.position.z);
 
     }
+
     public void CheckScore()
     {
-
         scoreManager.CheckScoreV2();
     }
 

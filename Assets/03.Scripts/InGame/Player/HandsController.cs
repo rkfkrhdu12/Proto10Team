@@ -27,6 +27,7 @@ public class HandsController : MonoBehaviour
         if (curHandState == PlayerController.eHandState.Catch)
         {
             if (_catchingObject == null) { return; }
+
         }
         else 
         {
@@ -61,10 +62,11 @@ public class HandsController : MonoBehaviour
             {
                 LogManager.Log(other.name);
 
-                _catchedToppings.Add(other.gameObject);
+                _catchedToppings.Add(other.transform.parent.gameObject);
                 if (_catchingObject == null)
                 {
                     _catchingObject = _catchedToppings[0];
+                    _catchingObject.GetComponent<Rigidbody>().isKinematic = true;
 
                     _catchingObject.transform.SetParent(transform);
                 }

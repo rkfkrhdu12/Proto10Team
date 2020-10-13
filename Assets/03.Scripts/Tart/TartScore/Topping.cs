@@ -37,6 +37,7 @@ public class Topping : MonoBehaviour
     //{
     //    isCheck = false;
     //}
+
     private void Update()
     {
         nowToppingPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.z);

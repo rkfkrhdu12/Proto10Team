@@ -131,8 +131,10 @@ public class ToppingSpawnManager : MonoBehaviour
 
             //토핑 오브젝트를 해당 위치에 복사
             GameObject tempToppingObj = Instantiate(nowToppingObject,
-    new Vector3(toppingSpawnPoint[topIndexTemp].transform.position.x, toppingSpawnPoint[topIndexTemp].transform.position.y, toppingSpawnPoint[topIndexTemp].transform.position.z),
-    nowToppingObject.transform.rotation);
+    new Vector3(toppingSpawnPoint[topIndexTemp].transform.position.x, toppingSpawnPoint[topIndexTemp].transform.position.y + 100, toppingSpawnPoint[topIndexTemp].transform.position.z),
+    nowToppingObject.transform.rotation,transform);
+
+
             pointCheck[topIndexTemp] = true; // 해당 포인트 체크를 true(사용 중)으로 함.
             log(nowToppingObject.name + " 복사.");
             //yield return null;
@@ -150,6 +152,8 @@ public class ToppingSpawnManager : MonoBehaviour
         {
             bonusCheck[i] = -1;
         }
+
+        yield break;
 
         //보너스 토핑 배치
         while (true)

@@ -26,8 +26,6 @@ public class InGameUIController : MonoBehaviour
     [SerializeField]
     Image _timerUI = null;
     [SerializeField]
-    Sprite _feverTimerSprite = null;
-    [SerializeField]
     AudioClip _feverSound = null;
 
     [Space]
@@ -60,7 +58,7 @@ public class InGameUIController : MonoBehaviour
 
     public void OnCountDownUI()
     {
-        if (_countDownSounds != null && _audio != null && _countDownSounds.Count == 0)
+        if (_countDownSounds != null && _audio != null && _countDownSounds.Count != 0)
             _audio.PlayOneShot(_countDownSounds.Dequeue());
 
         if (_countDownText != null)
