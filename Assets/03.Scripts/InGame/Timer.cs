@@ -150,7 +150,7 @@ public class Timer : MonoBehaviour
         _uiContoller.OnTimeOutUI();
         _ingameMgr.OnTimeOut();
 
-        _tartManager.SceneAndTartFix();
+        TartSystemManager.Instance.OnCheckScore();
         ++_eventCount;
     }
 }

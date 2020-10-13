@@ -112,7 +112,7 @@ public class ScoreManager : MonoBehaviour
         Init();
         Tart answerTart = tartManager.answerTart; //정답 타르트를 가져왔다.
 
-        if (answerTart==null)
+        if (answerTart == null)
         {
             LogManager.Log("앤서타르트 없음,");
         }
@@ -145,11 +145,8 @@ public class ScoreManager : MonoBehaviour
                             sameToppingIndex[sameToppingIndexVal] = j;
                             log("내 타르트의 토핑 중 " + sameToppingIndex[sameToppingIndexVal] + "번째의 토핑인" + myTart.toppingList[j].gameObject.name + "과 비교하도록 합니다.");
                             sameToppingIndexVal += 1; //하나 추가하고.
-
                         }
-
                     }
-
                 }
 
                 log("현재 " + sameToppingIndexVal + "개의 토핑과 비교합니다.");
@@ -186,9 +183,7 @@ public class ScoreManager : MonoBehaviour
                         log(myTart.toppingList[sameToppingIndex[k]].gameObject.name + "를 제일 가까운 토핑으로 등록합니다.");
                         minDis = compareDis;
                         lastToppingIndex = sameToppingIndex[k];
-
                     }
-
                 }
                 log("가까운 토핑 등록이 끝났습니다. 가장 가까운 토핑은 " + myTart.toppingList[lastToppingIndex].gameObject.name + " 입니다.");
                 //거리값이 작은 녀석을 찾았을 것이다. 그렇다면 이제
@@ -215,7 +210,6 @@ public class ScoreManager : MonoBehaviour
                         log("거리가 애매하기 때문에 계산된 점수를 지급합니다." + temp3);
                         myScore += (int)temp3;//myScore에 추가.
                     }
-
                 }
             }
 
@@ -241,7 +235,6 @@ public class ScoreManager : MonoBehaviour
                     }
                 }
             }
-
         }
 
         if (myScore <= 0)

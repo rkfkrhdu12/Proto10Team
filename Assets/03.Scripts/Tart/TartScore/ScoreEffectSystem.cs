@@ -255,7 +255,7 @@ public class ScoreEffectSystem : MonoBehaviour
             #endregion
 
         }
-        TartSystemManager.Instance.CheckBothScore();
+        // TartSystemManager.Instance.CheckBothScore();
         redScore = TartSystemManager.Instance.teamRedScore;
         blueScore = TartSystemManager.Instance.teamBlueScore;
         //redScore = 10;

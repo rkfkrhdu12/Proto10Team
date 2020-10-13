@@ -20,6 +20,8 @@ public class TartSettingManager : MonoBehaviour
     [Header("오류용 오브젝트")]
     public GameObject errorTopping;
 
+    public Dictionary<int, Topping> _answerToppings = new Dictionary<int, Topping>();
+
     public void InitAnswerTartSetting()
     {
         if (scoreManager.tartManager.answerTart.gameObject.transform.childCount==0)
@@ -57,16 +59,18 @@ public class TartSettingManager : MonoBehaviour
 
             //복제
             GameObject tempToppingObj = Instantiate(nowToppingObj,
-                new Vector3(answerTart.toppingList[i].answerPosX * 1.5f,
-                            answerTart.toppingList[i].answerPosY * 1.5f + 1000,
-                            answerTart.toppingList[i].answerPosZ * 1.5f),
-                nowToppingObj.transform.rotation, transform);
+                                                    new Vector3(answerTart.toppingList[i].answerPosX * 1.5f,
+                                                                answerTart.toppingList[i].answerPosY * 1.5f + 1000,
+                                                                answerTart.toppingList[i].answerPosZ * 1.5f),
+                                                    nowToppingObj.transform.rotation,
+                                                    transform);
 
             //LogManager.Log("리지드바디 삭제.");
 
             tempToppingObj.transform.GetChild(0).gameObject.GetComponent<Rigidbody>().isKinematic = true;
             tempToppingObj.transform.GetChild(0).gameObject.GetComponent<BoxCollider>().enabled = false;
 
+            _answerToppings.Add(_answerToppings.Count, tempToppingObj.transform.GetChild(0).GetComponent<Topping>());
 
            // tempToppingObj.transform.SetParent(scoreManager.tartManager.answerTart.gameObject.transform);
 

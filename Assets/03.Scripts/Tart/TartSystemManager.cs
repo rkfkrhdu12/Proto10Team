@@ -50,6 +50,8 @@ public class TartSystemManager : MonoBehaviour
     //private Vector3 tartManagerMovePos;
     //private Vector3 answerTartMoveRealPos;
 
+    public float redTeamScore;
+    public float blueTeamScore;
 
 
     [Header("랜덤으로 나올 타르트의 개수")]
@@ -99,6 +101,12 @@ public class TartSystemManager : MonoBehaviour
         DontDestroyOnLoad(teamBlueTart.gameObject);
         Init();
         //StartCoroutine(TartSystemTest());
+    }
+
+    public void OnCheckScore()
+    {
+        redTeamScore = toppingSpawnManager.CheckScoreV2(teamRedTart);
+        blueTeamScore = toppingSpawnManager.CheckScoreV2(teamBlueTart);
     }
 
     public IEnumerator TartSystemTest()
