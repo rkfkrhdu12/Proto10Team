@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using NetWork;
+using System.Runtime.CompilerServices;
+using UnityEngine.Rendering;
 
 public class ScoreEffectSystem : MonoBehaviour
 {
@@ -71,10 +73,22 @@ public class ScoreEffectSystem : MonoBehaviour
 
     [Header("사운드 관련")]
     public TestSoundSystem testSoundSystem;
+
+
+    //[SerializeField]
+    //private PlayerController _pCtrl = null;
+
+    //private Animator _pAnim = null;
+
+    //private struct Anikey
+    //{
+    //    public const string Win = "Win";
+    //    public const string Lose = "Lose";
+    //}
     #endregion
     public void Init()
     {
-        
+
         goIntroButton.gameObject.SetActive(false);
         teamScoreText.enabled = false;
         teamWin.enabled = false;
@@ -100,6 +114,12 @@ public class ScoreEffectSystem : MonoBehaviour
 
         recipeGroup.transform.position = recipeOne.transform.position;
         endingGroup.SetActive(false);
+
+        //int curTeam = (int)_pCtrl.Team;
+        //_pCtrl.GetComponent<Rigidbody>().isKinematic = true;
+        //var pObject = _pCtrl.transform.GetChild(((int)curTeam)).gameObject;
+        //pObject.SetActive(true);
+        //_pAnim = pObject.GetComponent<Animator>();
     }
 
     private void Awake()
@@ -147,6 +167,22 @@ public class ScoreEffectSystem : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("HomeScene");
 
     }
+
+    //private void PlayerWin()
+    //{
+    //    if (_pCtrl == null) return;
+    //    if (_pAnim == null) return;
+
+    //    _pAnim.SetTrigger(Anikey.Win);
+    //}
+    //private void PlayerLose()
+    //{
+    //    if (_pCtrl == null) return;
+    //    if (_pAnim == null) return;
+
+    //    _pAnim.SetTrigger(Anikey.Lose);
+    //}
+
     private WinCheck WhoIsWinner()
     {
         if (redScore > blueScore)
@@ -162,7 +198,7 @@ public class ScoreEffectSystem : MonoBehaviour
             return WinCheck.Draw;
         }
     }
-   
+
     private IEnumerator GoTarara()
     {
         Init();
@@ -256,7 +292,7 @@ public class ScoreEffectSystem : MonoBehaviour
                 LogManager.Log("WhoIsWinner에서 다른 값 발생");
                 break;
         }
-        
+
         #endregion
 
         yield return new WaitForSecondsRealtime(3f);
@@ -266,7 +302,7 @@ public class ScoreEffectSystem : MonoBehaviour
     }
     private IEnumerator GoEndScreen()
     {
-        //teamColor = (TeamColor)GameManager.Instance.PlayerCharacter.GetComponent<PlayerController>().Team;
+        teamColor = (TeamColor)GameManager.Instance.PlayerTeam;
         if (teamColor == 0)
         {
             LogManager.Log("Team None. -> Team Blue");
@@ -279,6 +315,7 @@ public class ScoreEffectSystem : MonoBehaviour
         WinCheck winCheckTemp = WhoIsWinner();
         RedCharacter.SetActive(false);
         BlueCharacter.SetActive(false);
+
         switch (teamColor)
         {
             case TeamColor.None:
@@ -288,25 +325,28 @@ public class ScoreEffectSystem : MonoBehaviour
                 break;
             case TeamColor.Red:
                 LogManager.Log("Red Team");
-                RedCharacter.SetActive(true);
                 teamScoreText.enabled = true;
+                RedCharacter.SetActive(true);
                 if (winCheckTemp == WinCheck.RedWin)
                 {
                     testSoundSystem.PlayOneShotSFX(3);
                     teamScoreText.text = redScore + "% 완성!";
                     teamWin.enabled = true;
+                    //PlayerWin();
                 }
                 else if (winCheckTemp == WinCheck.Draw)
                 {
                     testSoundSystem.PlayOneShotSFX(4);
                     teamScoreText.text = redScore + "% 완성";
                     teamDraw.enabled = true;
+                    //PlayerLose();
                 }
                 else
                 {
                     testSoundSystem.PlayOneShotSFX(4);
                     teamScoreText.text = redScore + "% 완성...";
                     teamLose.enabled = true;
+                    //PlayerLose();
                 }
                 break;
             case TeamColor.Blue:
@@ -318,18 +358,21 @@ public class ScoreEffectSystem : MonoBehaviour
                     testSoundSystem.PlayOneShotSFX(3);
                     teamScoreText.text = blueScore + "% 완성!";
                     teamWin.enabled = true;
+                    //PlayerWin();
                 }
                 else if (winCheckTemp == WinCheck.Draw)
                 {
                     testSoundSystem.PlayOneShotSFX(4);
                     teamScoreText.text = blueScore + "% 완성";
                     teamDraw.enabled = true;
+                    // PlayerLose();
                 }
                 else
                 {
                     testSoundSystem.PlayOneShotSFX(4);
                     teamScoreText.text = blueScore + "% 완성...";
                     teamLose.enabled = true;
+                    // PlayerLose();
                 }
                 break;
             default:

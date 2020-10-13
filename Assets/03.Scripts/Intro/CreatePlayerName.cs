@@ -1,20 +1,10 @@
-﻿using System.Collections;
+﻿using ExitGames.Client.Photon;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CreatePlayerName : MonoBehaviour
 {
-    /// <summary>
-    /// 유저 이름 만들기 시작
-    /// </summary>
-    /// <param name="playerPrefKey"></param>
-    public void OnStart(string playerPrefKey)
-    {
-        _playerPrefKey = playerPrefKey;
-
-        _curState = eCreateNameState.Making;
-    }
-
     /// <summary>
     /// InputField 의 값을 업데이트
     /// </summary>
@@ -32,7 +22,7 @@ public class CreatePlayerName : MonoBehaviour
         if (string.IsNullOrWhiteSpace(_name)) { return; }
 
         PlayerPrefs.SetString(_playerPrefKey, _name);
-
+        GameManager.Instance.PlayerName = _name;
         _curState = eCreateNameState.Check;
 
         gameObject.SetActive(false);
@@ -45,8 +35,9 @@ public class CreatePlayerName : MonoBehaviour
         Making,
         Check,
     }
+
     // 유저이름 PrefKey 변수
-    private string _playerPrefKey;
+    private static readonly string _playerPrefKey = "PlayerCharacterUserName";
 
     // InputField에 적힌 유저이름
     [SerializeField]

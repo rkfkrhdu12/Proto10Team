@@ -28,6 +28,8 @@ public class GameManager
         set { if (string.IsNullOrWhiteSpace(_playerName)) _playerName = value; }
     }
 
+    public int PlayerTeam;
+
     // 네트워크를 관리할 변수
     private NetworkManager _netManager = null;
     public NetworkManager NetManager 
@@ -48,7 +50,7 @@ public class GameManager
     public GameObject PlayerCharacter 
     {
         get { return _playerChar; }
-        set { if (_playerChar == null) _playerChar = value; }
+        set { if (_playerChar == null)  _playerChar = value; }
     }
 
     private CameraManager _cameraMgr = null;

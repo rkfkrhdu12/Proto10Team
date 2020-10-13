@@ -29,18 +29,23 @@ public class Tart : MonoBehaviour
     public void InputToppingToChildObject()
     {
 
-        for (int i = 0; i < toppingList.Count; i++)
+        if (toppingList[0]!=null)
         {
-            toppingList[i].transform.SetParent(toppingGroupObj.transform);
-            toppingList[i].GetComponent<Rigidbody>().isKinematic = true;
+            for (int i = 0; i < toppingList.Count; i++)
+            {
+                toppingList[i].transform.SetParent(toppingGroupObj.transform);
+                toppingList[i].GetComponent<Rigidbody>().isKinematic = true;
+            }
+            isFixed = true;
         }
+       
         // 가비지컬렉터 생성 X. 속도 비슷하대
         //foreach(Topping i in toppingList)
         //{
         //    i.transform.SetParent(toppingGroupObj.transform);
         //    i.GetComponent<Rigidbody>().isKinematic = true;
         //}
-        isFixed = true;
+ 
 
     }
     public void AddTopping(Topping topping) //토핑을 추가합니다.

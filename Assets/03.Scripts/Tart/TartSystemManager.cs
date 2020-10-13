@@ -63,7 +63,6 @@ public class TartSystemManager : MonoBehaviour
         }
         else if (_instance != this)
         {
-            LogManager.Log("얘 떄문에 오류나니?");
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
@@ -99,18 +98,17 @@ public class TartSystemManager : MonoBehaviour
         DontDestroyOnLoad(teamRedTart.gameObject);
         DontDestroyOnLoad(teamBlueTart.gameObject);
         Init();
-       // StartCoroutine(TartSystemTest());
-
+        StartCoroutine(TartSystemTest());
     }
 
     public IEnumerator TartSystemTest()
     {
         RandomChoiceOfTart();
-        LogManager.Log("타르트 세팅 완료...2초 뒤 씬 이동 합니다.");
-        yield return new WaitForSecondsRealtime(2f);
+        LogManager.Log("타르트 세팅 완료...2초 뒤 씬 이동.");
+        yield return new WaitForSecondsRealtime(10f);
         SceneAndTartFix();
-        LogManager.Log("이동 완료. 2초 뒤 정답 타르트 위치 이동한다...");
-        yield return new WaitForSecondsRealtime(2f);
+        //LogManager.Log("이동 완료. 2초 뒤 정답 타르트 위치 이동한다...");
+        //yield return new WaitForSecondsRealtime(2f);
         AnswerTartMove();
         LogManager.Log("이동 완료. 팀 타르트 위치 이동한다...");
         TeamTartMove();

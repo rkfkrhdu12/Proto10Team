@@ -26,13 +26,24 @@ public class HomeMenuSystem : MonoBehaviour
 
     private int introSceneIndex;
 
+    public GameObject enterTextGroup;
+
     private void Awake()
     {
+        enterTextGroup.SetActive(false);
         versionText.text = PlayerSettings.bundleVersion;
         introSceneIndex = UnityEngine.SceneManagement.SceneManager.GetSceneByName("IntroScene").buildIndex;
         settingErrorButtonObj.SetActive(false);
     }
 
+    private void Start()
+    {
+        Time.maximumDeltaTime = 1f / 3f;
+        Time.fixedDeltaTime = 1f / 60f;
+        Application.targetFrameRate = 60;
+        useGUILayout = false;
+        Screen.SetResolution(960, 540, false);
+    }
     void Update()
     {
         logoObj.gameObject.transform.localScale = new Vector3(Mathf.PingPong(Time.time*speed, scaleVal)+1, Mathf.PingPong(Time.time*speed, scaleVal)+1, 1);
@@ -42,7 +53,11 @@ public class HomeMenuSystem : MonoBehaviour
     }
     public void GoGameStart()
     {
-        PhotonNetwork.LoadLevel(1);
+        enterTextGroup.SetActive(true);
+    }
+    public void GoLobbyScene()
+    {
+        PhotonNetwork.LoadLevel(2);
     }
     public void GoExitGame()
     {

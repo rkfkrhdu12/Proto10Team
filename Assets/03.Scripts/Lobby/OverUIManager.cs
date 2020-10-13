@@ -37,6 +37,7 @@ public class OverUIManager : MonoBehaviour
     public int buttonType;
     private void Awake()
     {
+       // lobbyManager.testLauncher.gameObject.SetActive(false);
         if (buttonImage == null)
         {
             buttonImage = GetComponent<Image>();
@@ -67,13 +68,14 @@ public class OverUIManager : MonoBehaviour
     {
         successPer = targetOverTime / successTime;
         buttonImage.fillAmount = successPer;
+
     }
     public void IpZang()
     {
         LogManager.Log("입장!! 해야하는데 어케 해야 하는지 몰라서 걍 남겨둠");
         //입장 버튼 위에 올라가면
+        //lobbyManager.testLauncher.SetActive(true);
 
-        GameManager.Instance.NetManager.JoinRandomRoom();
     }
 
     IEnumerator ExitButton()

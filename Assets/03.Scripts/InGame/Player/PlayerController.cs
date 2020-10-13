@@ -91,6 +91,15 @@ public class PlayerController : MonoBehaviour
 
     public void Init(eTeam team)
     {
+        if (_pView == null)
+            _pView = gameObject.GetPhotonView();
+
+        if (_pView.IsMine)
+        {
+            GameManager.Instance.PlayerCharacter = gameObject;
+            GameManager.Instance.PlayerTeam = (int)team;
+        }
+
         _datas._curTeam = team;
 
         _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
@@ -141,16 +150,10 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        if (_pView == null)
-            _pView = gameObject.GetPhotonView();
-
         MoveSpeed = 10.0f;
         JumpPower = 10.0f;
         ItemEffectStateCount = new float[6];
 
-        if (!_pView.IsMine) { return; }
-
-        GameManager.Instance.PlayerCharacter = gameObject;
     }
 
     private void Start()

@@ -41,7 +41,7 @@ namespace NetWork
 
                     // 유저 이름 입력 Sequence
                     _createPlayerNameUI.gameObject.SetActive(true);
-                    _createPlayerNameUI.OnStart(_playerNamePrefkey);
+                    // _createPlayerNameUI.OnStart(_playerNamePrefkey);
 
                     Debug.Log("MakeName");
 
@@ -87,6 +87,8 @@ namespace NetWork
         public GameObject _netMgrPrefab;
         #endregion
 
+        //OverUIManager
+        public OverUIManager overUIManager;
         // Awake Update
         #region Monobehaviour Function
 
@@ -99,30 +101,37 @@ namespace NetWork
             useGUILayout = false;
             Screen.SetResolution(960, 540, false);
 
-
             // 게임 버젼을 PhotonNetwork 에 등록
             PhotonNetwork.GameVersion = _gameVersion;
             // 마스터 클라이언트와 일반 클라이언트의 씬을 동기화한다. 
             PhotonNetwork.AutomaticallySyncScene = true;
 
             UpdateState(eNetWorkState.Disconnect);
+
         }
+        
+
 
         public void Update()
         {
             // 접속시작
             if (!PhotonNetwork.IsConnected && _curState == eNetWorkState.Disconnect)
             {
-                if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetMouseButtonDown(0))
+                //if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetMouseButtonDown(0))
+                //{
+                //    StartCoroutine(Connect());
+                //}
+                if (overUIManager.isSuccess==true)
                 {
                     StartCoroutine(Connect());
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.Escape))
-            {
-                PlayerPrefs.DeleteKey(_playerNamePrefkey);
-            }
+
+            //if(Input.GetKeyDown(KeyCode.Escape))
+            //{
+            //    PlayerPrefs.DeleteKey(_playerNamePrefkey);
+            //}
         }
 
         #endregion
@@ -132,25 +141,26 @@ namespace NetWork
 
         void UpdateState(eNetWorkState state)
         {
+            if(_stateText == null) { return; }
+
             _curState = state;
 
             switch (_curState)
             {
                 case eNetWorkState.Disconnect:
-                    _stateText.text = "Disconnect";
+                    _stateText.text = "연결 안됨";
                     LogManager.Log("Server Disconnected");
                     break;
                 case eNetWorkState.Connecting:
-                    _stateText.text = "Connecting";
+                    _stateText.text = "서버에 연결 중...";
                     break;
                 case eNetWorkState.Connect:
-                    _stateText.text = "Connect";
+                    _stateText.text = "연결 완료!";
                     LogManager.Log("Server Connected");
                     break;
                 case eNetWorkState.Unstable:
                     break;
             }
-
         }
 
         #endregion
@@ -163,7 +173,9 @@ namespace NetWork
             Instantiate(_netMgrPrefab);
 
             PhotonNetwork.LocalPlayer.NickName = GameManager.Instance.PlayerName;
-            PhotonNetwork.LoadLevel(2);
+            PhotonNetwork.LoadLevel(3);
+
+            PhotonNetwork.JoinRandomRoom();
         }
         #endregion
     }

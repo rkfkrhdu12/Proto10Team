@@ -97,21 +97,21 @@ public class TartSettingManager : MonoBehaviour
 
         if (topSize == 1) //소형 사이즈 구간
         {
-            if (topNum == 4)//젤리빈일 경우
-            {
-                if (topType == 0)
-                {
-                    return smallSizeToppings[topNum - 1];
-                }
-                else
-                {
-                    return jellyBeans[topType - 1];
-                }
-            }
-            else
-            {
+            //if (topNum == 4)//젤리빈일 경우
+            //{
+            //    if (topType == 0)
+            //    {
+            //        return smallSizeToppings[topNum - 1];
+            //    }
+            //    else
+            //    {
+            //        return jellyBeans[topType - 1];
+            //    }
+            //}
+            //else
+            //{
                 return smallSizeToppings[topNum - 1];
-            }
+            //}
 
         }
         else if (topSize == 2) //중형 사이즈 구간
