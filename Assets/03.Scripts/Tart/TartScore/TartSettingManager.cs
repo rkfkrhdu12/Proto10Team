@@ -46,7 +46,7 @@ public class TartSettingManager : MonoBehaviour
     {
         InitAnswerTartSetting();
         Tart answerTart;
-        answerTart = scoreManager.tartManager.answerTart;//비어있는(?) 정답 타르트를 가져온다.
+        answerTart = TartSystemManager.Instance.tartManager.answerTart;//비어있는(?) 정답 타르트를 가져온다.
 
         for (int i = 0; i < answerTart.toppingList.Count; i++)//오브젝트 배치를 위해 for문을 돌린다.
         {

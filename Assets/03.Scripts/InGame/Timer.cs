@@ -109,8 +109,8 @@ public class Timer : MonoBehaviour
 
         if (_curEventTime == 180)
         {
-            _tartManager.SpawnToppings();
             _uiContoller.OnStartUI();
+            _tartManager.SpawnToppings();
         }
         else
             _uiContoller.OnCountDownUI();
