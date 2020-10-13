@@ -48,7 +48,7 @@ public class UnitController : MonoBehaviour
             _jumpRoutine = StartCoroutine(ActionJump());
 
         _targetTrans.gameObject.SetActive(true);
-        if(_transform == null) { _transform = transform; }
+        if (_transform == null) { _transform = transform; }
         _targetTrans.SetParent(_transform.parent);
 
         _targetTrans.localPosition = _transform.localPosition;
@@ -174,7 +174,7 @@ public class UnitController : MonoBehaviour
                                                  _transform.localPosition.y   + deltaPos.y * Time.deltaTime,
                                                  _targetTrans.localPosition.z + deltaPos.z * Time.deltaTime);
 
-        _moveDelta = deltaPos;
+        _moveDelta = deltaPos * Time.deltaTime;
     }
 
     void UpdateRotation()
