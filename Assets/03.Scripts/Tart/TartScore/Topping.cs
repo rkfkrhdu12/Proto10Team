@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
+using Photon.Realtime;
+
+[RequireComponent(typeof(PhotonView),typeof(PhotonTransformView))]
 public class Topping : MonoBehaviour
 {
     [Tooltip("토핑의 코드")]
@@ -33,6 +37,11 @@ public class Topping : MonoBehaviour
     //{
     //    isCheck = false;
     //}
+
+    private void Start()
+    {
+        gameObject.GetPhotonView().ObservedComponents.Add(GetComponent<PhotonTransformView>());
+    }
 
     private void Update()
     {
