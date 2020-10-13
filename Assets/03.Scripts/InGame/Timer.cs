@@ -122,9 +122,9 @@ public class Timer : MonoBehaviour
 
     void OnEventCallItem()
     {
-        if (_ingameMgr == null) _ingameMgr = GameManager.Instance.InGameManager;
+        // if (_ingameMgr == null) _ingameMgr = GameManager.Instance.InGameManager;
 
-        _ingameMgr.OnItemEvent();
+        // _ingameMgr.OnItemEvent();
 
         ++_eventCount;
     }

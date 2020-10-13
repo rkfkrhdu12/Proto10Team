@@ -121,15 +121,15 @@ public class InGameManager : MonoBehaviour
         {
             // 예외처리
 
-
             for (int i = 0; i < PlayerCharacters.Count; ++i)
             {
                 PlayerCharacters[i].transform.position = _playerSpawnPoints[i].transform.position;
             }
 
-            LogManager.Log("Player All In GameStart");
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+
             _Timer.OnStart();
-            // 타르트 시스템 Start
+
             _tartMgr.RandomChoiceOfTart();
 
             GameSequences.Dequeue();

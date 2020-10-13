@@ -74,21 +74,21 @@ public class HandsController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(_toppingTag))
-        {
-            GameObject curTopping = other.gameObject;
-            if (_catchedToppings.Contains(curTopping))
-            {
-                _catchingObject.transform.SetParent(null);
+        //if (other.CompareTag(_toppingTag))
+        //{
+        //    GameObject curTopping = other.gameObject;
+        //    if (_catchedToppings.Contains(curTopping))
+        //    {
+        //        _catchingObject.transform.SetParent(null);
 
-                LogManager.Log(_catchingObject.name);
-                _catchedToppings.Remove(curTopping);
-            }
+        //        LogManager.Log(_catchingObject.name);
+        //        _catchedToppings.Remove(curTopping);
+        //    }
 
-            if (_catchingObject == curTopping && _catchedToppings.Count != 0)
-            {
-                _catchingObject = _catchedToppings[0];
-            }
-        }
+        //    if (_catchingObject == curTopping && _catchedToppings.Count != 0)
+        //    {
+        //        _catchingObject = _catchedToppings[0];
+        //    }
+        //}
     }
 }
