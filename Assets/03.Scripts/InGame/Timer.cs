@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     TMP_Text _timeText = null;
 
     int _eventCount = 0;
-    int[] _eventTime = new int[_eventCountCountDown + _eventCountRecipe + _eventCountItem + _eventCountFever + _eventCountTimeOut];
+    int[] _eventTime = new int[_eventCountCountDown + _eventCountRecipe + _eventCountScoreCheck + _eventCountItem + _eventCountFever + _eventCountTimeOut];
     /// <summary>
     /// _eventTime[_eventCount]
     /// </summary>
@@ -26,6 +26,7 @@ public class Timer : MonoBehaviour
     const int _eventCountRecipe = 1;
     const int _eventCountItem = 5;
     const int _eventCountFever = 1;
+    const int _eventCountScoreCheck = 1;
     const int _eventCountTimeOut = 1;
 
     InGameManager _ingameMgr;
@@ -63,6 +64,7 @@ public class Timer : MonoBehaviour
         _eventTime[++count] = 30;
         _eventTime[++count] = 20;
         _eventTime[++count] = 0;
+        _eventTime[++count] = -3;
 
         ItemEvent OnEvent = new ItemEvent(OnEventCallCountDown);
         for (int i = 0; i < _eventCountCountDown; ++i)
@@ -75,6 +77,7 @@ public class Timer : MonoBehaviour
             ItemEvents.Enqueue(OnEvent);
 
         ItemEvents.Enqueue(OnEventCallFever);
+        ItemEvents.Enqueue(OnEventCallCheckScore);
         ItemEvents.Enqueue(OnEventCallTimeOut);
     }
 
@@ -124,10 +127,6 @@ public class Timer : MonoBehaviour
 
     void OnEventCallItem()
     {
-        // if (_ingameMgr == null) _ingameMgr = GameManager.Instance.InGameManager;
-
-        // _ingameMgr.OnItemEvent();
-
         ++_eventCount;
     }
 
@@ -142,15 +141,25 @@ public class Timer : MonoBehaviour
         ++_eventCount;
     }
 
+    void OnEventCallCheckScore()
+    {
+        if (_uiContoller == null) { return; }
+
+        _uiContoller.OnTimeOutUI();
+        TartSystemManager.Instance.OnCheckScore();
+
+        ++_eventCount;
+    }
+
     void OnEventCallTimeOut()
     {
         if (_ingameMgr == null) _ingameMgr = GameManager.Instance.InGameManager;
         if (_uiContoller == null) { return; }
 
-        _uiContoller.OnTimeOutUI();
         _ingameMgr.OnTimeOut();
 
-        TartSystemManager.Instance.OnCheckScore();
+        PhotonNetwork.LoadLevel(3);
+
         ++_eventCount;
     }
 }

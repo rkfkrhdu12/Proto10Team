@@ -37,6 +37,7 @@ public class HandsController : MonoBehaviour
 
                 _catchedToppings.Remove(_catchingObject);
 
+                _catchingObject.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
                 if (_catchedToppings.Count != 0)
                 {
                     _catchingObject = _catchedToppings[0];
@@ -66,7 +67,7 @@ public class HandsController : MonoBehaviour
                 if (_catchingObject == null)
                 {
                     _catchingObject = _catchedToppings[0];
-                    _catchingObject.GetComponent<Rigidbody>().isKinematic = true;
+                    _catchingObject.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
 
                     _catchingObject.transform.SetParent(transform);
                 }
