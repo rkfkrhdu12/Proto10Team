@@ -142,7 +142,7 @@ public class OverUIManager : MonoBehaviour
                     case 1:
                         isSuccess = true;
                         IpZang();
-                        //lobbyManager.JoinRandomRoom();
+                        // lobbyManager.JoinRandomRoom();
                         break;
 
                     default:

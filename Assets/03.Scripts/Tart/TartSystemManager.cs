@@ -98,7 +98,7 @@ public class TartSystemManager : MonoBehaviour
         DontDestroyOnLoad(teamRedTart.gameObject);
         DontDestroyOnLoad(teamBlueTart.gameObject);
         Init();
-        StartCoroutine(TartSystemTest());
+        // StartCoroutine(TartSystemTest());
     }
 
     public IEnumerator TartSystemTest()
@@ -132,9 +132,9 @@ public class TartSystemManager : MonoBehaviour
     {
         teamRedTart.InputToppingToChildObject();
         teamBlueTart.InputToppingToChildObject();
-        PhotonNetwork.LoadLevel(4);
-
+        PhotonNetwork.LoadLevel(3);
     }
+
     public void SpawnToppings()
     {
         toppingSpawnManager.InitAndGoSpawnTopping();

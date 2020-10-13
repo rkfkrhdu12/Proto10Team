@@ -91,15 +91,6 @@ public class PlayerController : MonoBehaviour
 
     public void Init(eTeam team)
     {
-        if (_pView == null)
-            _pView = gameObject.GetPhotonView();
-
-        if (_pView.IsMine)
-        {
-            GameManager.Instance.PlayerCharacter = gameObject;
-            GameManager.Instance.PlayerTeam = (int)team;
-        }
-
         _datas._curTeam = team;
 
         _curTeamObject = Team == eTeam.Red ? _redObject : _blueObject;
@@ -109,7 +100,10 @@ public class PlayerController : MonoBehaviour
         _datas._defaultJumpPower = JumpPower;
         _datas._defaultPower = Power;
 
-        LogManager.Log(_pView.Owner.NickName + " " + Team.ToString());
+        if (_pView.IsMine)
+        {
+            GameManager.Instance.PlayerTeam = (int)team;
+        }
 
         isInit = true;
     }
@@ -150,6 +144,14 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        if (_pView == null)
+            _pView = gameObject.GetPhotonView();
+
+        if (_pView.IsMine)
+        {
+            GameManager.Instance.PlayerCharacter = gameObject;
+        }
+
         MoveSpeed = 10.0f;
         JumpPower = 10.0f;
         ItemEffectStateCount = new float[6];
@@ -170,15 +172,11 @@ public class PlayerController : MonoBehaviour
             // 마우스 왼클릭을 누르고 있음
             // 잡기 모드
 
-            Debug.Log("Catching Mode");
-
             _pView.RPC("OnChangeHand", RpcTarget.All, (int)eHandState.Catch);
         }
         else if (!Input.GetMouseButton(0) && _curHandState != eHandState.Default)
         {   // 마우스 왼클릭을 안 누르고 있음
             // 기본 모드
-
-            Debug.Log("Default Mode");
 
             _pView.RPC("OnChangeHand", RpcTarget.All, (int)eHandState.Default);
         }

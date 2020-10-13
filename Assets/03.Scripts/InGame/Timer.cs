@@ -36,12 +36,17 @@ public class Timer : MonoBehaviour
     [SerializeField]
     InGameUIController _uiContoller = null;
 
+    TartSystemManager _tartManager;
+
     public void OnStart()
     {
         LogManager.Log("Timer On !");
 
         _remainingTime = 184;
         _isStart = true;
+        _tartManager = TartSystemManager.Instance;
+
+        _tartManager.RandomChoiceOfTart();
     }
 
     private void Awake()
@@ -98,7 +103,10 @@ public class Timer : MonoBehaviour
         if (_uiContoller == null) { return; }
 
         if (_curEventTime == 180)
+        {
+            _tartManager.SpawnToppings();
             _uiContoller.OnStartUI();
+        }
         else
             _uiContoller.OnCountDownUI();
 
@@ -139,6 +147,8 @@ public class Timer : MonoBehaviour
 
         _uiContoller.OnTimeOutUI();
         _ingameMgr.OnTimeOut();
+
+        _tartManager.SceneAndTartFix();
         ++_eventCount;
     }
 }

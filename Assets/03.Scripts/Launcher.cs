@@ -173,8 +173,6 @@ namespace NetWork
             Instantiate(_netMgrPrefab);
 
             PhotonNetwork.LocalPlayer.NickName = GameManager.Instance.PlayerName;
-            PhotonNetwork.LoadLevel(3);
-
             PhotonNetwork.JoinRandomRoom();
         }
         #endregion

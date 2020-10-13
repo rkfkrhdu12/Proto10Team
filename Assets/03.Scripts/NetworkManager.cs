@@ -81,7 +81,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel(3);
+        PhotonNetwork.LoadLevel(2);
 
         if (GameManager.Instance.PlayerCharacter == null)
             StartCoroutine(WaitPlayerSpawn());

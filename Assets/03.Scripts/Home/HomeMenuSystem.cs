@@ -7,7 +7,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 using TMPro;
-using UnityEditor;
 
 public class HomeMenuSystem : MonoBehaviour
 {
@@ -31,7 +30,6 @@ public class HomeMenuSystem : MonoBehaviour
     private void Awake()
     {
         enterTextGroup.SetActive(false);
-        versionText.text = PlayerSettings.bundleVersion;
         introSceneIndex = UnityEngine.SceneManagement.SceneManager.GetSceneByName("IntroScene").buildIndex;
         settingErrorButtonObj.SetActive(false);
     }
@@ -57,7 +55,7 @@ public class HomeMenuSystem : MonoBehaviour
     }
     public void GoLobbyScene()
     {
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(1);
     }
     public void GoExitGame()
     {
