@@ -98,7 +98,7 @@ public class TartSystemManager : MonoBehaviour
         DontDestroyOnLoad(teamRedTart.gameObject);
         DontDestroyOnLoad(teamBlueTart.gameObject);
         Init();
-        // StartCoroutine(TartSystemTest());
+        //StartCoroutine(TartSystemTest());
     }
 
     public IEnumerator TartSystemTest()
@@ -109,10 +109,10 @@ public class TartSystemManager : MonoBehaviour
         SceneAndTartFix();
         //LogManager.Log("이동 완료. 2초 뒤 정답 타르트 위치 이동한다...");
         //yield return new WaitForSecondsRealtime(2f);
-        AnswerTartMove();
-        LogManager.Log("이동 완료. 팀 타르트 위치 이동한다...");
-        TeamTartMove();
-        LogManager.Log("이동 완료. 어떰??");
+        //AnswerTartMove();
+        //LogManager.Log("이동 완료. 팀 타르트 위치 이동한다...");
+        //TeamTartMove();
+        //LogManager.Log("이동 완료. 어떰??");
 
     }
     public void RandomChoiceOfTart()

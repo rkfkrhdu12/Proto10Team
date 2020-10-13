@@ -126,6 +126,16 @@ public class ScoreEffectSystem : MonoBehaviour
     {
         Init();
     }
+
+    private void Start()
+    {
+        TartSystemManager.Instance.AnswerTartMove();
+        LogManager.Log("이동 완료. 팀 타르트 위치 이동한다...");
+        TartSystemManager.Instance.TeamTartMove();
+        LogManager.Log("이동 완료. 어떰??");
+        StartTarara();
+
+    }
     // Update is called once per frame
     void Update()
     {
