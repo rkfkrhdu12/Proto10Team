@@ -20,17 +20,17 @@ public class TartManager : MonoBehaviour
         {
             LogManager.Log("처음 Csv데이터를 읽어왔어...");
         }
-        else
-        {
-            LogManager.Log("처음으로 읽어온게 아니야...지우고 다시 한다...");
-            csvData.Clear();
-            answerTart.ClearTopping();
-            Destroy(gameObject.GetComponent<Tart>());
-            foreach (Topping testTopping in gameObject.GetComponents<Topping>())
-            {   
-                Destroy(testTopping);
-            }
-        }
+        //else
+        //{
+        //    LogManager.Log("처음으로 읽어온게 아니야...지우고 다시 한다...");
+        //    csvData.Clear();
+        //    answerTart.ClearTopping();
+        //    Destroy(gameObject.GetComponent<Tart>());
+        //    foreach (Topping testTopping in gameObject.GetComponents<Topping>())
+        //    {   
+        //        Destroy(testTopping);
+        //    }
+        //}
     }
 /// <summary>
 /// 
