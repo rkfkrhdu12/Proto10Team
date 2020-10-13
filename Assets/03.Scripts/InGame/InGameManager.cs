@@ -123,7 +123,8 @@ public class InGameManager : MonoBehaviour
 
             for (int i = 0; i < PlayerCharacters.Count; ++i)
             {
-                PlayerCharacters[i].transform.position = _playerSpawnPoints[i].transform.position;
+                if (PlayerCharacters[i] != null)
+                    PlayerCharacters[i].transform.position = _playerSpawnPoints[i].transform.position;
             }
 
             PhotonNetwork.CurrentRoom.IsOpen = false;
