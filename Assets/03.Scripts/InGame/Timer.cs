@@ -90,6 +90,8 @@ public class Timer : MonoBehaviour
         _remainingTime = Mathf.Max(_remainingTime - Time.deltaTime, 0.0f);
         _timeText.text = ((int)_remainingTime).ToString();
 
+        if(ItemEvents.Count == 0) { return; }
+
         if ((int)_remainingTime == _curEventTime && _eventCount < _eventTime.Length)
         {
             Debug.Log(_curEventTime);
