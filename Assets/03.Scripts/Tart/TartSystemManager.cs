@@ -121,7 +121,8 @@ public class TartSystemManager : MonoBehaviour
         //tartManager.gameObject.transform.position = Vector3.zero;
         //answerTartObj.transform.position = Vector3.zero;
         //gameObject.transform.position = Vector3.zero;
-        int randVal = Random.Range(1, tartVal + 1);
+        //int randVal = Random.Range(1, tartVal + 1);
+        int randVal = 2;
         tartManager.DataLoadAndSetAnswerTart(randVal);
         tartSettingManager.AnswerTartSetting();
         AnswerTartMove();
