@@ -64,10 +64,7 @@ public class TartManager : MonoBehaviour
         float nowPosY;
         float nowPosZ;
 
-
-
         Tart tempTart = gameObject.AddComponent<Tart>();// 임시로 쓰일 타르트
-
 
         while (true)
         {

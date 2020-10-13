@@ -9,6 +9,7 @@ public class HandsController : MonoBehaviour
 
     GameObject _catchingObject = null;
     Vector3 _collidePoint = Vector3.zero;
+    [SerializeField]
     List<GameObject> _catchedToppings = new List<GameObject>();
     bool _isCatch = false;
 
@@ -55,7 +56,7 @@ public class HandsController : MonoBehaviour
         _prevHandState = curHandState;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (curHandState == PlayerController.eHandState.Catch)
         {
@@ -63,7 +64,8 @@ public class HandsController : MonoBehaviour
             {
                 LogManager.Log(other.name);
 
-                _catchedToppings.Add(other.transform.parent.gameObject);
+                if (!_catchedToppings.Contains(other.transform.parent.gameObject))
+                    _catchedToppings.Add(other.transform.parent.gameObject);
                 if (_catchingObject == null)
                 {
                     _catchingObject = _catchedToppings[0];

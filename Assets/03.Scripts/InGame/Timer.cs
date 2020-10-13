@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
     /// </summary>
     int _curEventTime { get { return _eventCount >= _eventTime.Length ? 0 : _eventTime[_eventCount]; } }
 
-    const int _eventCountCountDown = 4;
+    const int _eventCountCountDown = 3;
     const int _eventCountRecipe = 1;
     const int _eventCountItem = 5;
     const int _eventCountFever = 1;
@@ -43,7 +43,7 @@ public class Timer : MonoBehaviour
     {
         LogManager.Log("Timer On !");
 
-        _remainingTime = 184;
+        _remainingTime = 185;
         _isStart = true;
         _tartManager = TartSystemManager.Instance;
 

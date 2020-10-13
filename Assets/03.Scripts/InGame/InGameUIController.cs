@@ -40,8 +40,6 @@ public class InGameUIController : MonoBehaviour
 
     private void Awake()
     {
-        if (_countSounds == null || _countDownSounds.Count == 0) return;
-
         for (int i = 0; i < _countSounds.Count(); ++i)
         {
             if (_countSounds[i] == null) { continue; }
@@ -52,6 +50,9 @@ public class InGameUIController : MonoBehaviour
 
     public void OnStartUI()
     {
+        if (_countDownSounds != null && _audio != null && _countDownSounds.Count != 0)
+            _audio.PlayOneShot(_countDownSounds.Dequeue());
+
         if (_startDownUI != null)
             _startDownUI.gameObject.SetActive(true);
     }
