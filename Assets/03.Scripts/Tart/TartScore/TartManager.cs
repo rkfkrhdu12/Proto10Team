@@ -22,14 +22,15 @@ public class TartManager : MonoBehaviour
         }
         else
         {
-            LogManager.Log("처음으로 읽어온게 아니야...지우고 다시 한다...");
-            csvData.Clear();
-            answerTart.ClearTopping();
-            Destroy(gameObject.GetComponent<Tart>());
-            foreach (Topping testTopping in gameObject.GetComponents<Topping>())
-            {
-                Destroy(testTopping);
-            }
+            //LogManager.Log("처음으로 읽어온게 아니야...지우고 다시 한다...");
+            //csvData.Clear();
+            //answerTart.ClearTopping();
+            //Destroy(gameObject.GetComponent<Tart>());
+            //foreach (Topping testTopping in gameObject.GetComponents<Topping>())
+            //{
+            //    Destroy(testTopping);
+            //}
+            answerTart.gameObject.SetActive(false);
         }
     }
 /// <summary>
