@@ -73,8 +73,8 @@ public class TartSettingManager : MonoBehaviour
                             answerTart.toppingList[i].answerPosY * 1.5f,
                             answerTart.toppingList[i].answerPosZ * 1.5f),
                 nowToppingObj.transform.rotation,scoreManager.tartManager.answerTart.gameObject.transform);
-            LogManager.Log("리지드바디 삭제.");
-            Destroy(tempToppingObj.transform.GetChild(0).gameObject.GetComponent<Rigidbody>());
+            //LogManager.Log("리지드바디 삭제.");
+            tempToppingObj.transform.GetChild(0).gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
 
            // tempToppingObj.transform.SetParent(scoreManager.tartManager.answerTart.gameObject.transform);
