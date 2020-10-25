@@ -43,9 +43,11 @@ namespace NetWork
                     _createPlayerNameUI.gameObject.SetActive(true);
                     // _createPlayerNameUI.OnStart(_playerNamePrefkey);
 
-                    Debug.Log("MakeName");
+                    LogManager.Log("MakeName");
 
-                    while (_createPlayerNameUI.CurState != CreatePlayerName.eCreateNameState.Check) yield return _checkNameWaitTime;
+                    // 닉네임 생성 완료까지 대기
+                    while (_createPlayerNameUI.CurState != CreatePlayerName.eCreateNameState.Check)
+                        yield return _checkNameWaitTime;
 
                     playerName = PlayerPrefs.GetString(_playerNamePrefkey);
                 }
@@ -85,10 +87,11 @@ namespace NetWork
 
         // 네트워크를 관리해줄 오브젝트
         public GameObject _netMgrPrefab;
-        #endregion
 
         //OverUIManager
         public OverUIManager overUIManager;
+        #endregion
+
         // Awake Update
         #region Monobehaviour Function
 

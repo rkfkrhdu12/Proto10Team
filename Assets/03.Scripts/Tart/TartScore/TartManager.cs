@@ -3,6 +3,41 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using System;
+
+[Serializable]
+public struct ToppingData
+{
+    public GameObject thisObject;
+    public int toppingCode;
+    public int toppingSize;
+    public int toppingNum;
+    public int toppingType;
+
+    public bool isCheck;
+
+    public float toppingScore;
+    public float answerPosX;
+    public float answerPosY;
+    public float answerPosZ;
+
+    public void SetToppingInfo(int code, int size, int num, int type, float score, float x, float y, float z)//토핑의 여러가지 정보들을 Set
+    {
+        toppingCode = code;
+        toppingSize = size;
+        toppingNum = num;
+        toppingType = type;
+        toppingScore = score;
+        answerPosX = x;
+        answerPosY = y;
+        answerPosZ = z;
+    }
+
+    public void Check()
+    {
+        isCheck = true;
+    }
+}
 
 public class TartManager : MonoBehaviour
 {
@@ -16,10 +51,6 @@ public class TartManager : MonoBehaviour
 
     public void InitTartTopping()
     {
-        if (csvData==null)
-        {
-            LogManager.Log("처음 Csv데이터를 읽어왔어...");
-        }
         //else
         //{
         //    LogManager.Log("처음으로 읽어온게 아니야...지우고 다시 한다...");
@@ -41,7 +72,7 @@ public class TartManager : MonoBehaviour
     {
         InitTartTopping();
         string finishFileName;
-        finishFileName = "Tart_" + (string)System.Convert.ToString(tartCode);
+        finishFileName = "Tart_" + System.Convert.ToString(tartCode);
         CsvDataLoad(finishFileName);
         SetAnswerTart(tartCode);
     }
@@ -89,7 +120,7 @@ public class TartManager : MonoBehaviour
             //Debug.Log("nowCode = " + nowCode + " | nowVal = " + nowVal);
 
             //Debug.Log("now어쩌고에 데이터 할당 완료. 임시 토핑에 세팅 시작!");
-            Topping tempTopping = gameObject.AddComponent<Topping>(); //임시로 쓰일 현재 토핑
+            ToppingData tempTopping = new ToppingData(); //임시로 쓰일 현재 토핑
 
             tempTopping.SetToppingInfo(nowCode, nowSize, nowNum, nowType, nowScore, nowPosX, nowPosY, nowPosZ);
 

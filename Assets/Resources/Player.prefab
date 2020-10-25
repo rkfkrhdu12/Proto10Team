@@ -490,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0eb8a35846c234cb1d1fec1d86b329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _catchingObject: {fileID: 0}
   _catchedToppings: []
   _pCtrl: {fileID: 6037959793252923441}
   _uCtrl: {fileID: 7789593532145264898}

@@ -22,9 +22,9 @@ public class Timer : MonoBehaviour
     /// </summary>
     int _curEventTime { get { return _eventCount >= _eventTime.Length ? 0 : _eventTime[_eventCount]; } }
 
-    const int _eventCountCountDown = 3;
+    const int _eventCountCountDown = 4;
     const int _eventCountRecipe = 1;
-    const int _eventCountItem = 5;
+    const int _eventCountItem = 4;
     const int _eventCountFever = 1;
     const int _eventCountScoreCheck = 1;
     const int _eventCountTimeOut = 1;

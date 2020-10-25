@@ -134,7 +134,6 @@ public class TartSystemManager : MonoBehaviour
         tartManager.DataLoadAndSetAnswerTart(randVal);
         tartSettingManager.AnswerTartSetting();
         AnswerTartMove();
-
     }
 
     public void SceneAndTartFix()

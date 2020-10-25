@@ -34,7 +34,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Private Function
 
     private IEnumerator WaitPlayerSpawn()
-    {
+    { // InGame의 로딩이 끝나면 PlayerCharacter 생성
         bool isEnd = false;
 
         while (!isEnd)
@@ -71,7 +71,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Photon Callback Function
 
     public override void OnDisconnected(DisconnectCause cause)
-    {
+    { // 서버 연결 종료 시 게임종료
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #else
@@ -80,7 +80,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     public override void OnJoinedRoom()
-    {
+    { // RoomLevel로 입장 및 캐릭터 Spawn
         PhotonNetwork.LoadLevel(2);
 
         if (GameManager.Instance.PlayerCharacter == null)
@@ -88,12 +88,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
-    {
+    { // JoinRoom 실패시 새로운 방을 생성하고 입장
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = _maxPlayerCount });
-    }
-
-    public override void OnLeftRoom()
-    {
     }
     #endregion
 }

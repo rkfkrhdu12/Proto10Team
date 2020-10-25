@@ -100,6 +100,7 @@ public class InGameManager : MonoBehaviour
         GameManager.Instance.CurState = GameManager.eSceneState.InGame;
 
         GameSequences.Enqueue(new GameSequence(PlayerAllIn));
+        GameSequences.Enqueue(new GameSequence(OnUI));
         GameSequences.Enqueue(new GameSequence(GameTimeOut));
 
         _pView = gameObject.GetPhotonView();
@@ -131,10 +132,20 @@ public class InGameManager : MonoBehaviour
 
             _Timer.OnStart();
 
-            _tartMgr.RandomChoiceOfTart();
+            if (PhotonNetwork.IsMasterClient)
+                _tartMgr.RandomChoiceOfTart();
 
             GameSequences.Dequeue();
         }
+    }
+
+    [SerializeField]
+    private GameObject _ui = null;
+    void OnUI()
+    {
+        _ui.SetActive(true);
+
+        GameSequences.Dequeue();
     }
 
     void GameTimeOut()

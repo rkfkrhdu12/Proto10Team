@@ -7,6 +7,7 @@ public class HandsController : MonoBehaviour
     PlayerController.eHandState _prevHandState = PlayerController.eHandState.Default;
     PlayerController.eHandState curHandState;
 
+    [SerializeField]
     GameObject _catchingObject = null;
     Vector3 _collidePoint = Vector3.zero;
     [SerializeField]
@@ -28,10 +29,9 @@ public class HandsController : MonoBehaviour
         if (curHandState == PlayerController.eHandState.Catch)
         {
             if (_catchingObject == null) { return; }
-
         }
         else 
-        {
+        { 
             if (_catchingObject != null)
             {
                 _catchingObject.transform.SetParent(null);
@@ -57,21 +57,24 @@ public class HandsController : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other)
-    {
-        if (curHandState == PlayerController.eHandState.Catch)
+    { // Stay 말고 다른걸로 대체 해야함. // 일단 우선순위는 뒤로 ....
+        if (_pCtrl.CurHandState == PlayerController.eHandState.Catch)
         {
             if (other.CompareTag(_toppingTag))
             {
                 LogManager.Log(other.name);
 
                 if (!_catchedToppings.Contains(other.transform.parent.gameObject))
-                    _catchedToppings.Add(other.transform.parent.gameObject);
-                if (_catchingObject == null)
                 {
-                    _catchingObject = _catchedToppings[0];
-                    _catchingObject.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+                    _catchedToppings.Add(other.transform.parent.gameObject);
 
-                    _catchingObject.transform.SetParent(transform);
+                    if (_catchingObject == null)
+                    {
+                        _catchingObject = _catchedToppings[0];
+                        _catchingObject.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+
+                        _catchingObject.transform.SetParent(transform);
+                    }
                 }
             }
         }

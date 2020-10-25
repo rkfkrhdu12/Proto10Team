@@ -5,30 +5,25 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-[RequireComponent(typeof(PhotonView),typeof(PhotonTransformView))]
 public class Topping : MonoBehaviour
 {
-    [Tooltip("토핑의 코드")]
-    public int toppingCode;
-    [Tooltip("토핑의 사이즈. 0 = 소 , 1 = 중, 2 = 대")]
-    public int toppingSize;
+    [SerializeField]
+    public ToppingData Data;
 
-    [Tooltip("사이즈에 따른 토핑의 종류. 문서 참고...")]
-    public int toppingNum;
+    public int toppingCode { get { return Data.toppingCode; } set { Data.toppingCode = value; } }
+    public int toppingSize { get { return Data.toppingSize; } set { Data.toppingSize = value; } }
 
-    [Tooltip("각 토핑별로 있을 수 있는 타입들...문서 참고")]
-    public int toppingType;
+    public int toppingNum { get { return Data.toppingNum; } set { Data.toppingNum = value; } }
 
-    [Tooltip("토핑이 가지고 있는 점수(완성도)")]
-    public float toppingScore;
+    public int toppingType { get { return Data.toppingType; } set { Data.toppingType = value; } }
 
-    public bool isCheck; //채점 때 사용함. 검사가 완료된 토핑인지?
+    public float toppingScore { get { return Data.toppingScore; } set { Data.toppingScore = value; } }
 
-    //정답 토핑일 경우에만 사용함...
-    public Vector3 answerPos;
-    public float answerPosX;
-    public float answerPosY;
-    public float answerPosZ;
+    public bool isCheck { get { return Data.isCheck; } set { Data.isCheck = value; } }
+
+    public float answerPosX { get { return Data.answerPosX; } set { Data.answerPosX = value; } }
+    public float answerPosY { get { return Data.answerPosY; } set { Data.answerPosY = value; } }
+    public float answerPosZ { get { return Data.answerPosZ; } set { Data.answerPosZ = value; } }
 
     [Tooltip("현재 토핑의 위치입니다. Update에서 계속 업데이트됨.")]
     public Vector2 nowToppingPos;
@@ -44,7 +39,8 @@ public class Topping : MonoBehaviour
     }
 
     public void SetToppingInfo(int code, int size, int num, int type, float score, float x, float y, float z)//토핑의 여러가지 정보들을 Set
-    {        
+    {
+        Data.thisObject = gameObject;
 
         toppingCode = code;
         toppingSize = size;
